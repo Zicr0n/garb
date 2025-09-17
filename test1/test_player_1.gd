@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var maxRunSpeed : int = 40
+@export var maxRunSpeed : int = 80
 @export var runAcceleration : int = 1
 @export var jumpPower : int = -500
 var canJump : bool = false
