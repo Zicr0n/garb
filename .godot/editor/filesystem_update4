@@ -1,1 +1,2 @@
-res://test1/test_player_1.gd
+res://test-scene.tscn
+res://player/player.gd
