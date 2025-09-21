@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=10 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Script" uid="uid://c1240vqmt4squ" path="res://statemachine/player/player_statemachine.gd" id="3_g1dw6"]
+[ext_resource type="Script" uid="uid://c3qb0f2v1g87h" path="res://player/player_moveComponent.gd" id="3_rgyib"]
+[ext_resource type="Script" uid="uid://b5psxt4dsqn1t" path="res://statemachine/player/player_idleState.gd" id="4_yw30f"]
+[ext_resource type="Script" uid="uid://cyrk46itcj7hg" path="res://statemachine/player/player_runState.gd" id="5_g6k8r"]
+[ext_resource type="Script" uid="uid://qlk0erq25k8y" path="res://player/input_component.gd" id="5_qjkh3"]
+[ext_resource type="Script" uid="uid://ciuanf5meh5yq" path="res://statemachine/player/player_jumpState.gd" id="6_boad6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
 height = 40.0
@@ -16,3 +22,38 @@ shape = SubResource("CapsuleShape2D_rkbax")
 position = Vector2(-0.5, 1.9073486e-06)
 scale = Vector2(0.16406249, 0.31249997)
 texture = ExtResource("1_oul6g")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("3_rgyib")
+characterBody2D = NodePath("..")
+
+[node name="Statemachine" type="Node" parent="." node_paths=PackedStringArray("start_state", "input_component", "move_component")]
+script = ExtResource("3_g1dw6")
+start_state = NodePath("Idle")
+input_component = NodePath("../InputComponent")
+move_component = NodePath("../MoveComponent")
+
+[node name="Idle" type="Node" parent="Statemachine" node_paths=PackedStringArray("_jump_state", "_run_state")]
+script = ExtResource("4_yw30f")
+_jump_state = NodePath("../Jump")
+_run_state = NodePath("../Run")
+
+[node name="Run" type="Node" parent="Statemachine" node_paths=PackedStringArray("idle_state", "jump_state")]
+script = ExtResource("5_g6k8r")
+idle_state = NodePath("../Idle")
+jump_state = NodePath("../Jump")
+metadata/_custom_type_script = "uid://ddme3krabnfa5"
+
+[node name="Jump" type="Node" parent="Statemachine"]
+script = ExtResource("6_boad6")
+metadata/_custom_type_script = "uid://ddme3krabnfa5"
+
+[node name="InputComponent" type="Node" parent="."]
+script = ExtResource("5_qjkh3")
+
+[node name="currentstate" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -51.0
+offset_right = 21.0
+offset_bottom = -28.0
+text = "text"
