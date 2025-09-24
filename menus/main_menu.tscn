@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctvreo1y474rv"]
+
+[ext_resource type="Script" uid="uid://covvuvdu1veku" path="res://menus/main_menu_buttons.gd" id="1_8gy84"]
+
+[node name="mainMenu" type="Node2D"]
+
+[node name="mainMenuButtons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_8gy84")
+metadata/_edit_use_anchors_ = true
+
+[node name="StartGame" type="Button" parent="mainMenuButtons"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Start Game"
+
+[node name="Settings" type="Button" parent="mainMenuButtons"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Settings"
+
+[node name="QuitGame" type="Button" parent="mainMenuButtons"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Quit Game"
+
+[connection signal="button_down" from="mainMenuButtons/StartGame" to="mainMenuButtons" method="_on_start_game_button_down"]
+[connection signal="button_down" from="mainMenuButtons/Settings" to="mainMenuButtons" method="_on_settings_button_down"]
+[connection signal="button_down" from="mainMenuButtons/QuitGame" to="mainMenuButtons" method="_on_quit_game_button_down"]

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://byr47gp8mwbva"]
+
+[node name="levelSelectMenu" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Level1" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
