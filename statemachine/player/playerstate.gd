@@ -15,5 +15,5 @@ func process(_delta):
 func physics_process(_delta):
 	pass
 
-func input(_event):
+func input(_event : InputEvent):
 	pass

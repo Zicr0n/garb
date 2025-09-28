@@ -12,6 +12,8 @@ var previous_state : PlayerState = null
 @export var input_component : InputComponent = null
 @export var move_component : PlayerMoveComponent = null
 
+@export var disabled := false
+
 func _ready():
 	init(character)
 
@@ -38,7 +40,8 @@ func set_state(new_state : PlayerState):
 	current_state.enter()
 	
 
-func _input(event):
+func _input(event : InputEvent):
+	if disabled: return
 	if call_input:
 		if current_state:
 			var new_state : PlayerState = current_state.input(event)
@@ -48,6 +51,7 @@ func _input(event):
 				set_state(new_state)
 
 func _process(delta):
+	if disabled: return
 	if current_state:
 		var new_state : PlayerState = current_state.process(delta)
 		
@@ -58,6 +62,7 @@ func _process(delta):
 	currentstateLabel.text = current_state.name
 
 func _physics_process(delta):
+	if disabled: return
 	if current_state:
 		var new_state : PlayerState = current_state.physics_process(delta)
 		
