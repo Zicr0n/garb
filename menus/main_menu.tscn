@@ -1,0 +1,155 @@
+[gd_scene load_steps=8 format=3 uid="uid://ctvreo1y474rv"]
+
+[ext_resource type="Script" uid="uid://covvuvdu1veku" path="res://menus/main_menu_buttons.gd" id="1_8gy84"]
+[ext_resource type="PackedScene" uid="uid://byr47gp8mwbva" path="res://menus/level_select_menu.tscn" id="2_ij7vn"]
+[ext_resource type="PackedScene" uid="uid://bjxev4es20eod" path="res://menus/settings_menu.tscn" id="3_yjgyn"]
+
+[sub_resource type="Animation" id="Animation_8gy84"]
+resource_name = "Main -> LevelSelect"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 700, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_ij7vn"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_rqbgu"]
+resource_name = "Main -> Settings"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 500, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ij7vn"]
+_data = {
+&"Main -> LevelSelect": SubResource("Animation_8gy84"),
+&"Main -> Settings": SubResource("Animation_rqbgu"),
+&"RESET": SubResource("Animation_ij7vn")
+}
+
+[node name="mainMenu" type="Node2D"]
+
+[node name="mainMenuButtons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8gy84")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="mainMenuButtons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.00006
+offset_top = -50.5
+offset_right = 48.00006
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartGame" type="Button" parent="mainMenuButtons/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="Settings" type="Button" parent="mainMenuButtons/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="QuitGame" type="Button" parent="mainMenuButtons/VBoxContainer"]
+layout_mode = 2
+text = "Quit Game"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ij7vn")
+}
+
+[node name="levelSelectMenu" parent="." node_paths=PackedStringArray("main_menu") instance=ExtResource("2_ij7vn")]
+offset_left = 380.0
+offset_top = -180.0
+offset_right = 1020.0
+offset_bottom = 180.0
+main_menu = NodePath("../mainMenuButtons")
+
+[node name="SettingsMenu" parent="." node_paths=PackedStringArray("main_menu") instance=ExtResource("3_yjgyn")]
+offset_left = -320.0
+offset_top = 500.0
+offset_right = 320.0
+offset_bottom = 500.0
+main_menu = NodePath("../mainMenuButtons")
+
+[connection signal="button_down" from="mainMenuButtons/VBoxContainer/StartGame" to="mainMenuButtons" method="_on_start_game_button_down"]
+[connection signal="button_down" from="mainMenuButtons/VBoxContainer/Settings" to="mainMenuButtons" method="_on_settings_button_down"]
+[connection signal="button_down" from="mainMenuButtons/VBoxContainer/QuitGame" to="mainMenuButtons" method="_on_quit_game_button_down"]
