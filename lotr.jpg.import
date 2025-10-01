@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://7u6ticish8j3"
-path="res://.godot/imported/hatdolfmitler.jpg-f627f8e5676062360980a68d08a85fea.ctex"
+path="res://.godot/imported/lotr.jpg-ab111bef7f08660825aad4b9a2dd5b91.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hatdolfmitler.jpg"
-dest_files=["res://.godot/imported/hatdolfmitler.jpg-f627f8e5676062360980a68d08a85fea.ctex"]
+source_file="res://lotr.jpg"
+dest_files=["res://.godot/imported/lotr.jpg-ab111bef7f08660825aad4b9a2dd5b91.ctex"]
 
 [params]
 

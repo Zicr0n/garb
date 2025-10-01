@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjxev4es20eod"]
+
+[ext_resource type="Texture2D" uid="uid://7u6ticish8j3" path="res://lotr.jpg" id="1_83qjl"]
+[ext_resource type="Script" uid="uid://csgyiceukp6i5" path="res://menus/settings_menu.gd" id="1_v0bl3"]
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(320, 180)
+script = ExtResource("1_v0bl3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_83qjl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -50.5
+offset_right = 31.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UXImprovements" type="CheckBox" parent="VBoxContainer"]
+layout_mode = 2
+text = "UX-Upgrades"
+
+[node name="AnotherONE" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level 2"
+
+[node name="AnotherTWO" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level 3"
+
+[node name="BackButtonS" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -11.0
+offset_right = 140.0
+offset_bottom = 20.0
+grow_vertical = 0
+text = "Back To Main Menu"
+
+[connection signal="toggled" from="VBoxContainer/UXImprovements" to="." method="_on_ux_improvements_toggled"]
+[connection signal="pressed" from="BackButtonS" to="." method="_on_back_button_pressed"]

@@ -1,17 +1,26 @@
 extends Control
+class_name MainMenu
 
-var continuefromlastsavemidlevel = false # temporary
+@onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
 
 func _on_start_game_button_down() -> void:
-	if continuefromlastsavemidlevel:
+	if false:
 		pass # do that
 	else:
-		pass #go to levelselect menu
+		animation_player.play("Main -> LevelSelect")
 
 
 func _on_settings_button_down() -> void:
-	pass # Replace with function body.
+	animation_player.play("Main -> Settings")
 
 
 func _on_quit_game_button_down() -> void:
 	get_tree().quit()
+
+
+func back_from_level_select_menu() -> void:
+	animation_player.play("Main -> LevelSelect",-1, -1, true)
+
+
+func back_from_settings_menu():
+	animation_player.play("Main -> Settings", -1, -1, true)

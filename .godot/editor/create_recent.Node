@@ -1,13 +1,15 @@
+CheckBox
 Control
+AnimationPlayer
+Sprite2D
+CPUParticles2D
 Button
+VBoxContainer
+Camera2D
 Node
 PlayerState
 Label      - Matches the "text" keyword.
 Line2D
-Sprite2D
 CollisionShape2D
 StaticBody2D
 CharacterBody2D
-Camera2D
-Node2D
-TileMap
