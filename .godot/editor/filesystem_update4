@@ -1,12 +1,3 @@
 res://player/player.tscn
-res://statemachine/player/player_idleState.gd
-res://statemachine/player/player_runState.gd
-res://statemachine/player/player_fallState.gd
-res://statemachine/player/player_jumpState.gd
-res://player/player_moveComponent.gd
-res://statemachine/player/playerstate.gd
-res://statemachine/player/player_statemachine.gd
-res://grappling/grapple_point.tscn
-res://grappling/grapple_point.gd
-res://test-scene.tscn
 res://player/player.gd
+res://player/player_moveComponent.gd

@@ -8,14 +8,15 @@ class_name PlayerMoveComponent
 
 @export_category("GROUND MOVEMENT")
 @export var MOVE_SPEED_GROUND : float = 250.0
-@export var ACCELERATION_GROUND : float = 5000.0
+@export var ACCELERATION_GROUND : float = 1000.0
 @export var DECELERATION_GROUND : float = 3000.0
 var _current_move_speed : float = 0.0
 
 @export_category("AIR MOVEMENT")
 @export var MOVE_SPEED_AIR : float = 250
-@export var ACCELERATION_AIR : float = 5000.0
+@export var ACCELERATION_AIR : float = 1500.0
 @export var DECELERATION_AIR : float = 3000.0
+@export var DECELERATION_AIR_OVERDRIVE : float = 200.0
 
 func move_on_ground(direction : float, _dt : float) -> void:
 	#_current_move_speed = move_toward(_current_move_speed, MOVE_SPEED_GROUND * direction, ACCELERATION_GROUND * dt)
@@ -29,10 +30,13 @@ func idle(dt):
 	_current_move_speed = move_toward(_current_move_speed, 0, DECELERATION_GROUND * dt)
 	characterBody2D.velocity.x = _current_move_speed
 
-func move_in_air(direction : float, _dt) -> void:
-	#_current_move_speed = move_toward(_current_move_speed, MOVE_SPEED_AIR * direction, ACCELERATION_AIR * dt)
-	_current_move_speed = MOVE_SPEED_AIR * direction
-	characterBody2D.velocity.x = _current_move_speed
+func move_in_air(direction : float, dt) -> void:
+	#_current_move_speed = 
+	#_current_move_speed = MOVE_SPEED_AIR * direction
+	var accel = (DECELERATION_AIR if  abs(characterBody2D.velocity.x) < MOVE_SPEED_AIR else DECELERATION_AIR_OVERDRIVE)
+	if accel == DECELERATION_AIR_OVERDRIVE:
+		print("OVERDRIVE!")
+	characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, MOVE_SPEED_AIR * direction, accel * dt)
 
 func _physics_process(dt) -> void:
 	if !grounded():

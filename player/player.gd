@@ -10,18 +10,25 @@ var dampening = 20.0
 
 var grap_length = 100
 
+@onready var line_2d: Line2D = $Line2D
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("grapple"):
 		if nearestGrapplePoint:
 			is_grappling = true
 			statemachine.disabled = true
-			grap_length = global_position.distance_to(nearestGrapplePoint.global_position)
+			grap_length = global_position.distance_to(nearestGrapplePoint.global_position) 
+			line_2d.show()
+			if is_on_floor():
+				grap_length *= 0.5
 			return
 	
 	if event.is_action_released("grapple"):
 		if is_grappling:
 			is_grappling = false
 			statemachine.disabled = false
+			line_2d.hide()
+			
 			return
 
 @onready var statemachine: PlayerStateMachine = $Statemachine
@@ -30,6 +37,8 @@ func grapple(delta):
 	if nearestGrapplePoint == null:
 		statemachine.disabled = false
 		return
+	
+	line_2d.set_point_position(1, nearestGrapplePoint.global_position)
 	
 	var direction = (nearestGrapplePoint.global_position - global_position).normalized()
 	var distance = global_position.distance_to(nearestGrapplePoint.global_position)
