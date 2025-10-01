@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=12 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
@@ -8,12 +8,29 @@
 [ext_resource type="Script" uid="uid://cyrk46itcj7hg" path="res://statemachine/player/player_runState.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://qlk0erq25k8y" path="res://player/input_component.gd" id="5_qjkh3"]
 [ext_resource type="Script" uid="uid://ciuanf5meh5yq" path="res://statemachine/player/player_jumpState.gd" id="6_boad6"]
+[ext_resource type="Script" uid="uid://bt7jmrbfpepbj" path="res://statemachine/player/player_fallState.gd" id="8_hg6s5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hg6s5"]
+radius = 506.00888
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
 height = 40.0
 
 [node name="player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_rkbax")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 30, 0)
+
+[node name="GrappleDetect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleDetect"]
+shape = SubResource("CircleShape2D_hg6s5")
+debug_color = Color(6.848802, 0, 13.539555, 0.0627451)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_rkbax")
@@ -26,34 +43,48 @@ texture = ExtResource("1_oul6g")
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("characterBody2D")]
 script = ExtResource("3_rgyib")
 characterBody2D = NodePath("..")
+JUMP_HEIGHT = 800.0
+
+[node name="InputComponent" type="Node" parent="."]
+script = ExtResource("5_qjkh3")
 
 [node name="Statemachine" type="Node" parent="." node_paths=PackedStringArray("start_state", "input_component", "move_component")]
 script = ExtResource("3_g1dw6")
+call_input = true
 start_state = NodePath("Idle")
 input_component = NodePath("../InputComponent")
 move_component = NodePath("../MoveComponent")
 
-[node name="Idle" type="Node" parent="Statemachine" node_paths=PackedStringArray("_jump_state", "_run_state")]
+[node name="Idle" type="Node" parent="Statemachine" node_paths=PackedStringArray("_jump_state", "_run_state", "_fall_state")]
 script = ExtResource("4_yw30f")
 _jump_state = NodePath("../Jump")
 _run_state = NodePath("../Run")
+_fall_state = NodePath("../Fall")
 
-[node name="Run" type="Node" parent="Statemachine" node_paths=PackedStringArray("idle_state", "jump_state")]
+[node name="Run" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_jump_state", "_fall_state")]
 script = ExtResource("5_g6k8r")
-idle_state = NodePath("../Idle")
-jump_state = NodePath("../Jump")
+_idle_state = NodePath("../Idle")
+_jump_state = NodePath("../Jump")
+_fall_state = NodePath("../Fall")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="Jump" type="Node" parent="Statemachine"]
+[node name="Jump" type="Node" parent="Statemachine" node_paths=PackedStringArray("_fall_state")]
 script = ExtResource("6_boad6")
+_fall_state = NodePath("../Fall")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="InputComponent" type="Node" parent="."]
-script = ExtResource("5_qjkh3")
+[node name="Fall" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_run_state")]
+script = ExtResource("8_hg6s5")
+_idle_state = NodePath("../Idle")
+_run_state = NodePath("../Run")
+metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
 [node name="currentstate" type="Label" parent="."]
 offset_left = -19.0
 offset_top = -51.0
 offset_right = 21.0
 offset_bottom = -28.0
-text = "text"
+text = "state"
+
+[connection signal="area_entered" from="GrappleDetect" to="." method="_on_grapple_detect_area_entered"]
+[connection signal="area_exited" from="GrappleDetect" to="." method="_on_grapple_detect_area_exited"]
