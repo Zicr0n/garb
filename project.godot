@@ -11,11 +11,10 @@ config_version=5
 [application]
 
 config/name="garb"
-run/main_scene="uid://ctvreo1y474rv"
+run/main_scene="res://test-scene.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
-<<<<<<< HEAD
 [display]
 
 window/size/viewport_width=640
@@ -24,12 +23,11 @@ window/size/resizable=false
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="viewport"
-=======
+
 [editor]
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
->>>>>>> main
 
 [input]
 
