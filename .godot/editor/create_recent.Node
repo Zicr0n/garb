@@ -1,9 +1,10 @@
+Line2D
+CollisionShape2D
+Area2D
 Node
+Sprite2D
 PlayerState
 Label      - Matches the "text" keyword.
-Line2D
-Sprite2D
-CollisionShape2D
 StaticBody2D
 CharacterBody2D
 Camera2D
