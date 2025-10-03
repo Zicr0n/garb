@@ -29,16 +29,13 @@ offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Level1" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level 1"
+
 [node name="Level2" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Level 2"
-
-[node name="Level1" type="Button" parent="VBoxContainer/Level2"]
-layout_mode = 0
-offset_top = -35.0
-offset_right = 62.0
-offset_bottom = -4.0
-text = "Level 1"
 
 [node name="Level3" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -56,4 +53,5 @@ offset_bottom = -72.0
 grow_vertical = 0
 text = "Back To Main Menu"
 
+[connection signal="pressed" from="VBoxContainer/Level1" to="." method="_on_level_1_pressed"]
 [connection signal="pressed" from="BackButtonLS" to="." method="_on_back_button_pressed"]

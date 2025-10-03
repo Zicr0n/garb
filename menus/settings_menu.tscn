@@ -42,21 +42,21 @@ text = "UX-Upgrades"
 
 [node name="AnotherONE" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Level 2"
+text = "AnotherONE"
 
 [node name="AnotherTWO" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Level 3"
+text = "AnotherTWO"
 
 [node name="BackButtonS" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -11.0
-offset_right = 140.0
-offset_bottom = 20.0
+offset_left = 31.0
+offset_top = -14.0
+offset_right = 191.0
+offset_bottom = 17.0
 grow_vertical = 0
 text = "Back To Main Menu"
 
