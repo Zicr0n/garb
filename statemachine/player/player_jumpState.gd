@@ -14,6 +14,8 @@ func enter():
 		has_released_jump = false
 	else:
 		print("release jump")
+		state_machine.move_component.variable_jump()
+		
 		has_released_jump = true
 
 func process(_delta):
@@ -36,3 +38,7 @@ func physics_process(delta):
 	state_machine.move_component.move_in_air(dir_x, delta)
 	
 	return null
+
+func exit():
+	state_machine.fall_source = state_machine.FALL_SOURCE.OTHER
+	
