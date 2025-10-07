@@ -1,2 +1,2 @@
 # garb
-mitt gymnasiearbete 2025-2026
+vårt gymnasiearbete 2025-2026
