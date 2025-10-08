@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://di4cl6i0wcrea"]
+
+[ext_resource type="Script" uid="uid://bhowledxtgc00" path="res://Level Parts/Scripts/wind_tunnel.gd" id="1_3gth7"]
+[ext_resource type="Texture2D" uid="uid://dn13j5rcilh36" path="res://freak.png" id="2_edxur"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edxur"]
+
+[node name="WindTunnel" type="Area2D"]
+collision_layer = 8
+collision_mask = 9
+script = ExtResource("1_3gth7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_edxur")
+
+[node name="Freak" type="Sprite2D" parent="."]
+position = Vector2(-2.9999962, -2.000001)
+scale = Vector2(0.095999986, 0.08551068)
+texture = ExtResource("2_edxur")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

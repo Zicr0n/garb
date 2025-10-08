@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfe7htucjw6bh"]
+
+[ext_resource type="Texture2D" uid="uid://sypl2u85cu64" path="res://wanker.jpg" id="1_8o77c"]
+[ext_resource type="Script" uid="uid://c6bnlbgeosmhn" path="res://yank_point.gd" id="1_e7mh1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e7mh1"]
+radius = 139.0
+
+[node name="YankPoint" type="Area2D"]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_e7mh1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e7mh1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1.5)
+scale = Vector2(0.09183673, 0.08061224)
+texture = ExtResource("1_8o77c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
