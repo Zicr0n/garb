@@ -41,6 +41,13 @@ texture = ExtResource("1_364m4")
 script = ExtResource("2_sk6g7")
 characterBody2D = NodePath("..")
 JUMP_HEIGHT = 800.0
+MOVE_SPEED_GROUND = 250.0
+ACCELERATION_GROUND = 1750.0
+DECELERATION_GROUND = 3000.0
+TURNING_ACCELERATION_GROUND = 6000.0
+ACCELERATION_AIR = 3200.0
+DECELERATION_AIR = 2000.0
+MAX_FALL_SPEED = 300.0
 
 [node name="InputComponent" type="Node" parent="."]
 script = ExtResource("3_crleu")
@@ -70,14 +77,25 @@ script = ExtResource("7_uqd35")
 _fall_state = NodePath("../Fall")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="Fall" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_run_state")]
+[node name="Fall" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_run_state", "_jump_state")]
 script = ExtResource("8_bgold")
 _idle_state = NodePath("../Idle")
 _run_state = NodePath("../Run")
+_jump_state = NodePath("../Jump")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
+
+[node name="coyote_timer" type="Timer" parent="Statemachine/Fall"]
+wait_time = 0.15
+one_shot = true
+
+[node name="buffer_timer" type="Timer" parent="Statemachine/Fall"]
+wait_time = 0.15
+one_shot = true
 
 [node name="YankArrow" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
+
+[node name="MaxSpeedBoost" type="Timer" parent="."]
 
 [connection signal="area_entered" from="YankDetect" to="." method="_on_yank_detect_area_entered"]
 [connection signal="area_exited" from="YankDetect" to="." method="_on_yank_detect_area_exited"]

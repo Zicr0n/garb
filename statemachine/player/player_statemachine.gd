@@ -8,7 +8,6 @@ var character = null
 var current_state : PlayerState = null
 var previous_state : PlayerState = null
 
-@onready var currentstateLabel: Label = $"../currentstate"
 @export var input_component : InputComponent = null
 @export var move_component : PlayerMoveComponent = null
 
@@ -65,9 +64,7 @@ func _process(delta):
 		if new_state != null:
 			# Returned a state, change to it
 			set_state(new_state)
-	
-	if currentstateLabel != null:
-		currentstateLabel.text = current_state.name
+
 
 func _physics_process(delta):
 	if disabled: return
