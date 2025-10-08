@@ -4,7 +4,9 @@ var nearestGrapplePoint : Area2D = null
 var is_grappling = false
 var grap_dist = 100
 
-#var grap_length = 100.0
+@onready var x: Label = $CanvasLayer/hud/velocities/X
+@onready var y: Label = $CanvasLayer/hud/velocities/Y
+
 var stiffness = 100.0
 var dampening = 20.0
 
@@ -33,6 +35,11 @@ func _input(event: InputEvent) -> void:
 
 @onready var statemachine: PlayerStateMachine = $Statemachine
 
+func _process(_delta: float) -> void:
+	x.text = "VEL_X : " + "%0.2f" % velocity.x
+	y.text = "VEL_Y : " + "%0.2f" % velocity.y
+	
+
 func grapple(delta):
 	if nearestGrapplePoint == null:
 		statemachine.disabled = false
@@ -48,15 +55,39 @@ func grapple(delta):
 	
 	var force = Vector2.ZERO
 	
+	var tangentVector = Vector2(-direction.y, direction.x)
+	var tangetnSpeed = velocity.dot(tangentVector)
+	var tangentFriction = 0.999
+	
 	if stretch > 0:
 		var spring_force_strength = stiffness * stretch
 		var spring_force_vector = direction * spring_force_strength
 		
 		# complex shit i dont understand it but it should work according to the internet <3
-		var vel_dot = velocity.dot(direction) # velocity along rope axis
+		var vel_dot = velocity.dot(direction) # velocity along rope axis, radial
+		
 		var damping = -dampening * vel_dot * direction # Resisting the back and forth swing ????
 		
+		
+
+		velocity = tangentVector * tangetnSpeed
+		velocity -= direction * abs(vel_dot) * 0.2
+		velocity -= tangentVector * tangetnSpeed * (1.0 - tangentFriction)
+		
 		force = spring_force_vector + damping
+	
+	
+	
+	var x_input = statemachine.input_component.move_dir_x()
+	
+	if x_input != 0:
+		var accelStrength = 400.0
+		var input_dir = sign(x_input)
+		
+		if sign(tangetnSpeed) == input_dir:
+			velocity += tangentVector * accelStrength * delta * input_dir
+		else:
+			velocity += tangentVector * (accelStrength * 0.3) * delta * input_dir
 	
 	velocity += force * delta
 

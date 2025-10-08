@@ -14,6 +14,13 @@ var previous_state : PlayerState = null
 
 @export var disabled := false
 
+enum FALL_SOURCE {
+	PLATFORM,
+	OTHER
+}
+
+var fall_source = FALL_SOURCE.PLATFORM
+
 func _ready():
 	init(character)
 

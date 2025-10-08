@@ -13,11 +13,11 @@ func enter():
 func process(_delta):
 	x_dir = state_machine.input_component.move_dir_x()
 	
-	if x_dir == 0:
-		return _idle_state
-	
 	if state_machine.input_component.is_jump_just_pressed():
 		return _jump_state
+	
+	if x_dir == 0 and state_machine.move_component.not_moving():
+		return _idle_state
 	
 	return null
 
@@ -28,3 +28,7 @@ func physics_process(delta):
 	state_machine.move_component.move_on_ground(x_dir, delta)
 	
 	return null
+
+func exit():
+	state_machine.fall_source = state_machine.FALL_SOURCE.PLATFORM
+	
