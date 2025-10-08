@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0fpi2hx80ksy"]
+[gd_scene load_steps=7 format=3 uid="uid://c0fpi2hx80ksy"]
 
 [ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://player/player.tscn" id="1_wn8ut"]
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="2_8amj3"]
+[ext_resource type="PackedScene" uid="uid://di4cl6i0wcrea" path="res://Level Parts/Scenes/wind_tunnel.tscn" id="2_cp2na"]
 [ext_resource type="Texture2D" uid="uid://dn13j5rcilh36" path="res://freak.png" id="3_8amj3"]
 [ext_resource type="PackedScene" uid="uid://bb8fiw5446634" path="res://grappling/grapple_point.tscn" id="4_c5pbs"]
 
@@ -14,6 +15,9 @@ size = Vector2(1163, 20)
 position = Vector2(101, 95)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
+
+[node name="WindTunnel" parent="player" instance=ExtResource("2_cp2na")]
+position = Vector2(42, 459)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(566, 501)
@@ -45,4 +49,4 @@ scale = Vector2(0.07106269, 0.07106315)
 texture = ExtResource("3_8amj3")
 
 [node name="GrapplePoint" parent="." instance=ExtResource("4_c5pbs")]
-position = Vector2(265, 192)
+position = Vector2(400, 216)
