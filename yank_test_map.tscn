@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsf2gjuq5ku6r"]
+
+[ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_l4ygy"]
+[ext_resource type="PackedScene" uid="uid://ngida6cty3b3" path="res://yanker.tscn" id="2_y830g"]
+[ext_resource type="PackedScene" uid="uid://cfe7htucjw6bh" path="res://yank_point.tscn" id="3_y830g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4ygy"]
+size = Vector2(1163, 20)
+
+[node name="YankTestMap" type="Node2D"]
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(1672, 496)
+rotation = -1.8252379
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(571.5, 0)
+shape = SubResource("RectangleShape2D_l4ygy")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
+position = Vector2(549.49994, -1.5)
+scale = Vector2(8.710937, 0.1640625)
+texture = ExtResource("1_l4ygy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(9, 634)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(571.5, 0)
+shape = SubResource("RectangleShape2D_l4ygy")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(549.49994, -1.5)
+scale = Vector2(8.710937, 0.1640625)
+texture = ExtResource("1_l4ygy")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(566, 501)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(571.5, 0)
+shape = SubResource("RectangleShape2D_l4ygy")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(549.49994, -1.5)
+scale = Vector2(8.710937, 0.1640625)
+texture = ExtResource("1_l4ygy")
+
+[node name="Yanker" parent="." instance=ExtResource("2_y830g")]
+position = Vector2(351, 346)
+
+[node name="YankPoint" parent="." instance=ExtResource("3_y830g")]
+position = Vector2(792, 351)
+
+[node name="YankPoint2" parent="." instance=ExtResource("3_y830g")]
+position = Vector2(997, 105)
+
+[node name="YankPoint3" parent="." instance=ExtResource("3_y830g")]
+position = Vector2(736, -90)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(762, 393)
+zoom = Vector2(0.2, 0.2)

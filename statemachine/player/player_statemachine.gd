@@ -59,7 +59,8 @@ func _process(delta):
 			# Returned a state, change to it
 			set_state(new_state)
 	
-	currentstateLabel.text = current_state.name
+	if currentstateLabel != null:
+		currentstateLabel.text = current_state.name
 
 func _physics_process(delta):
 	if disabled: return

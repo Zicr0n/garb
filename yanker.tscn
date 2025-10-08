@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=3 uid="uid://ngida6cty3b3"]
+
+[ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_364m4"]
+[ext_resource type="Script" uid="uid://haxl2ftc6qc1" path="res://yanker.gd" id="1_sk6g7"]
+[ext_resource type="Script" uid="uid://c3qb0f2v1g87h" path="res://player/player_moveComponent.gd" id="2_sk6g7"]
+[ext_resource type="Script" uid="uid://qlk0erq25k8y" path="res://player/input_component.gd" id="3_crleu"]
+[ext_resource type="Script" uid="uid://c1240vqmt4squ" path="res://statemachine/player/player_statemachine.gd" id="4_50pxr"]
+[ext_resource type="Script" uid="uid://b5psxt4dsqn1t" path="res://statemachine/player/player_idleState.gd" id="5_4bq8a"]
+[ext_resource type="Script" uid="uid://cyrk46itcj7hg" path="res://statemachine/player/player_runState.gd" id="6_1g5u3"]
+[ext_resource type="Script" uid="uid://ciuanf5meh5yq" path="res://statemachine/player/player_jumpState.gd" id="7_uqd35"]
+[ext_resource type="Script" uid="uid://bt7jmrbfpepbj" path="res://statemachine/player/player_fallState.gd" id="8_bgold"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u4cas"]
+radius = 22.203604
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fck2m"]
+height = 40.0
+
+[node name="Yanker" type="CharacterBody2D" node_paths=PackedStringArray("yankArrow")]
+script = ExtResource("1_sk6g7")
+yankPower = 800
+yankArrow = NodePath("YankArrow")
+
+[node name="YankDetect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YankDetect"]
+shape = SubResource("CircleShape2D_u4cas")
+debug_color = Color(6.848802, 0, 13.539555, 0.0627451)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_fck2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.5, 1.9073486e-06)
+scale = Vector2(0.16406249, 0.31249997)
+texture = ExtResource("1_364m4")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("2_sk6g7")
+characterBody2D = NodePath("..")
+JUMP_HEIGHT = 800.0
+
+[node name="InputComponent" type="Node" parent="."]
+script = ExtResource("3_crleu")
+
+[node name="Statemachine" type="Node" parent="." node_paths=PackedStringArray("start_state", "input_component", "move_component")]
+script = ExtResource("4_50pxr")
+call_input = true
+start_state = NodePath("Idle")
+input_component = NodePath("../InputComponent")
+move_component = NodePath("../MoveComponent")
+
+[node name="Idle" type="Node" parent="Statemachine" node_paths=PackedStringArray("_jump_state", "_run_state", "_fall_state")]
+script = ExtResource("5_4bq8a")
+_jump_state = NodePath("../Jump")
+_run_state = NodePath("../Run")
+_fall_state = NodePath("../Fall")
+
+[node name="Run" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_jump_state", "_fall_state")]
+script = ExtResource("6_1g5u3")
+_idle_state = NodePath("../Idle")
+_jump_state = NodePath("../Jump")
+_fall_state = NodePath("../Fall")
+metadata/_custom_type_script = "uid://ddme3krabnfa5"
+
+[node name="Jump" type="Node" parent="Statemachine" node_paths=PackedStringArray("_fall_state")]
+script = ExtResource("7_uqd35")
+_fall_state = NodePath("../Fall")
+metadata/_custom_type_script = "uid://ddme3krabnfa5"
+
+[node name="Fall" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_run_state")]
+script = ExtResource("8_bgold")
+_idle_state = NodePath("../Idle")
+_run_state = NodePath("../Run")
+metadata/_custom_type_script = "uid://ddme3krabnfa5"
+
+[node name="YankArrow" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0, 0, 0)
+
+[connection signal="area_entered" from="YankDetect" to="." method="_on_yank_detect_area_entered"]
+[connection signal="area_exited" from="YankDetect" to="." method="_on_yank_detect_area_exited"]
