@@ -44,6 +44,14 @@ texture = ExtResource("1_oul6g")
 script = ExtResource("3_rgyib")
 characterBody2D = NodePath("..")
 JUMP_HEIGHT = 800.0
+MOVE_SPEED_GROUND = 300.0
+ACCELERATION_GROUND = 1750.0
+DECELERATION_GROUND = 3000.0
+TURNING_ACCELERATION_GROUND = 6000.0
+MOVE_SPEED_AIR = 300.0
+ACCELERATION_AIR = 3200.0
+DECELERATION_AIR = 2000.0
+MAX_FALL_SPEED = 1000.0
 
 [node name="InputComponent" type="Node" parent="."]
 script = ExtResource("5_qjkh3")
@@ -73,11 +81,20 @@ script = ExtResource("6_boad6")
 _fall_state = NodePath("../Fall")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="Fall" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_run_state")]
+[node name="Fall" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_run_state", "_jump_state")]
 script = ExtResource("8_hg6s5")
 _idle_state = NodePath("../Idle")
 _run_state = NodePath("../Run")
+_jump_state = NodePath("../Jump")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
+
+[node name="coyote_timer" type="Timer" parent="Statemachine/Fall"]
+wait_time = 0.15
+one_shot = true
+
+[node name="buffer_timer" type="Timer" parent="Statemachine/Fall"]
+wait_time = 0.15
+one_shot = true
 
 [node name="currentstate" type="Label" parent="."]
 offset_left = -19.0
@@ -85,6 +102,40 @@ offset_top = -51.0
 offset_right = 21.0
 offset_bottom = -28.0
 text = "state"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="hud" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="velocities" type="Control" parent="CanvasLayer/hud"]
+anchors_preset = 0
+offset_right = 150.0
+offset_bottom = 56.0
+
+[node name="X" type="Label" parent="CanvasLayer/hud/velocities"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "VEL_X : 0"
+
+[node name="Y" type="Label" parent="CanvasLayer/hud/velocities"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "VEL_Y : 0"
 
 [connection signal="area_entered" from="GrappleDetect" to="." method="_on_grapple_detect_area_entered"]
 [connection signal="area_exited" from="GrappleDetect" to="." method="_on_grapple_detect_area_exited"]

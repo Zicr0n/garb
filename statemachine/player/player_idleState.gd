@@ -24,3 +24,7 @@ func physics_process(delta):
 	state_machine.move_component.idle(delta)
 	
 	return null
+
+func exit():
+	state_machine.fall_source = state_machine.FALL_SOURCE.PLATFORM
+	
