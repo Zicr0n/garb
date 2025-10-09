@@ -3,6 +3,7 @@ extends CharacterBody2D
 var nearestYank = null
 @export var yankPower = 1000
 @export var yankArrow : Line2D = null
+@export var grapple_cursor: Sprite2D = null
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("grapple"):
@@ -28,15 +29,21 @@ func _physics_process(delta: float) -> void:
 func _on_yank_detect_area_entered(area: Area2D) -> void:
 	nearestYank = area
 
-
 func _on_yank_detect_area_exited(_area: Area2D) -> void:
 	nearestYank = null
-	pass # Replace with function body.
 
 func updateYankArrow():
-	if nearestYank != null:
+	if nearestYank :
+		# Yank arrow
 		yankArrow.points[1] = nearestYank.position - position
 		yankArrow.points[2] = yankArrow.points[1] * 2
+		
+		# Grapple cursor
+		grapple_cursor.global_position = nearestYank.global_position
+		grapple_cursor.visible = true
+	
 	elif nearestYank == null:
 		yankArrow.points[1] = Vector2.ZERO
 		yankArrow.points[2] = yankArrow.points[1]
+		
+		grapple_cursor.visible = false

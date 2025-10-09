@@ -1,14 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://ngida6cty3b3"]
+[gd_scene load_steps=14 format=3 uid="uid://ngida6cty3b3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_364m4"]
 [ext_resource type="Script" uid="uid://haxl2ftc6qc1" path="res://yanker.gd" id="1_sk6g7"]
 [ext_resource type="Script" uid="uid://c3qb0f2v1g87h" path="res://player/player_moveComponent.gd" id="2_sk6g7"]
+[ext_resource type="Script" uid="uid://ojfalqk7a0sv" path="res://hit_system/hurtbox.gd" id="3_50pxr"]
 [ext_resource type="Script" uid="uid://qlk0erq25k8y" path="res://player/input_component.gd" id="3_crleu"]
 [ext_resource type="Script" uid="uid://c1240vqmt4squ" path="res://statemachine/player/player_statemachine.gd" id="4_50pxr"]
 [ext_resource type="Script" uid="uid://b5psxt4dsqn1t" path="res://statemachine/player/player_idleState.gd" id="5_4bq8a"]
 [ext_resource type="Script" uid="uid://cyrk46itcj7hg" path="res://statemachine/player/player_runState.gd" id="6_1g5u3"]
 [ext_resource type="Script" uid="uid://ciuanf5meh5yq" path="res://statemachine/player/player_jumpState.gd" id="7_uqd35"]
 [ext_resource type="Script" uid="uid://bt7jmrbfpepbj" path="res://statemachine/player/player_fallState.gd" id="8_bgold"]
+[ext_resource type="Script" uid="uid://d0og7kbpdb86e" path="res://player/player_healthComponent.gd" id="10_crleu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u4cas"]
 radius = 22.203604
@@ -37,6 +39,10 @@ position = Vector2(-0.5, 1.9073486e-06)
 scale = Vector2(0.16406249, 0.31249997)
 texture = ExtResource("1_364m4")
 
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("3_50pxr")
+metadata/_custom_type_script = "uid://ojfalqk7a0sv"
+
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("characterBody2D")]
 script = ExtResource("2_sk6g7")
 characterBody2D = NodePath("..")
@@ -52,12 +58,18 @@ MAX_FALL_SPEED = 300.0
 [node name="InputComponent" type="Node" parent="."]
 script = ExtResource("3_crleu")
 
-[node name="Statemachine" type="Node" parent="." node_paths=PackedStringArray("start_state", "input_component", "move_component")]
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("10_crleu")
+hurtbox = NodePath("../Hurtbox")
+metadata/_custom_type_script = "uid://d0og7kbpdb86e"
+
+[node name="Statemachine" type="Node" parent="." node_paths=PackedStringArray("start_state", "input_component", "move_component", "health_component")]
 script = ExtResource("4_50pxr")
 call_input = true
 start_state = NodePath("Idle")
 input_component = NodePath("../InputComponent")
 move_component = NodePath("../MoveComponent")
+health_component = NodePath("../HealthComponent")
 
 [node name="Idle" type="Node" parent="Statemachine" node_paths=PackedStringArray("_jump_state", "_run_state", "_fall_state")]
 script = ExtResource("5_4bq8a")
