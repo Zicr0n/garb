@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="garb"
-run/main_scene="uid://bsf2gjuq5ku6r"
+run/main_scene="uid://c0fpi2hx80ksy"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -67,6 +67,8 @@ move_down={
 2d_physics/layer_3="grapplepoint"
 2d_physics/layer_4="windtunnel"
 2d_physics/layer_5="yank"
+2d_physics/layer_6="hurtbox"
+2d_physics/layer_7="hitbox"
 
 [rendering]
 

@@ -38,7 +38,6 @@ func _input(event: InputEvent) -> void:
 func _process(_delta: float) -> void:
 	x.text = "VEL_X : " + "%0.2f" % velocity.x
 	y.text = "VEL_Y : " + "%0.2f" % velocity.y
-	
 
 func grapple(delta):
 	if nearestGrapplePoint == null:
@@ -68,8 +67,6 @@ func grapple(delta):
 		
 		var damping = -dampening * vel_dot * direction # Resisting the back and forth swing ????
 		
-		
-
 		velocity = tangentVector * tangetnSpeed
 		velocity -= direction * abs(vel_dot) * 0.2
 		velocity -= tangentVector * tangetnSpeed * (1.0 - tangentFriction)
@@ -105,7 +102,6 @@ func _on_grapple_detect_area_entered(area: Area2D) -> void:
 	"""
 	nearestGrapplePoint = area
 	print("Grapple point detected")
-
 
 func _on_grapple_detect_area_exited(_area: Area2D) -> void:
 	print("Grapple point exited")

@@ -8,8 +8,11 @@ var character = null
 var current_state : PlayerState = null
 var previous_state : PlayerState = null
 
+@export var _death_state : PlayerState = null
+
 @export var input_component : InputComponent = null
 @export var move_component : PlayerMoveComponent = null
+@export var health_component : HealthComponent = null
 
 @export var disabled := false
 
@@ -22,6 +25,8 @@ var fall_source = FALL_SOURCE.PLATFORM
 
 func _ready():
 	init(character)
+	health_component.on_die.connect(func():
+		set_state(_death_state))
 
 func init(set_parent):
 	character = set_parent
