@@ -3,9 +3,6 @@ class_name PlayerMoveComponent
 
 @export var characterBody2D : CharacterBody2D = null
 
-@export var JUMP_HEIGHT : float = 400.0
-@export var GRAVITY_MULTIPLIER : float = 1.5
-
 @export_category("GROUND MOVEMENT")
 @export var MOVE_SPEED_GROUND : float = 100.0
 @export var ACCELERATION_GROUND : float = 100.0
@@ -14,19 +11,40 @@ class_name PlayerMoveComponent
 @export var TURNING_THRESHOLD_SPEED : float = 280.0
 var _current_move_speed : float = 0.0
 
+@export_category("JUMP")
+@export var MAX_JUMP_HEIGHT : float = 400.0
+
 @export_category("AIR MOVEMENT")
-@export var MOVE_SPEED_AIR : float = 250
+@export var MOVE_SPEED_AIR : float = 250.0
 @export var ACCELERATION_AIR : float = 1500.0
 @export var DECELERATION_AIR : float = 3000.0
-@export var DECELERATION_AIR_OVERDRIVE : float = 200.0
 
 @export_category("FALLING")
+@export var GRAVITY_MULTIPLIER : float = 1.5 ## Gravity Multiplier, general
+@export var FALL_MULTIPLIER : float = 1.2 ## Applies to make falling faster than jumping
 @export var MAX_FALL_SPEED : float = 40.0
 @export var MAX_FAST_FALL_SPEED : float = 60.0
 
 var last_move_dir = 1
 var last_target_speed = 0
 var is_turning = false
+
+############
+## UPDATE ##
+############
+
+func _physics_process(dt) -> void:
+	if !grounded():
+		fall(dt)
+	
+	characterBody2D.move_and_slide()
+
+############
+## GROUND ##
+############
+func idle(dt):
+	_current_move_speed = move_toward(_current_move_speed, 0, DECELERATION_GROUND * dt)
+	characterBody2D.velocity.x = _current_move_speed
 
 func move_on_ground(direction : float, dt : float) -> void:
 	var target_speed = MOVE_SPEED_GROUND * direction
@@ -61,44 +79,38 @@ func move_on_ground(direction : float, dt : float) -> void:
 	
 	was_turning = is_turning
 
+func grounded() -> bool:
+	return characterBody2D.is_on_floor()
+
+func not_moving() -> bool:
+	return abs(characterBody2D.velocity.x) < 1
+
+##########
+## JUMP ##
+##########
+func jump():
+	characterBody2D.velocity.y = -MAX_JUMP_HEIGHT
+
 func variable_jump():
 	characterBody2D.velocity.y *= 0.5
 
-func idle(dt):
-	_current_move_speed = move_toward(_current_move_speed, 0, DECELERATION_GROUND * dt)
-	characterBody2D.velocity.x = _current_move_speed
-
+##########
+## FALL ##
+##########
 func move_in_air(direction : float, dt) -> void:
-	var target_speed = MOVE_SPEED_AIR * direction
+	var target_speed := MOVE_SPEED_AIR * direction
 	
 	if direction != 0:
 		characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, target_speed, ACCELERATION_AIR * dt)
 	else:
 		characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, 0, DECELERATION_AIR * dt)
 
-func _physics_process(dt) -> void:
-	if !grounded():
-		fall(dt)
-	
-	characterBody2D.move_and_slide()
-
-func not_moving() -> bool:
-	return abs(characterBody2D.velocity.x) < 1
-
 func fall(dt):
-	var multi = 1
-	if characterBody2D.velocity.y > 0:
-		multi = 1.4
+	var multi := FALL_MULTIPLIER if characterBody2D.velocity.y > 0.0 else 1.0
 	
 	characterBody2D.velocity.y += characterBody2D.get_gravity().y * dt * GRAVITY_MULTIPLIER * multi
 	
 	characterBody2D.velocity.y = clampf(characterBody2D.velocity.y, -99999, MAX_FALL_SPEED)
-
-func grounded() -> bool:
-	return characterBody2D.is_on_floor()
-
-func jump():
-	characterBody2D.velocity.y = -JUMP_HEIGHT
 
 func is_falling() -> bool:
 	return characterBody2D.velocity.y >= 0.0

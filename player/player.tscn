@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=17 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Texture2D" uid="uid://dyvhpsjm0vyja" path="res://cursor.png" id="2_yllr7"]
 [ext_resource type="Script" uid="uid://c1240vqmt4squ" path="res://statemachine/player/player_statemachine.gd" id="3_g1dw6"]
 [ext_resource type="Script" uid="uid://c3qb0f2v1g87h" path="res://player/player_moveComponent.gd" id="3_rgyib"]
 [ext_resource type="Script" uid="uid://b5psxt4dsqn1t" path="res://statemachine/player/player_idleState.gd" id="4_yw30f"]
@@ -13,22 +14,46 @@
 [ext_resource type="Script" uid="uid://ds1nel8c6klld" path="res://statemachine/player/player_deathState.gd" id="10_8t03j"]
 [ext_resource type="Script" uid="uid://ojfalqk7a0sv" path="res://hit_system/hurtbox.gd" id="11_2ieo8"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ebec5"]
+radius = 22.203604
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebec5"]
 size = Vector2(20, 40)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hg6s5"]
-radius = 506.00888
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
 height = 40.0
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("yankArrow", "grapple_cursor")]
 collision_layer = 10
 collision_mask = 5
 script = ExtResource("1_rkbax")
+yankPower = 800
+yankArrow = NodePath("YankArrow")
+grapple_cursor = NodePath("ParentIndependent/GrappleCursor")
+
+[node name="ParentIndependent" type="Node" parent="."]
+
+[node name="GrappleCursor" type="Sprite2D" parent="ParentIndependent"]
+visible = false
+modulate = Color(0, 1, 1, 1)
+z_index = 99
+texture = ExtResource("2_yllr7")
+
+[node name="YankArrow" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0, 0, 0)
+
+[node name="MaxSpeedBoost" type="Timer" parent="."]
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 30, 0)
+
+[node name="YankDetect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YankDetect"]
+shape = SubResource("CircleShape2D_ebec5")
+debug_color = Color(6.848802, 0, 13.539555, 0.0627451)
 
 [node name="Hurtbox" type="Area2D" parent="."]
 script = ExtResource("11_2ieo8")
@@ -36,14 +61,6 @@ metadata/_custom_type_script = "uid://ojfalqk7a0sv"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_ebec5")
-
-[node name="GrappleDetect" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleDetect"]
-shape = SubResource("CircleShape2D_hg6s5")
-debug_color = Color(6.848802, 0, 13.539555, 0.0627451)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_rkbax")
@@ -56,15 +73,16 @@ texture = ExtResource("1_oul6g")
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("characterBody2D")]
 script = ExtResource("3_rgyib")
 characterBody2D = NodePath("..")
-JUMP_HEIGHT = 500.0
 MOVE_SPEED_GROUND = 300.0
 ACCELERATION_GROUND = 1750.0
 DECELERATION_GROUND = 3000.0
 TURNING_ACCELERATION_GROUND = 100000.0
 TURNING_THRESHOLD_SPEED = 200.0
+MAX_JUMP_HEIGHT = 600.0
 MOVE_SPEED_AIR = 300.0
+ACCELERATION_AIR = 1800.0
 DECELERATION_AIR = 2000.0
-MAX_FALL_SPEED = 1000.0
+MAX_FALL_SPEED = 700.0
 
 [node name="InputComponent" type="Node" parent="."]
 script = ExtResource("5_qjkh3")
@@ -73,8 +91,9 @@ script = ExtResource("5_qjkh3")
 script = ExtResource("6_ebec5")
 hurtbox = NodePath("../Hurtbox")
 
-[node name="Statemachine" type="Node" parent="." node_paths=PackedStringArray("start_state", "_death_state", "input_component", "move_component", "health_component")]
+[node name="Statemachine" type="Node" parent="." node_paths=PackedStringArray("character", "start_state", "_death_state", "input_component", "move_component", "health_component")]
 script = ExtResource("3_g1dw6")
+character = NodePath("..")
 call_input = true
 start_state = NodePath("Idle")
 _death_state = NodePath("Death")
@@ -160,5 +179,5 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "VEL_Y : 0"
 
-[connection signal="area_entered" from="GrappleDetect" to="." method="_on_grapple_detect_area_entered"]
-[connection signal="area_exited" from="GrappleDetect" to="." method="_on_grapple_detect_area_exited"]
+[connection signal="area_entered" from="YankDetect" to="." method="_on_yank_detect_area_entered"]
+[connection signal="area_exited" from="YankDetect" to="." method="_on_yank_detect_area_exited"]

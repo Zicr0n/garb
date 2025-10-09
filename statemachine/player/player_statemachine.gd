@@ -2,7 +2,7 @@
 extends Node
 class_name PlayerStateMachine
 
-var character = null
+@export var character : CharacterBody2D = null
 @export var call_input : bool = false
 @export var start_state : PlayerState = null
 var current_state : PlayerState = null
@@ -30,6 +30,7 @@ func _ready():
 
 func init(set_parent):
 	character = set_parent
+	move_component.characterBody2D = character
 	
 	if start_state == null:
 		print("NO START STATE FOUND")
