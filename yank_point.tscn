@@ -8,7 +8,7 @@ radius = 139.0
 
 [node name="YankPoint" type="Area2D"]
 collision_layer = 16
-collision_mask = 16
+collision_mask = 0
 script = ExtResource("1_e7mh1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -19,5 +19,8 @@ position = Vector2(0, -1.5)
 scale = Vector2(0.09183673, 0.08061224)
 texture = ExtResource("1_8o77c")
 
+[node name="YankPointCooldown" type="Timer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="YankPointCooldown" to="." method="_on_yank_point_cooldown_timeout"]

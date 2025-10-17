@@ -57,7 +57,7 @@ position = Vector2(792, 351)
 position = Vector2(997, 105)
 
 [node name="YankPoint3" parent="." instance=ExtResource("3_y830g")]
-position = Vector2(736, -90)
+position = Vector2(1173, 458)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(762, 393)
