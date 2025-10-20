@@ -1,15 +1,15 @@
 extends Area2D
 
+@export var timer : Timer = null
+
 var player : CharacterBody2D = null
 
-func _on_body_entered(body: Node2D) -> void:
-	print("body entered area! " + body.name)
-	if body.name == "yanker":
-		player = body
+var active : bool = true
 
+func yanked():
+	active = false
+	#animate
 
-func _on_body_exited(body: Node2D) -> void:
-	print("body exited area ! " + body.name)
-	if body.name == player.name:
-		player = null
-	
+func _on_yank_point_cooldown_timeout() -> void:
+	active = true
+	#animate

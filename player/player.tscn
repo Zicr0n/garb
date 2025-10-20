@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=19 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://bt7jmrbfpepbj" path="res://statemachine/player/player_fallState.gd" id="8_hg6s5"]
 [ext_resource type="Script" uid="uid://ds1nel8c6klld" path="res://statemachine/player/player_deathState.gd" id="10_8t03j"]
 [ext_resource type="Script" uid="uid://ojfalqk7a0sv" path="res://hit_system/hurtbox.gd" id="11_2ieo8"]
+[ext_resource type="Script" uid="uid://c8rkvciojjew7" path="res://statemachine/player/player_yankState.gd" id="14_kb6p2"]
+[ext_resource type="PackedScene" uid="uid://dtjh7ox1kyry8" path="res://player/yank_detector.tscn" id="15_wodsf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebec5"]
 radius = 22.203604
@@ -23,18 +25,14 @@ size = Vector2(20, 40)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
 height = 40.0
 
-[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("yankArrow", "grapple_cursor")]
+[node name="player" type="CharacterBody2D"]
 collision_layer = 10
 collision_mask = 5
 script = ExtResource("1_rkbax")
-yankPower = 800
-yankArrow = NodePath("YankArrow")
-grapple_cursor = NodePath("ParentIndependent/GrappleCursor")
 
 [node name="ParentIndependent" type="Node" parent="."]
 
 [node name="GrappleCursor" type="Sprite2D" parent="ParentIndependent"]
-visible = false
 modulate = Color(0, 1, 1, 1)
 z_index = 99
 texture = ExtResource("2_yllr7")
@@ -70,9 +68,10 @@ position = Vector2(-0.5, 1.9073486e-06)
 scale = Vector2(0.16406249, 0.31249997)
 texture = ExtResource("1_oul6g")
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("characterBody2D")]
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("characterBody2D", "yankDetector")]
 script = ExtResource("3_rgyib")
 characterBody2D = NodePath("..")
+yankDetector = NodePath("../YankDetector")
 MOVE_SPEED_GROUND = 300.0
 ACCELERATION_GROUND = 1750.0
 DECELERATION_GROUND = 3000.0
@@ -101,17 +100,19 @@ input_component = NodePath("../InputComponent")
 move_component = NodePath("../MoveComponent")
 health_component = NodePath("../HealthComponent")
 
-[node name="Idle" type="Node" parent="Statemachine" node_paths=PackedStringArray("_jump_state", "_run_state", "_fall_state")]
+[node name="Idle" type="Node" parent="Statemachine" node_paths=PackedStringArray("_jump_state", "_run_state", "_fall_state", "_yank_state")]
 script = ExtResource("4_yw30f")
 _jump_state = NodePath("../Jump")
 _run_state = NodePath("../Run")
 _fall_state = NodePath("../Fall")
+_yank_state = NodePath("../Yank")
 
-[node name="Run" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_jump_state", "_fall_state")]
+[node name="Run" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_jump_state", "_fall_state", "_yank_state")]
 script = ExtResource("5_g6k8r")
 _idle_state = NodePath("../Idle")
 _jump_state = NodePath("../Jump")
 _fall_state = NodePath("../Fall")
+_yank_state = NodePath("../Yank")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
 [node name="Jump" type="Node" parent="Statemachine" node_paths=PackedStringArray("_fall_state")]
@@ -123,11 +124,12 @@ metadata/_custom_type_script = "uid://ddme3krabnfa5"
 script = ExtResource("10_8t03j")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="Fall" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_run_state", "_jump_state")]
+[node name="Fall" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_run_state", "_jump_state", "_yank_state")]
 script = ExtResource("8_hg6s5")
 _idle_state = NodePath("../Idle")
 _run_state = NodePath("../Run")
 _jump_state = NodePath("../Jump")
+_yank_state = NodePath("../Yank")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
 [node name="coyote_timer" type="Timer" parent="Statemachine/Fall"]
@@ -136,6 +138,16 @@ one_shot = true
 
 [node name="buffer_timer" type="Timer" parent="Statemachine/Fall"]
 wait_time = 0.15
+one_shot = true
+
+[node name="Yank" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_yank_duration")]
+script = ExtResource("14_kb6p2")
+_idle_state = NodePath("../Idle")
+_fall_state = NodePath("../Fall")
+_yank_duration = NodePath("yank_duration")
+
+[node name="yank_duration" type="Timer" parent="Statemachine/Yank"]
+wait_time = 0.1
 one_shot = true
 
 [node name="currentstate" type="Label" parent="."]
@@ -179,5 +191,12 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "VEL_Y : 0"
 
+[node name="YankDetector" parent="." node_paths=PackedStringArray("player", "yankArrow", "grapple_cursor") instance=ExtResource("15_wodsf")]
+player = NodePath("..")
+yankArrow = NodePath("../YankArrow")
+grapple_cursor = NodePath("../ParentIndependent/GrappleCursor")
+
 [connection signal="area_entered" from="YankDetect" to="." method="_on_yank_detect_area_entered"]
 [connection signal="area_exited" from="YankDetect" to="." method="_on_yank_detect_area_exited"]
+
+[editable path="YankDetector"]

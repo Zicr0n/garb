@@ -46,7 +46,6 @@ metadata/_custom_type_script = "uid://ojfalqk7a0sv"
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("characterBody2D")]
 script = ExtResource("2_sk6g7")
 characterBody2D = NodePath("..")
-JUMP_HEIGHT = 800.0
 MOVE_SPEED_GROUND = 250.0
 ACCELERATION_GROUND = 1750.0
 DECELERATION_GROUND = 3000.0

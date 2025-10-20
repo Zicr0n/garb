@@ -20,7 +20,7 @@ func enter():
 
 func process(_delta):
 	dir_x = state_machine.input_component.move_dir_x()
-	
+
 	return null
 
 func input(event : InputEvent):
@@ -32,6 +32,7 @@ func input(event : InputEvent):
 	return null
 
 func physics_process(delta):
+	state_machine.move_component.fall(delta)
 	if state_machine.move_component.is_falling():
 		return _fall_state
 	

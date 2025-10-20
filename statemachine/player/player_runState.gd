@@ -3,6 +3,7 @@ extends PlayerState
 @export var _idle_state : PlayerState = null
 @export var _jump_state : PlayerState = null
 @export var _fall_state : PlayerState = null
+@export var _yank_state : PlayerState = null;
 
 var x_dir = 0
 
@@ -12,7 +13,10 @@ func enter():
 
 func process(_delta):
 	x_dir = state_machine.input_component.move_dir_x()
-	
+
+	if state_machine.input_component.is_yank_just_pressed():
+		return _yank_state
+
 	if state_machine.input_component.is_jump_just_pressed():
 		return _jump_state
 	

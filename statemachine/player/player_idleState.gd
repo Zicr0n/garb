@@ -4,11 +4,15 @@ class_name PlayerIdleState
 @export var _jump_state : PlayerState = null;
 @export var _run_state : PlayerState = null;
 @export var _fall_state : PlayerState = null;
+@export var _yank_state : PlayerState = null;
 
 func enter():
 	pass
 
 func process(_delta):
+	if state_machine.input_component.is_yank_just_pressed():
+		return _yank_state
+
 	if state_machine.input_component.move_dir_x() != 0:
 		return _run_state;
 	

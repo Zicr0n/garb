@@ -14,3 +14,6 @@ func move_down() -> bool:
 
 func is_jump_just_pressed() -> bool:
 	return Input.is_action_just_pressed("jump")
+
+func is_yank_just_pressed() -> bool:
+	return Input.is_action_just_pressed("grapple")

@@ -2,6 +2,7 @@ extends Node
 class_name PlayerMoveComponent
 
 @export var characterBody2D : CharacterBody2D = null
+@export var yankDetector : Area2D = null
 
 @export_category("GROUND MOVEMENT")
 @export var MOVE_SPEED_GROUND : float = 100.0
@@ -25,6 +26,9 @@ var _current_move_speed : float = 0.0
 @export var MAX_FALL_SPEED : float = 40.0
 @export var MAX_FAST_FALL_SPEED : float = 60.0
 
+@export_category("YANK")
+@export var YANK_POWER : float = 600
+
 var last_move_dir = 1
 var last_target_speed = 0
 var is_turning = false
@@ -34,9 +38,6 @@ var is_turning = false
 ############
 
 func _physics_process(dt) -> void:
-	if !grounded():
-		fall(dt)
-	
 	characterBody2D.move_and_slide()
 
 ############
@@ -114,3 +115,7 @@ func fall(dt):
 
 func is_falling() -> bool:
 	return characterBody2D.velocity.y >= 0.0
+
+func yank():
+	var yank_dir = (yankDetector.nearestPoint().global_position - characterBody2D.global_position).normalized()
+	characterBody2D.velocity = yank_dir * YANK_POWER
