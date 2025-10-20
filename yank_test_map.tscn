@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsf2gjuq5ku6r"]
+[gd_scene load_steps=7 format=3 uid="uid://bsf2gjuq5ku6r"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_l4ygy"]
 [ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://player/player.tscn" id="3_d77vk"]
 [ext_resource type="PackedScene" uid="uid://cfe7htucjw6bh" path="res://yank_point.tscn" id="3_y830g"]
 [ext_resource type="PackedScene" uid="uid://ca0715cgxnxcb" path="res://scenes/killzone.tscn" id="4_d77vk"]
+[ext_resource type="PackedScene" uid="uid://06743jtpeump" path="res://LevelTester/level_tester.tscn" id="5_r8tbw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4ygy"]
 size = Vector2(1163, 20)
@@ -65,3 +66,7 @@ zoom = Vector2(0.515, 0.515)
 
 [node name="Killzone" parent="." instance=ExtResource("4_d77vk")]
 position = Vector2(992, 594)
+
+[node name="LevelTester" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_r8tbw")]
+player = NodePath("../player")
+interval = 0.15
