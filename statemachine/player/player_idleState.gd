@@ -5,6 +5,7 @@ class_name PlayerIdleState
 @export var _run_state : PlayerState = null;
 @export var _fall_state : PlayerState = null;
 @export var _yank_state : PlayerState = null;
+@export var _dash_state: PlayerState = null
 
 func enter():
 	pass
@@ -12,6 +13,9 @@ func enter():
 func process(_delta):
 	if state_machine.input_component.is_yank_just_pressed():
 		return _yank_state
+
+	if state_machine.input_component.is_dash_just_pressed():
+		return _dash_state
 
 	if state_machine.input_component.move_dir_x() != 0:
 		return _run_state;

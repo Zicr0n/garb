@@ -29,6 +29,9 @@ var _current_move_speed : float = 0.0
 @export_category("YANK")
 @export var YANK_POWER : float = 600
 
+@export_category("DASH")
+@export var DASH_VELOCITY : float = 1000
+
 var last_move_dir = 1
 var last_target_speed = 0
 var is_turning = false
@@ -116,6 +119,17 @@ func fall(dt):
 func is_falling() -> bool:
 	return characterBody2D.velocity.y >= 0.0
 
+##########
+## YANK ##
+##########
 func yank():
-	var yank_dir = (yankDetector.nearestPoint().global_position - characterBody2D.global_position).normalized()
-	characterBody2D.velocity = yank_dir * YANK_POWER
+	if yankDetector.nearestPoint():
+		var yank_dir = (yankDetector.nearestPoint().global_position - characterBody2D.global_position).normalized()
+		characterBody2D.velocity = yank_dir * YANK_POWER
+
+##########
+## DASH ##
+##########
+func dash(dir : Vector2):
+	characterBody2D.velocity = dir * DASH_VELOCITY
+	characterBody2D.dashes -= 1
