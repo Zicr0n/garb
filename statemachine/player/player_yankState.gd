@@ -13,7 +13,7 @@ func process(_delta):
 		return _fall_state
 	return null
 
-func physics_process(delta):
+func physics_process(_delta):
 	if state_machine.move_component.grounded():
 		return _idle_state
 

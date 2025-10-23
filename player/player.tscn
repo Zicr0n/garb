@@ -161,7 +161,8 @@ _fall_state = NodePath("../Fall")
 _dash_duration = NodePath("dash_duration")
 
 [node name="dash_duration" type="Timer" parent="Statemachine/Dash"]
-wait_time = 0.1
+wait_time = 0.05
+one_shot = true
 
 [node name="currentstate" type="Label" parent="."]
 offset_left = -19.0
