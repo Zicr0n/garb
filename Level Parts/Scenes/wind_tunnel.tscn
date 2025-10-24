@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dn13j5rcilh36" path="res://freak.png" id="2_edxur"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edxur"]
+size = Vector2(16, 16)
 
 [node name="WindTunnel" type="Area2D"]
 collision_layer = 8

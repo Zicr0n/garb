@@ -73,16 +73,20 @@ texture = ExtResource("1_oul6g")
 script = ExtResource("3_rgyib")
 characterBody2D = NodePath("..")
 yankDetector = NodePath("../YankDetector")
-MOVE_SPEED_GROUND = 300.0
-ACCELERATION_GROUND = 1750.0
-DECELERATION_GROUND = 3000.0
+MOVE_SPEED_GROUND = 180.0
+ACCELERATION_GROUND = 4000.0
+DECELERATION_GROUND = 6000.0
 TURNING_ACCELERATION_GROUND = 100000.0
-TURNING_THRESHOLD_SPEED = 200.0
-MAX_JUMP_HEIGHT = 600.0
-MOVE_SPEED_AIR = 300.0
-ACCELERATION_AIR = 1800.0
-DECELERATION_AIR = 2000.0
-MAX_FALL_SPEED = 700.0
+TURNING_THRESHOLD_SPEED = 120.0
+MAX_JUMP_HEIGHT = 250.0
+MOVE_SPEED_AIR = 180.0
+ACCELERATION_AIR = 3000.0
+DECELERATION_AIR = 4500.0
+GRAVITY_MULTIPLIER = 0.5
+FALL_MULTIPLIER = 3.0
+MAX_FALL_SPEED = 800.0
+MAX_FAST_FALL_SPEED = 1200.0
+DASH_VELOCITY = 480.0
 
 [node name="InputComponent" type="Node" parent="."]
 script = ExtResource("5_qjkh3")
@@ -161,7 +165,7 @@ _fall_state = NodePath("../Fall")
 _dash_duration = NodePath("dash_duration")
 
 [node name="dash_duration" type="Timer" parent="Statemachine/Dash"]
-wait_time = 0.05
+wait_time = 0.15
 one_shot = true
 
 [node name="currentstate" type="Label" parent="."]
