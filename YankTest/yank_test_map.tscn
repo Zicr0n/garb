@@ -1,17 +1,17 @@
 [gd_scene load_steps=7 format=3 uid="uid://bsf2gjuq5ku6r"]
 
-[ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_l4ygy"]
-[ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://player/player.tscn" id="3_d77vk"]
-[ext_resource type="PackedScene" uid="uid://cfe7htucjw6bh" path="res://yank_point.tscn" id="3_y830g"]
-[ext_resource type="PackedScene" uid="uid://ca0715cgxnxcb" path="res://scenes/killzone.tscn" id="4_d77vk"]
-[ext_resource type="PackedScene" uid="uid://06743jtpeump" path="res://LevelTester/level_tester.tscn" id="5_r8tbw"]
+[ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://player/player.tscn" id="1_h7rcy"]
+[ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="2_vu5n8"]
+[ext_resource type="PackedScene" uid="uid://cfe7htucjw6bh" path="res://Level Parts/Scenes/yank_point.tscn" id="3_myky1"]
+[ext_resource type="PackedScene" uid="uid://ca0715cgxnxcb" path="res://scenes/killzone.tscn" id="4_b88vl"]
+[ext_resource type="PackedScene" uid="uid://06743jtpeump" path="res://LevelTester/level_tester.tscn" id="5_re6fj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4ygy"]
 size = Vector2(1163, 20)
 
 [node name="YankTestMap" type="Node2D"]
 
-[node name="player" parent="." instance=ExtResource("3_d77vk")]
+[node name="player" parent="." instance=ExtResource("1_h7rcy")]
 position = Vector2(228, 200)
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
@@ -25,7 +25,7 @@ shape = SubResource("RectangleShape2D_l4ygy")
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
 position = Vector2(549.49994, -1.5)
 scale = Vector2(8.710937, 0.1640625)
-texture = ExtResource("1_l4ygy")
+texture = ExtResource("2_vu5n8")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(9, 634)
@@ -37,7 +37,7 @@ shape = SubResource("RectangleShape2D_l4ygy")
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(549.49994, -1.5)
 scale = Vector2(8.710937, 0.1640625)
-texture = ExtResource("1_l4ygy")
+texture = ExtResource("2_vu5n8")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(566, 501)
@@ -49,24 +49,24 @@ shape = SubResource("RectangleShape2D_l4ygy")
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
 position = Vector2(549.49994, -1.5)
 scale = Vector2(8.710937, 0.1640625)
-texture = ExtResource("1_l4ygy")
+texture = ExtResource("2_vu5n8")
 
-[node name="YankPoint" parent="." instance=ExtResource("3_y830g")]
+[node name="YankPoint" parent="." instance=ExtResource("3_myky1")]
 position = Vector2(792, 351)
 
-[node name="YankPoint2" parent="." instance=ExtResource("3_y830g")]
+[node name="YankPoint2" parent="." instance=ExtResource("3_myky1")]
 position = Vector2(997, 105)
 
-[node name="YankPoint3" parent="." instance=ExtResource("3_y830g")]
+[node name="YankPoint3" parent="." instance=ExtResource("3_myky1")]
 position = Vector2(1173, 458)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(762, 393)
 zoom = Vector2(0.515, 0.515)
 
-[node name="Killzone" parent="." instance=ExtResource("4_d77vk")]
+[node name="Killzone" parent="." instance=ExtResource("4_b88vl")]
 position = Vector2(992, 594)
 
-[node name="LevelTester" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_r8tbw")]
+[node name="LevelTester" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_re6fj")]
 player = NodePath("../player")
 interval = 0.15

@@ -1,6 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dtjh7ox1kyry8"]
 
-[ext_resource type="Script" uid="uid://dyrcsn8itlei1" path="res://yank_detector.gd" id="1_toqnn"]
+[ext_resource type="Script" uid="uid://dyrcsn8itlei1" path="res://player/yank_detector.gd" id="1_toqnn"]
+
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_toqnn"]
 radius = 22.022715
