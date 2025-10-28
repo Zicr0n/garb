@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://06743jtpeump"]
 
-[ext_resource type="Script" uid="uid://lk5bdfclme4i" path="res://LevelTester/level_tester.gd" id="1_j63fx"]
+[ext_resource type="Script" uid="uid://lk5bdfclme4i" path="res://Levels/LevelTester/level_tester.gd" id="1_j63fx"]
+
 
 [node name="LevelTester" type="Node" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_j63fx")

@@ -1,8 +1,8 @@
 [gd_resource type="TileSet" load_steps=7 format=3 uid="uid://ctdunf85qx8fy"]
 
 [ext_resource type="PackedScene" uid="uid://ca0715cgxnxcb" path="res://scenes/killzone.tscn" id="1_nlers"]
-[ext_resource type="PackedScene" uid="uid://di4cl6i0wcrea" path="res://Level Parts/Scenes/wind_tunnel.tscn" id="2_iftsf"]
-[ext_resource type="PackedScene" uid="uid://cfe7htucjw6bh" path="res://Level Parts/Scenes/yank_point.tscn" id="3_cq242"]
+[ext_resource type="PackedScene" uid="uid://di4cl6i0wcrea" path="res://Levels/Level Parts/Scenes/wind_tunnel.tscn" id="2_iftsf"]
+[ext_resource type="PackedScene" uid="uid://cfe7htucjw6bh" path="res://Levels/Level Parts/Scenes/yank_point.tscn" id="3_cq242"]
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="4_iftsf"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_vreee"]

@@ -2,9 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://player/player.tscn" id="1_h7rcy"]
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="2_vu5n8"]
-[ext_resource type="PackedScene" uid="uid://cfe7htucjw6bh" path="res://Level Parts/Scenes/yank_point.tscn" id="3_myky1"]
+[ext_resource type="PackedScene" uid="uid://cfe7htucjw6bh" path="res://Levels/Level Parts/Scenes/yank_point.tscn" id="3_myky1"]
 [ext_resource type="PackedScene" uid="uid://ca0715cgxnxcb" path="res://scenes/killzone.tscn" id="4_b88vl"]
-[ext_resource type="PackedScene" uid="uid://06743jtpeump" path="res://LevelTester/level_tester.tscn" id="5_re6fj"]
+[ext_resource type="PackedScene" uid="uid://06743jtpeump" path="res://Levels/LevelTester/level_tester.tscn" id="5_re6fj"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4ygy"]
 size = Vector2(1163, 20)

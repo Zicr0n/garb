@@ -20,4 +20,4 @@ func physics_process(_delta):
 	return null
 
 func exit():
-	pass
+	state_machine.move_component.end_yank()

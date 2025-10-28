@@ -21,4 +21,4 @@ func physics_process(_delta):
 		return _idle_state
 
 func exit():
-	pass#state_machine.move_component.end_dash()
+	state_machine.move_component.end_dash()

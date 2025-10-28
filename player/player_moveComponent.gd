@@ -112,8 +112,9 @@ func move_in_air(direction : float, dt) -> void:
 func fall(dt):
 	var multi := FALL_MULTIPLIER if characterBody2D.velocity.y > 0.0 else 1.0
 
-	characterBody2D.velocity.y += characterBody2D.get_gravity().y * dt * GRAVITY_MULTIPLIER * multi
+	characterBody2D.velocity.y = move_toward(characterBody2D.velocity.y, 0, DECELERATION_AIR * dt)
 
+	characterBody2D.velocity.y += characterBody2D.get_gravity().y * dt * GRAVITY_MULTIPLIER * multi
 	characterBody2D.velocity.y = clampf(characterBody2D.velocity.y, -99999, MAX_FALL_SPEED)
 
 func is_falling() -> bool:
@@ -128,7 +129,7 @@ func yank():
 		characterBody2D.velocity = yank_dir * YANK_POWER
 
 func end_yank():
-	characterBody2D.velocity = Vector2.ZERO
+	characterBody2D.velocity *= 0.5
 
 ##########
 ## DASH ##
@@ -138,4 +139,4 @@ func dash(dir : Vector2):
 	characterBody2D.dashes -= 1
 
 func end_dash():
-	characterBody2D.velocity = Vector2.ZERO
+	characterBody2D.velocity *= 0.5

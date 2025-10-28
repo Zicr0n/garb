@@ -81,7 +81,7 @@ TURNING_THRESHOLD_SPEED = 120.0
 MAX_JUMP_HEIGHT = 250.0
 MOVE_SPEED_AIR = 180.0
 ACCELERATION_AIR = 3000.0
-DECELERATION_AIR = 4500.0
+DECELERATION_AIR = 150.0
 GRAVITY_MULTIPLIER = 0.5
 FALL_MULTIPLIER = 3.0
 MAX_FALL_SPEED = 800.0
@@ -155,7 +155,7 @@ _fall_state = NodePath("../Fall")
 _yank_duration = NodePath("yank_duration")
 
 [node name="yank_duration" type="Timer" parent="Statemachine/Yank"]
-wait_time = 0.1
+wait_time = 0.2
 one_shot = true
 
 [node name="Dash" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_dash_duration")]
