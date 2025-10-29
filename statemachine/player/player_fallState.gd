@@ -3,6 +3,7 @@ extends PlayerState
 @export var _idle_state : PlayerState = null
 @export var _run_state : PlayerState = null
 @export var _jump_state: PlayerState = null
+@export var _dash_state: PlayerState = null
 
 @onready var _coyote_timer: Timer = $coyote_timer
 @onready var buffer_timer: Timer = $buffer_timer
@@ -28,6 +29,9 @@ func process(_delta):
 
 	if state_machine.input_component.is_jump_just_pressed():
 		buffer_timer.start()
+
+	if state_machine.input_component.is_dash_just_pressed():
+		return _dash_state
 
 func physics_process(delta: float):
 	state_machine.move_component.fall(delta)

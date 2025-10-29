@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfe7htucjw6bh"]
 
-[ext_resource type="Texture2D" uid="uid://sypl2u85cu64" path="res://wanker.jpg" id="1_8o77c"]
-[ext_resource type="Script" uid="uid://c6bnlbgeosmhn" path="res://yank_point.gd" id="1_e7mh1"]
+[ext_resource type="Texture2D" uid="uid://sypl2u85cu64" path="res://YankTest/wanker.jpg" id="1_8o77c"]
+[ext_resource type="Script" uid="uid://c6bnlbgeosmhn" path="res://Levels/Level Parts/Scripts/yank_point.gd" id="1_e7mh1"]
+
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7mh1"]
 radius = 139.0

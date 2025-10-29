@@ -29,6 +29,9 @@ var _current_move_speed : float = 0.0
 @export_category("YANK")
 @export var YANK_POWER : float = 600
 
+@export_category("DASH")
+@export var DASH_VELOCITY : float = 700
+
 var last_move_dir = 1
 var last_target_speed = 0
 var is_turning = false
@@ -37,7 +40,7 @@ var is_turning = false
 ## UPDATE ##
 ############
 
-func _physics_process(dt) -> void:
+func _physics_process(_dt) -> void:
 	characterBody2D.move_and_slide()
 
 ############
@@ -108,14 +111,32 @@ func move_in_air(direction : float, dt) -> void:
 
 func fall(dt):
 	var multi := FALL_MULTIPLIER if characterBody2D.velocity.y > 0.0 else 1.0
-	
+
+	characterBody2D.velocity.y = move_toward(characterBody2D.velocity.y, 0, DECELERATION_AIR * dt)
+
 	characterBody2D.velocity.y += characterBody2D.get_gravity().y * dt * GRAVITY_MULTIPLIER * multi
-	
 	characterBody2D.velocity.y = clampf(characterBody2D.velocity.y, -99999, MAX_FALL_SPEED)
 
 func is_falling() -> bool:
 	return characterBody2D.velocity.y >= 0.0
 
+##########
+## YANK ##
+##########
 func yank():
-	var yank_dir = (yankDetector.nearestPoint().global_position - characterBody2D.global_position).normalized()
-	characterBody2D.velocity = yank_dir * YANK_POWER
+	if yankDetector.nearestPoint():
+		var yank_dir = (yankDetector.nearestPoint().global_position - characterBody2D.global_position).normalized()
+		characterBody2D.velocity = yank_dir * YANK_POWER
+
+func end_yank():
+	characterBody2D.velocity *= 0.5
+
+##########
+## DASH ##
+##########
+func dash(dir : Vector2):
+	characterBody2D.velocity = dir * DASH_VELOCITY
+	characterBody2D.dashes -= 1
+
+func end_dash():
+	characterBody2D.velocity *= 0.5

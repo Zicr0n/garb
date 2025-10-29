@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://sypl2u85cu64"
-path="res://.godot/imported/wanker.jpg-82532ccfae8b7561f3b62d6d11af6795.ctex"
+path="res://.godot/imported/wanker.jpg-e9c714ad34439ed7adc1e612d57ea7c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://wanker.jpg"
-dest_files=["res://.godot/imported/wanker.jpg-82532ccfae8b7561f3b62d6d11af6795.ctex"]
+source_file="res://YankTest/wanker.jpg"
+dest_files=["res://.godot/imported/wanker.jpg-e9c714ad34439ed7adc1e612d57ea7c3.ctex"]
 
 [params]
 

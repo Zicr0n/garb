@@ -7,7 +7,7 @@ extends Area2D
 var yankPoints : Array
 var nearest : Area2D = null
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	nearestPoint()
 #	grapple_cursor.global_position = nearest.global_position
 #	grapple_cursor.rotation += 3.14 * delta

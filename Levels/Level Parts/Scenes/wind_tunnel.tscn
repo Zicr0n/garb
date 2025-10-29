@@ -1,9 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://di4cl6i0wcrea"]
 
-[ext_resource type="Script" uid="uid://bhowledxtgc00" path="res://Level Parts/Scripts/wind_tunnel.gd" id="1_3gth7"]
+[ext_resource type="Script" uid="uid://bhowledxtgc00" path="res://Levels/Level Parts/Scripts/wind_tunnel.gd" id="1_3gth7"]
 [ext_resource type="Texture2D" uid="uid://dn13j5rcilh36" path="res://freak.png" id="2_edxur"]
 
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edxur"]
+size = Vector2(16, 16)
 
 [node name="WindTunnel" type="Area2D"]
 collision_layer = 8
