@@ -6,18 +6,14 @@ extends Node
 var current_level
 var last_level
 
-func on_new_level_enter() -> void:
-	pass
-	#get all this from the new level and put into camera
-	#Camera2D.limit_left
-	#Camera2D.limit_right
-	#Camera2D.limit_top
-	#Camera2D.limit_bottom
-	#move camera to new start position + window-wide fade/flash
 
-func change_level_to(new_level_directory: String) -> void:
+func load_level(new_level_directory: String) -> void:
 	last_level = current_level
 	current_level = new_level_directory
-	
-	last_level.exit()
-	current_level.enter()
+
+	camera_node.limit_left = current_level.limit_left
+	camera_node.limit_right = current_level.limit_right
+	camera_node.limit_top = current_level.limit_top
+	camera_node.limit_bottom = current_level.limit_bottom
+	camera_node.locked = current_level.camera_locked
+	#move camera to new start position + window-wide fade/flash
