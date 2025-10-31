@@ -21,10 +21,11 @@
 radius = 22.203604
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebec5"]
-size = Vector2(20, 40)
+size = Vector2(14, 26)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
-height = 40.0
+radius = 7.0
+height = 28.0
 
 [node name="player" type="CharacterBody2D"]
 collision_layer = 10
@@ -65,8 +66,7 @@ shape = SubResource("RectangleShape2D_ebec5")
 shape = SubResource("CapsuleShape2D_rkbax")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-0.5, 1.9073486e-06)
-scale = Vector2(0.16406249, 0.31249997)
+scale = Vector2(0.11074219, 0.2109375)
 texture = ExtResource("1_oul6g")
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("characterBody2D", "yankDetector")]
