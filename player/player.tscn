@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=22 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
@@ -25,6 +25,15 @@ size = Vector2(20, 40)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
 height = 40.0
+
+[sub_resource type="Curve" id="Curve_32hag"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.35836914, 1), 0.0, 0.0, 0, 0, Vector2(0.5987125, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_tqiix"]
+offsets = PackedFloat32Array(0, 0.002272725, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.9376923, 0.9376923, 0.9376923, 1, 0.85, 0.85, 0.85, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
 
 [node name="player" type="CharacterBody2D"]
 collision_layer = 10
@@ -148,11 +157,12 @@ one_shot = true
 wait_time = 0.15
 one_shot = true
 
-[node name="Yank" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_yank_duration")]
+[node name="Yank" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_yank_duration", "_particle_emitter")]
 script = ExtResource("14_kb6p2")
 _idle_state = NodePath("../Idle")
 _fall_state = NodePath("../Fall")
 _yank_duration = NodePath("yank_duration")
+_particle_emitter = NodePath("../../yankParticles")
 
 [node name="yank_duration" type="Timer" parent="Statemachine/Yank"]
 wait_time = 0.2
@@ -215,6 +225,17 @@ player = NodePath("..")
 yankArrow = NodePath("../YankArrow")
 grapple_cursor = NodePath("../ParentIndependent/GrappleCursor")
 
+[node name="yankParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 100
+lifetime = 0.3
+emission_shape = 1
+emission_sphere_radius = 10.0
+gravity = Vector2(0, 0)
+scale_amount_min = 6.0
+scale_amount_max = 6.0
+color = Color(0.24705882, 0.60784316, 0.89411765, 1)
+
 [node name="dashParticles" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 100
@@ -224,7 +245,9 @@ emission_sphere_radius = 20.0
 gravity = Vector2(0, 0)
 scale_amount_min = 5.0
 scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_32hag")
 color = Color(0.6862745, 0.30980393, 0.8, 1)
+color_ramp = SubResource("Gradient_tqiix")
 
 [connection signal="area_entered" from="YankDetect" to="." method="_on_yank_detect_area_entered"]
 [connection signal="area_exited" from="YankDetect" to="." method="_on_yank_detect_area_exited"]
