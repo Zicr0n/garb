@@ -158,11 +158,12 @@ _yank_duration = NodePath("yank_duration")
 wait_time = 0.2
 one_shot = true
 
-[node name="Dash" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_dash_duration")]
+[node name="Dash" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_dash_duration", "_particle_emitter")]
 script = ExtResource("15_32hag")
 _idle_state = NodePath("../Idle")
 _fall_state = NodePath("../Fall")
 _dash_duration = NodePath("dash_duration")
+_particle_emitter = NodePath("../../dashParticles")
 
 [node name="dash_duration" type="Timer" parent="Statemachine/Dash"]
 wait_time = 0.15
@@ -213,6 +214,17 @@ text = "VEL_Y : 0"
 player = NodePath("..")
 yankArrow = NodePath("../YankArrow")
 grapple_cursor = NodePath("../ParentIndependent/GrappleCursor")
+
+[node name="dashParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 100
+lifetime = 0.2
+emission_shape = 1
+emission_sphere_radius = 20.0
+gravity = Vector2(0, 0)
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+color = Color(0.6862745, 0.30980393, 0.8, 1)
 
 [connection signal="area_entered" from="YankDetect" to="." method="_on_yank_detect_area_entered"]
 [connection signal="area_exited" from="YankDetect" to="." method="_on_yank_detect_area_exited"]

@@ -127,6 +127,9 @@ func yank():
 	if yankDetector.nearestPoint():
 		var yank_dir = (yankDetector.nearestPoint().global_position - characterBody2D.global_position).normalized()
 		characterBody2D.velocity = yank_dir * YANK_POWER
+		return true
+	else:
+		return false
 
 func end_yank():
 	characterBody2D.velocity *= 0.5
@@ -134,9 +137,13 @@ func end_yank():
 ##########
 ## DASH ##
 ##########
-func dash(dir : Vector2):
-	characterBody2D.velocity = dir * DASH_VELOCITY
-	characterBody2D.dashes -= 1
+func dash(dir : Vector2) -> bool:
+	if dir != Vector2.ZERO:
+		characterBody2D.velocity = dir * DASH_VELOCITY
+		characterBody2D.dashes -= 1
+		return true
+	else:
+		return false
 
 func end_dash():
 	characterBody2D.velocity *= 0.5

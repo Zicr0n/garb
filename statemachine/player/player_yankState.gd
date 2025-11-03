@@ -5,7 +5,9 @@ extends PlayerState
 @export var _yank_duration : Timer = null
 
 func enter():
-	state_machine.move_component.yank()
+	var is_yanking = state_machine.move_component.yank()
+	if !is_yanking:
+		return _fall_state
 	_yank_duration.start()
 
 func process(_delta):
