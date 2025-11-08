@@ -4,10 +4,11 @@ extends PlayerState
 @export var _run_state : PlayerState = null
 @export var _jump_state: PlayerState = null
 @export var _dash_state: PlayerState = null
+@export var _walljump_state: PlayerState = null
+@export var _yank_state : PlayerState = null;
 
 @onready var _coyote_timer: Timer = $coyote_timer
 @onready var buffer_timer: Timer = $buffer_timer
-@export var _yank_state : PlayerState = null;
 
 var dir_x = 0
 var fastfall = false
@@ -28,6 +29,8 @@ func process(_delta):
 		return _jump_state
 
 	if state_machine.input_component.is_jump_just_pressed():
+		if state_machine.move_component.is_wall_left() and dir_x < 0:
+			
 		buffer_timer.start()
 
 	if state_machine.input_component.is_dash_just_pressed():
