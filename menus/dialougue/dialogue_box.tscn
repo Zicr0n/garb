@@ -14,6 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ieyop")
+dialogue = Array[String](["Hello", "number 2", "maybe some more more moremroe moremroem oremroe more=? maybe", "Good byes to you matey!"])
 text_label = NodePath("text")
 next_label = NodePath("text/next")
 

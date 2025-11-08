@@ -11,7 +11,7 @@ var ii : int = 0
 
 func _ready() -> void:
 	next_label.visible = false
-	change_line_to(ii)
+	change_line_to()
 
 func _process(_delta) -> void:
 	add_letter()
@@ -33,7 +33,14 @@ func add_letter() -> void:
 func next_line() -> void:
 	i = 0
 	ii += 1
-	change_line_to(ii)
+	change_line_to()
 
-func change_line_to(ii) -> void:
-	current_line = dialogue[ii]
+func change_line_to() -> void:
+	if ii < (dialogue.size() - 1):
+		current_line = dialogue[ii]
+		empty_box()
+	else:
+		return# dialogue is done
+
+func empty_box() -> void:
+	shown_text = ""
