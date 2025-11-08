@@ -35,7 +35,7 @@ var _current_move_speed : float = 0.0
 var last_move_dir = 1
 var last_target_speed = 0
 var is_turning = false
-
+	
 ############
 ## UPDATE ##
 ############
