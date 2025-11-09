@@ -44,7 +44,6 @@ func add_letter() -> void:
 	i += 1
 
 func next_line() -> void:
-	i = 0
 	ii += 1
 	change_line_to()
 	next_label.visible = false
@@ -59,3 +58,4 @@ func change_line_to() -> void:
 
 func empty_box() -> void:
 	shown_text = ""
+	i = 0
