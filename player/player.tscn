@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=23 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://c8rkvciojjew7" path="res://statemachine/player/player_yankState.gd" id="14_kb6p2"]
 [ext_resource type="Script" uid="uid://bv6s3kv0ek36f" path="res://statemachine/player/player_dashState.gd" id="15_32hag"]
 [ext_resource type="PackedScene" uid="uid://dtjh7ox1kyry8" path="res://player/yank_detector.tscn" id="15_wodsf"]
+[ext_resource type="Script" uid="uid://bsebrpsa7rt6v" path="res://statemachine/player/walljump.gd" id="16_tqiix"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebec5"]
 radius = 22.203604
@@ -71,6 +72,14 @@ metadata/_custom_type_script = "uid://ojfalqk7a0sv"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_ebec5")
 
+[node name="WallRays" type="Node2D" parent="."]
+
+[node name="Left" type="RayCast2D" parent="WallRays"]
+target_position = Vector2(-10, 0)
+
+[node name="Right" type="RayCast2D" parent="WallRays"]
+target_position = Vector2(10, 0)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_rkbax")
 
@@ -78,7 +87,7 @@ shape = SubResource("CapsuleShape2D_rkbax")
 scale = Vector2(0.11074219, 0.2109375)
 texture = ExtResource("1_oul6g")
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("characterBody2D", "yankDetector")]
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("characterBody2D", "yankDetector", "WALL_LEFT_RAY", "WALL_RIGHT_RAY")]
 script = ExtResource("3_rgyib")
 characterBody2D = NodePath("..")
 yankDetector = NodePath("../YankDetector")
@@ -88,6 +97,10 @@ DECELERATION_GROUND = 6000.0
 TURNING_ACCELERATION_GROUND = 100000.0
 TURNING_THRESHOLD_SPEED = 120.0
 MAX_JUMP_HEIGHT = 250.0
+VERTICAL_WALL_JUMP_HEIGHT = 250
+HORIZONTAL_WALL_JUMP_HEIGHT = 150
+WALL_LEFT_RAY = NodePath("../WallRays/Left")
+WALL_RIGHT_RAY = NodePath("../WallRays/Right")
 MOVE_SPEED_AIR = 180.0
 ACCELERATION_AIR = 3000.0
 DECELERATION_AIR = 150.0
@@ -104,7 +117,7 @@ script = ExtResource("5_qjkh3")
 script = ExtResource("6_ebec5")
 hurtbox = NodePath("../Hurtbox")
 
-[node name="Statemachine" type="Node" parent="." node_paths=PackedStringArray("character", "start_state", "_death_state", "input_component", "move_component", "health_component")]
+[node name="Statemachine" type="Node" parent="." node_paths=PackedStringArray("character", "start_state", "_death_state", "input_component", "move_component", "health_component", "stateLabel")]
 script = ExtResource("3_g1dw6")
 character = NodePath("..")
 call_input = true
@@ -113,6 +126,7 @@ _death_state = NodePath("Death")
 input_component = NodePath("../InputComponent")
 move_component = NodePath("../MoveComponent")
 health_component = NodePath("../HealthComponent")
+stateLabel = NodePath("../currentstate")
 
 [node name="Idle" type="Node" parent="Statemachine" node_paths=PackedStringArray("_jump_state", "_run_state", "_fall_state", "_yank_state", "_dash_state")]
 script = ExtResource("4_yw30f")
@@ -131,21 +145,23 @@ _yank_state = NodePath("../Yank")
 _dash_state = NodePath("../Dash")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="Jump" type="Node" parent="Statemachine" node_paths=PackedStringArray("_fall_state")]
+[node name="Jump" type="Node" parent="Statemachine" node_paths=PackedStringArray("_fall_state", "_walljump_state")]
 script = ExtResource("6_boad6")
 _fall_state = NodePath("../Fall")
+_walljump_state = NodePath("../Walljump")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
 [node name="Death" type="Node" parent="Statemachine"]
 script = ExtResource("10_8t03j")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="Fall" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_run_state", "_jump_state", "_dash_state", "_yank_state")]
+[node name="Fall" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_run_state", "_jump_state", "_dash_state", "_walljump_state", "_yank_state")]
 script = ExtResource("8_hg6s5")
 _idle_state = NodePath("../Idle")
 _run_state = NodePath("../Run")
 _jump_state = NodePath("../Jump")
 _dash_state = NodePath("../Dash")
+_walljump_state = NodePath("../Walljump")
 _yank_state = NodePath("../Yank")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
@@ -177,6 +193,15 @@ _particle_emitter = NodePath("../../dashParticles")
 
 [node name="dash_duration" type="Timer" parent="Statemachine/Dash"]
 wait_time = 0.15
+one_shot = true
+
+[node name="Walljump" type="Node" parent="Statemachine" node_paths=PackedStringArray("_fall_state")]
+script = ExtResource("16_tqiix")
+_fall_state = NodePath("../Fall")
+metadata/_custom_type_script = "uid://ddme3krabnfa5"
+
+[node name="WalljumpDuration" type="Timer" parent="Statemachine/Walljump"]
+wait_time = 0.1
 one_shot = true
 
 [node name="currentstate" type="Label" parent="."]

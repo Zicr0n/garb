@@ -29,7 +29,8 @@ func process(_delta):
 		return _jump_state
 
 	if state_machine.input_component.is_jump_just_pressed():
-		if state_machine.move_component.is_wall_left() and dir_x < 0:
+		if state_machine.move_component.is_wall_left() || state_machine.move_component.is_wall_right():
+			return _walljump_state
 			
 		buffer_timer.start()
 
