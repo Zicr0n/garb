@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cr0xrh5rcnepg"]
 
-[ext_resource type="Script" uid="uid://hyt8rnfbcwl0" path="res://menus/dialougue/dialogue_box.gd" id="1_ieyop"]
+[ext_resource type="Script" uid="uid://hyt8rnfbcwl0" path="res://menus/dialougue/Box/dialogue_box.gd" id="1_ieyop"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_cdjhv"]
 
@@ -14,7 +14,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ieyop")
-dialogue = Array[String](["Hello", "number 2", "maybe some more more moremroe moremroem oremroe more=? maybe", "Good byes to you matey!"])
 text_label = NodePath("text")
 next_label = NodePath("text/next")
 

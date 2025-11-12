@@ -1,16 +1,15 @@
 extends PlayerState
 
-@export var _idle_state : PlayerState = null
-@export var _jump_state : PlayerState = null
-@export var _fall_state : PlayerState = null
+@export var _idle_state : PlayerState = null;
+@export var _jump_state : PlayerState = null;
+@export var _fall_state : PlayerState = null;
 @export var _yank_state : PlayerState = null;
-@export var _dash_state: PlayerState = null
+@export var _dash_state : PlayerState = null;
 
 var x_dir = 0
 
 func enter():
 	pass
-	#print("Entered Run State")
 
 func process(_delta):
 	x_dir = state_machine.input_component.move_dir_x()
@@ -23,6 +22,9 @@ func process(_delta):
 
 	if state_machine.input_component.is_jump_just_pressed():
 		return _jump_state
+
+	#if state_machine.move_component.is_interact_just_pressed():
+		#state_machine._interract_area.activate()
 	
 	if x_dir == 0 and state_machine.move_component.not_moving():
 		return _idle_state

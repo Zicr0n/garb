@@ -80,14 +80,9 @@ func move_on_ground(direction : float, dt : float) -> void:
 		characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, target_speed, accel * dt)
 	else:
 		characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, 0, DECELERATION_GROUND * dt)
-	
+
 	last_target_speed = target_speed
-	
-	if is_turning and not was_turning:
-		print("TURN START")
-	elif not is_turning and was_turning:
-		print("TURN END")
-	
+
 	was_turning = is_turning
 
 func grounded() -> bool:

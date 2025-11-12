@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=25 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
@@ -16,6 +16,8 @@
 [ext_resource type="Script" uid="uid://c8rkvciojjew7" path="res://statemachine/player/player_yankState.gd" id="14_kb6p2"]
 [ext_resource type="Script" uid="uid://bv6s3kv0ek36f" path="res://statemachine/player/player_dashState.gd" id="15_32hag"]
 [ext_resource type="PackedScene" uid="uid://dtjh7ox1kyry8" path="res://player/yank_detector.tscn" id="15_wodsf"]
+[ext_resource type="Script" uid="uid://bb2gheck2km73" path="res://statemachine/player/player_dialogueState.gd" id="16_e7oew"]
+[ext_resource type="Script" uid="uid://bn7f4lmksulal" path="res://interract_detector.gd" id="17_tqiix"]
 [ext_resource type="Script" uid="uid://bsebrpsa7rt6v" path="res://statemachine/player/walljump.gd" id="16_tqiix"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebec5"]
@@ -36,6 +38,9 @@ point_count = 4
 offsets = PackedFloat32Array(0, 0.002272725, 0.5, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.9376923, 0.9376923, 0.9376923, 1, 0.85, 0.85, 0.85, 1, 0, 0, 0, 1)
 metadata/_snap_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e7oew"]
+radius = 22.0
 
 [node name="player" type="CharacterBody2D"]
 collision_layer = 10
@@ -117,15 +122,16 @@ script = ExtResource("5_qjkh3")
 script = ExtResource("6_ebec5")
 hurtbox = NodePath("../Hurtbox")
 
-[node name="Statemachine" type="Node" parent="." node_paths=PackedStringArray("character", "start_state", "_death_state", "input_component", "move_component", "health_component", "stateLabel")]
+[node name="Statemachine" type="Node" parent="." node_paths=PackedStringArray("character", "start_state", "_death_state", "input_component", "move_component", "health_component", "_interract_area", "stateLabel")]
 script = ExtResource("3_g1dw6")
 character = NodePath("..")
-call_input = true
+call_input = true, 
 start_state = NodePath("Idle")
 _death_state = NodePath("Death")
 input_component = NodePath("../InputComponent")
 move_component = NodePath("../MoveComponent")
 health_component = NodePath("../HealthComponent")
+_interract_area = NodePath("../InterractDetector")
 stateLabel = NodePath("../currentstate")
 
 [node name="Idle" type="Node" parent="Statemachine" node_paths=PackedStringArray("_jump_state", "_run_state", "_fall_state", "_yank_state", "_dash_state")]
@@ -195,6 +201,8 @@ _particle_emitter = NodePath("../../dashParticles")
 wait_time = 0.15
 one_shot = true
 
+[node name="Dialogue" type="Node" parent="Statemachine"]
+script = ExtResource("16_e7oew")
 [node name="Walljump" type="Node" parent="Statemachine" node_paths=PackedStringArray("_fall_state")]
 script = ExtResource("16_tqiix")
 _fall_state = NodePath("../Fall")
@@ -274,7 +282,17 @@ scale_amount_curve = SubResource("Curve_32hag")
 color = Color(0.6862745, 0.30980393, 0.8, 1)
 color_ramp = SubResource("Gradient_tqiix")
 
+[node name="InterractDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+script = ExtResource("17_tqiix")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InterractDetector"]
+shape = SubResource("CircleShape2D_e7oew")
+
 [connection signal="area_entered" from="YankDetect" to="." method="_on_yank_detect_area_entered"]
 [connection signal="area_exited" from="YankDetect" to="." method="_on_yank_detect_area_exited"]
+[connection signal="area_entered" from="InterractDetector" to="InterractDetector" method="_on_area_entered"]
+[connection signal="area_exited" from="InterractDetector" to="InterractDetector" method="_on_area_exited"]
 
 [editable path="YankDetector"]

@@ -119,10 +119,8 @@ func _on_grapple_detect_area_entered(area: Area2D) -> void:
 	 - me
 	"""
 	nearestGrapplePoint = area
-	print("Grapple point detected")
 
 func _on_grapple_detect_area_exited(_area: Area2D) -> void:
-	print("Grapple point exited")
 	nearestGrapplePoint = null
 	"""
 	Same shit here, dont just nullify, check if there are others that can be used, which 
