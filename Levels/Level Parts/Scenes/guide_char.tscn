@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsoq3wpilqxjt"]
+
+[ext_resource type="Script" uid="uid://cl5vvgmim2y1q" path="res://interract_area.gd" id="1_lpa35"]
+[ext_resource type="Script" uid="uid://hyt8rnfbcwl0" path="res://menus/dialougue/Box/dialogue_box.gd" id="2_lpa35"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl56g"]
+size = Vector2(44, 44)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_cdjhv"]
+
+[node name="GuideChar" type="Node2D"]
+
+[node name="InterractArea" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_lpa35")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InterractArea"]
+shape = SubResource("RectangleShape2D_yl56g")
+
+[node name="DialogueBox" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="DialogueBox" node_paths=PackedStringArray("activation_signal_emitter", "text_label", "next_label")]
+layout_mode = 3
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_lpa35")
+dialogue = Array[String](["Hoya ther matey!!!", "How you doin this fine evening'???\"?", "AIGHT SEE YA !!!"])
+activation_signal_emitter = NodePath("../../InterractArea")
+text_label = NodePath("text")
+next_label = NodePath("text/next")
+
+[node name="BG" type="TextureRect" parent="DialogueBox/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_cdjhv")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="text" type="Label" parent="DialogueBox/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "_"
+
+[node name="next" type="Label" parent="DialogueBox/Control/text"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.93700004
+anchor_top = 0.87200004
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.3199463
+offset_top = 0.039993286
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "next..."
+
+[connection signal="area_entered" from="InterractArea" to="InterractArea" method="_on_area_entered"]
+[connection signal="area_exited" from="InterractArea" to="InterractArea" method="_on_area_exited"]

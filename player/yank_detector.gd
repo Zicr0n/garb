@@ -32,7 +32,6 @@ func nearestPoint() -> Area2D:
 		nearest = null
 	
 	for point : Area2D in yankPoints:
-		print(point)
 		if nearest == null:
 			nearest = point
 			continue

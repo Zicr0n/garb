@@ -16,6 +16,8 @@ var previous_state : PlayerState = null
 
 @export var disabled := false
 
+@export var _interract_area : Area2D = null;
+
 enum FALL_SOURCE {
 	PLATFORM,
 	OTHER
@@ -33,7 +35,6 @@ func init(set_parent):
 	move_component.characterBody2D = character
 	
 	if start_state == null:
-		print("NO START STATE FOUND")
 		return
 	
 	for child in get_children():

@@ -10,10 +10,8 @@ func enter():
 	state_machine.move_component.jump()
 	
 	if Input.is_action_pressed("jump"):
-		print("not release jumpo")
 		has_released_jump = false
 	else:
-		print("release jump")
 		state_machine.move_component.variable_jump()
 		
 		has_released_jump = true

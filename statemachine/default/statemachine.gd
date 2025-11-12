@@ -11,14 +11,13 @@ func init(set_parent):
 	parent = set_parent
 	
 	if start_state == null:
-		print("NO START STATE FOUND")
 		return
-	
+
 	for child in get_children():
 		if child is State:
 			var state : State = child
 			state.state_machine = self
-	
+
 	set_state(start_state)
 
 func set_state(new_state : State):
