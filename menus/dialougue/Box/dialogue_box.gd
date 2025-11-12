@@ -24,7 +24,7 @@ func activate() -> void:
 func _ready() -> void:
 	visible = false
 	next_label.visible = false
-	activation_signal_emitter.interracted.connect(activate)
+	activation_signal_emitter.on_interact.connect(activate)
 
 func _process(delta) -> void:
 	if active:
@@ -76,4 +76,4 @@ func exit() -> void:
 	current_line = ""
 	shown_text = ""
 	
-	activation_signal_emitter.ended()
+	activation_signal_emitter.end_interaction()

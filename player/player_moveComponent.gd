@@ -18,6 +18,7 @@ var _current_move_speed : float = 0.0
 @export_category("WALL JUMP")
 @export var VERTICAL_WALL_JUMP_HEIGHT = 400
 @export var HORIZONTAL_WALL_JUMP_HEIGHT = 400
+@export var HORIZONTAL_WALL_JUMP_HEIGHT_ON_INPUT = 600
 @export var WALL_DETECTION_RANGE = 400
 @export var WALL_LEFT_RAY : RayCast2D = null
 @export var WALL_RIGHT_RAY : RayCast2D = null
@@ -114,7 +115,7 @@ func move_in_air(direction : float, dt) -> void:
 func fall(dt):
 	var multi := FALL_MULTIPLIER if characterBody2D.velocity.y > 0.0 else 1.0
 
-	characterBody2D.velocity.y = move_toward(characterBody2D.velocity.y, 0, DECELERATION_AIR * dt)
+	#characterBody2D.velocity.y = move_toward(characterBody2D.velocity.y, 0, DECELERATION_AIR * dt)
 
 	characterBody2D.velocity.y += characterBody2D.get_gravity().y * dt * GRAVITY_MULTIPLIER * multi
 	characterBody2D.velocity.y = clampf(characterBody2D.velocity.y, -99999, MAX_FALL_SPEED)
@@ -150,12 +151,18 @@ func dash(dir : Vector2) -> bool:
 func end_dash():
 	characterBody2D.velocity *= 0.5
 
-func wall_jump():
+func wall_jump(input : float = 0.0):
 	if grounded(): return
+	
+	var dir = 1
+	
 	if is_wall_left():
-		characterBody2D.velocity = Vector2(HORIZONTAL_WALL_JUMP_HEIGHT,-VERTICAL_WALL_JUMP_HEIGHT * 1.0)
+		dir = 1
 	elif is_wall_right():
-		characterBody2D.velocity = Vector2(-HORIZONTAL_WALL_JUMP_HEIGHT,-VERTICAL_WALL_JUMP_HEIGHT * 1.0)
+		dir = -1
+	
+	var jump_power = HORIZONTAL_WALL_JUMP_HEIGHT if input == 0.0 else HORIZONTAL_WALL_JUMP_HEIGHT_ON_INPUT
+	characterBody2D.velocity = Vector2(jump_power * dir,-VERTICAL_WALL_JUMP_HEIGHT * 1.0)
 
 func is_wall_left():
 	return WALL_LEFT_RAY.is_colliding()

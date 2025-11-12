@@ -13,10 +13,11 @@ var previous_state : PlayerState = null
 @export var input_component : InputComponent = null
 @export var move_component : PlayerMoveComponent = null
 @export var health_component : HealthComponent = null
+@export var animation_player : AnimationPlayer = null
 
 @export var disabled := false
 
-@export var _interract_area : Area2D = null;
+@export var interactor : Interactor = null;
 @export var stateLabel : Label = null
 
 enum FALL_SOURCE {
@@ -65,7 +66,7 @@ func _input(event : InputEvent):
 				set_state(new_state)
 
 func _process(delta):
-	stateLabel.text = current_state.name
+	#stateLabel.text = current_state.name
 	if disabled: return
 	if current_state:
 		var new_state : PlayerState = current_state.process(delta)

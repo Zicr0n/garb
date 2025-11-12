@@ -9,8 +9,8 @@ var has_released_jump = false
 
 func enter():
 	walljump_timer.start()
-	
-	state_machine.move_component.wall_jump()
+	var inputDir = state_machine.input_component.move_dir_x()
+	state_machine.move_component.wall_jump(inputDir)
 	
 	if Input.is_action_pressed("jump"):
 		has_released_jump = false

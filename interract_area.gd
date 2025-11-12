@@ -1,14 +1,21 @@
 extends Area2D
 class_name InteractArea
 
-signal interracted
-signal finished_interaction
+var has_interacted = false
+signal on_interact
+signal on_interaction_finished
 
 func _init() -> void:
 	collision_layer = 128
 
 func activate() -> void:
-	interracted.emit()
+	if has_interacted: return
+	
+	print("mikudayoooo")
+	has_interacted = true
+	on_interact.emit()
+	#interracted.emit()
 
-func ended() -> void:
-	finished_interaction.emit()
+func end_interaction() -> void:
+	has_interacted = false
+	on_interaction_finished.emit()

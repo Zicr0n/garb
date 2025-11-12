@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=30 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
@@ -17,18 +17,87 @@
 [ext_resource type="Script" uid="uid://bv6s3kv0ek36f" path="res://statemachine/player/player_dashState.gd" id="15_32hag"]
 [ext_resource type="PackedScene" uid="uid://dtjh7ox1kyry8" path="res://player/yank_detector.tscn" id="15_wodsf"]
 [ext_resource type="Script" uid="uid://bb2gheck2km73" path="res://statemachine/player/player_dialogueState.gd" id="16_e7oew"]
-[ext_resource type="Script" uid="uid://bn7f4lmksulal" path="res://interract_detector.gd" id="17_tqiix"]
 [ext_resource type="Script" uid="uid://bsebrpsa7rt6v" path="res://statemachine/player/walljump.gd" id="16_tqiix"]
+[ext_resource type="Script" uid="uid://bn7f4lmksulal" path="res://interract_detector.gd" id="17_tqiix"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
+radius = 7.0
+height = 28.0
+
+[sub_resource type="Animation" id="Animation_c35mf"]
+resource_name = "land"
+length = 0.40001002
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.11074219, 0.2109375), Vector2(0.15625, 0.13671875), Vector2(0.09374999, 0.23828126), Vector2(0.11074219, 0.2109375)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 4.75), Vector2(0, -1.7499988), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_65viv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.11074219, 0.2109375)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_x7c3f"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjvpn"]
+_data = {
+&"RESET": SubResource("Animation_65viv"),
+&"idle": SubResource("Animation_x7c3f"),
+&"land": SubResource("Animation_c35mf")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e7oew"]
+radius = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebec5"]
 radius = 22.203604
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebec5"]
 size = Vector2(14, 26)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
-radius = 7.0
-height = 28.0
 
 [sub_resource type="Curve" id="Curve_32hag"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.35836914, 1), 0.0, 0.0, 0, 0, Vector2(0.5987125, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -39,20 +108,19 @@ offsets = PackedFloat32Array(0, 0.002272725, 0.5, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.9376923, 0.9376923, 0.9376923, 1, 0.85, 0.85, 0.85, 1, 0, 0, 0, 1)
 metadata/_snap_enabled = true
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_e7oew"]
-radius = 22.0
-
 [node name="player" type="CharacterBody2D"]
 collision_layer = 10
 collision_mask = 5
 script = ExtResource("1_rkbax")
 
-[node name="ParentIndependent" type="Node" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_rkbax")
 
-[node name="GrappleCursor" type="Sprite2D" parent="ParentIndependent"]
-modulate = Color(0, 1, 1, 1)
-z_index = 99
-texture = ExtResource("2_yllr7")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bjvpn")
+}
+autoplay = "idle"
 
 [node name="YankArrow" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
@@ -61,6 +129,14 @@ points = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 30, 0)
+
+[node name="Interactor" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+script = ExtResource("17_tqiix")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
+shape = SubResource("CircleShape2D_e7oew")
 
 [node name="YankDetect" type="Area2D" parent="."]
 collision_layer = 0
@@ -85,83 +161,62 @@ target_position = Vector2(-10, 0)
 [node name="Right" type="RayCast2D" parent="WallRays"]
 target_position = Vector2(10, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_rkbax")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.11074219, 0.2109375)
 texture = ExtResource("1_oul6g")
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("characterBody2D", "yankDetector", "WALL_LEFT_RAY", "WALL_RIGHT_RAY")]
-script = ExtResource("3_rgyib")
-characterBody2D = NodePath("..")
-yankDetector = NodePath("../YankDetector")
-MOVE_SPEED_GROUND = 180.0
-ACCELERATION_GROUND = 4000.0
-DECELERATION_GROUND = 6000.0
-TURNING_ACCELERATION_GROUND = 100000.0
-TURNING_THRESHOLD_SPEED = 120.0
-MAX_JUMP_HEIGHT = 250.0
-VERTICAL_WALL_JUMP_HEIGHT = 250
-HORIZONTAL_WALL_JUMP_HEIGHT = 150
-WALL_LEFT_RAY = NodePath("../WallRays/Left")
-WALL_RIGHT_RAY = NodePath("../WallRays/Right")
-MOVE_SPEED_AIR = 180.0
-ACCELERATION_AIR = 3000.0
-DECELERATION_AIR = 150.0
-GRAVITY_MULTIPLIER = 0.5
-FALL_MULTIPLIER = 3.0
-MAX_FALL_SPEED = 800.0
-MAX_FAST_FALL_SPEED = 1200.0
-DASH_VELOCITY = 480.0
+[node name="ParentIndependent" type="Node" parent="."]
 
-[node name="InputComponent" type="Node" parent="."]
-script = ExtResource("5_qjkh3")
+[node name="GrappleCursor" type="Sprite2D" parent="ParentIndependent"]
+modulate = Color(0, 1, 1, 1)
+z_index = 99
+texture = ExtResource("2_yllr7")
 
-[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurtbox")]
-script = ExtResource("6_ebec5")
-hurtbox = NodePath("../Hurtbox")
+[node name="Components" type="Node" parent="."]
 
-[node name="Statemachine" type="Node" parent="." node_paths=PackedStringArray("character", "start_state", "_death_state", "input_component", "move_component", "health_component", "_interract_area", "stateLabel")]
+[node name="Statemachine" type="Node" parent="Components" node_paths=PackedStringArray("character", "start_state", "_death_state", "input_component", "move_component", "health_component", "animation_player", "interactor", "stateLabel")]
 script = ExtResource("3_g1dw6")
-character = NodePath("..")
-call_input = true, 
+character = NodePath("../..")
+call_input = true
 start_state = NodePath("Idle")
 _death_state = NodePath("Death")
 input_component = NodePath("../InputComponent")
 move_component = NodePath("../MoveComponent")
 health_component = NodePath("../HealthComponent")
-_interract_area = NodePath("../InterractDetector")
-stateLabel = NodePath("../currentstate")
+animation_player = NodePath("../../AnimationPlayer")
+interactor = NodePath("../../Interactor")
+stateLabel = NodePath("../../currentstate")
 
-[node name="Idle" type="Node" parent="Statemachine" node_paths=PackedStringArray("_jump_state", "_run_state", "_fall_state", "_yank_state", "_dash_state")]
+[node name="Idle" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_jump_state", "_run_state", "_fall_state", "_yank_state", "_dash_state", "_dialogue_state")]
 script = ExtResource("4_yw30f")
 _jump_state = NodePath("../Jump")
 _run_state = NodePath("../Run")
 _fall_state = NodePath("../Fall")
 _yank_state = NodePath("../Yank")
 _dash_state = NodePath("../Dash")
+_dialogue_state = NodePath("../Dialogue")
 
-[node name="Run" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_jump_state", "_fall_state", "_yank_state", "_dash_state")]
+[node name="Run" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_idle_state", "_jump_state", "_fall_state", "_yank_state", "_dash_state", "_dialogue_state")]
 script = ExtResource("5_g6k8r")
 _idle_state = NodePath("../Idle")
 _jump_state = NodePath("../Jump")
 _fall_state = NodePath("../Fall")
 _yank_state = NodePath("../Yank")
 _dash_state = NodePath("../Dash")
+_dialogue_state = NodePath("../Dialogue")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="Jump" type="Node" parent="Statemachine" node_paths=PackedStringArray("_fall_state", "_walljump_state")]
+[node name="Jump" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_walljump_state")]
 script = ExtResource("6_boad6")
 _fall_state = NodePath("../Fall")
 _walljump_state = NodePath("../Walljump")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="Death" type="Node" parent="Statemachine"]
+[node name="Death" type="Node" parent="Components/Statemachine"]
 script = ExtResource("10_8t03j")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="Fall" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_run_state", "_jump_state", "_dash_state", "_walljump_state", "_yank_state")]
+[node name="Fall" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_idle_state", "_run_state", "_jump_state", "_dash_state", "_walljump_state", "_yank_state")]
 script = ExtResource("8_hg6s5")
 _idle_state = NodePath("../Idle")
 _run_state = NodePath("../Run")
@@ -171,46 +226,79 @@ _walljump_state = NodePath("../Walljump")
 _yank_state = NodePath("../Yank")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="coyote_timer" type="Timer" parent="Statemachine/Fall"]
+[node name="coyote_timer" type="Timer" parent="Components/Statemachine/Fall"]
 wait_time = 0.15
 one_shot = true
 
-[node name="buffer_timer" type="Timer" parent="Statemachine/Fall"]
+[node name="buffer_timer" type="Timer" parent="Components/Statemachine/Fall"]
 wait_time = 0.15
 one_shot = true
 
-[node name="Yank" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_yank_duration", "_particle_emitter")]
+[node name="Yank" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_yank_duration", "_particle_emitter")]
 script = ExtResource("14_kb6p2")
 _idle_state = NodePath("../Idle")
 _fall_state = NodePath("../Fall")
 _yank_duration = NodePath("yank_duration")
-_particle_emitter = NodePath("../../yankParticles")
+_particle_emitter = NodePath("../../../yankParticles")
 
-[node name="yank_duration" type="Timer" parent="Statemachine/Yank"]
+[node name="yank_duration" type="Timer" parent="Components/Statemachine/Yank"]
 wait_time = 0.2
 one_shot = true
 
-[node name="Dash" type="Node" parent="Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_dash_duration", "_particle_emitter")]
+[node name="Dash" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_dash_duration", "_particle_emitter")]
 script = ExtResource("15_32hag")
 _idle_state = NodePath("../Idle")
 _fall_state = NodePath("../Fall")
 _dash_duration = NodePath("dash_duration")
-_particle_emitter = NodePath("../../dashParticles")
+_particle_emitter = NodePath("../../../dashParticles")
 
-[node name="dash_duration" type="Timer" parent="Statemachine/Dash"]
+[node name="dash_duration" type="Timer" parent="Components/Statemachine/Dash"]
 wait_time = 0.15
 one_shot = true
 
-[node name="Dialogue" type="Node" parent="Statemachine"]
+[node name="Dialogue" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_idle_state")]
 script = ExtResource("16_e7oew")
-[node name="Walljump" type="Node" parent="Statemachine" node_paths=PackedStringArray("_fall_state")]
+_idle_state = NodePath("../Idle")
+
+[node name="Walljump" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state")]
 script = ExtResource("16_tqiix")
 _fall_state = NodePath("../Fall")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="WalljumpDuration" type="Timer" parent="Statemachine/Walljump"]
-wait_time = 0.1
+[node name="WalljumpDuration" type="Timer" parent="Components/Statemachine/Walljump"]
+wait_time = 0.05
 one_shot = true
+
+[node name="MoveComponent" type="Node" parent="Components" node_paths=PackedStringArray("characterBody2D", "yankDetector", "WALL_LEFT_RAY", "WALL_RIGHT_RAY")]
+script = ExtResource("3_rgyib")
+characterBody2D = NodePath("../..")
+yankDetector = NodePath("../../YankDetector")
+MOVE_SPEED_GROUND = 180.0
+ACCELERATION_GROUND = 4000.0
+DECELERATION_GROUND = 6000.0
+TURNING_ACCELERATION_GROUND = 100000.0
+TURNING_THRESHOLD_SPEED = 120.0
+MAX_JUMP_HEIGHT = 250.0
+VERTICAL_WALL_JUMP_HEIGHT = 250
+HORIZONTAL_WALL_JUMP_HEIGHT = 150
+HORIZONTAL_WALL_JUMP_HEIGHT_ON_INPUT = 250
+WALL_LEFT_RAY = NodePath("../../WallRays/Left")
+WALL_RIGHT_RAY = NodePath("../../WallRays/Right")
+MOVE_SPEED_AIR = 180.0
+ACCELERATION_AIR = 2000.0
+DECELERATION_AIR = 250.0
+GRAVITY_MULTIPLIER = 0.5
+FALL_MULTIPLIER = 3.0
+MAX_FALL_SPEED = 800.0
+MAX_FAST_FALL_SPEED = 1200.0
+DASH_VELOCITY = 480.0
+
+[node name="InputComponent" type="Node" parent="Components"]
+script = ExtResource("5_qjkh3")
+
+[node name="HealthComponent" type="Node" parent="Components" node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("6_ebec5")
+hurtbox = NodePath("../../Hurtbox")
 
 [node name="currentstate" type="Label" parent="."]
 offset_left = -19.0
@@ -282,17 +370,9 @@ scale_amount_curve = SubResource("Curve_32hag")
 color = Color(0.6862745, 0.30980393, 0.8, 1)
 color_ramp = SubResource("Gradient_tqiix")
 
-[node name="InterractDetector" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 128
-script = ExtResource("17_tqiix")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InterractDetector"]
-shape = SubResource("CircleShape2D_e7oew")
-
+[connection signal="area_entered" from="Interactor" to="Interactor" method="_on_area_entered"]
+[connection signal="area_exited" from="Interactor" to="Interactor" method="_on_area_exited"]
 [connection signal="area_entered" from="YankDetect" to="." method="_on_yank_detect_area_entered"]
 [connection signal="area_exited" from="YankDetect" to="." method="_on_yank_detect_area_exited"]
-[connection signal="area_entered" from="InterractDetector" to="InterractDetector" method="_on_area_entered"]
-[connection signal="area_exited" from="InterractDetector" to="InterractDetector" method="_on_area_exited"]
 
 [editable path="YankDetector"]
