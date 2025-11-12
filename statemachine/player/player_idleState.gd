@@ -24,8 +24,12 @@ func process(_delta):
 	#if state_machine.move_component.is_interact_just_pressed():
 		#state_machine._interract_area.activate()
 
+	
 	if state_machine.input_component.is_jump_just_pressed():
 		return _jump_state
+
+	if state_machine.input_component.move_dir_x() != 0:
+		return _run_state;
 	
 	return null
 
