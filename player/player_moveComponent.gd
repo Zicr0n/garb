@@ -15,6 +15,13 @@ var _current_move_speed : float = 0.0
 @export_category("JUMP")
 @export var MAX_JUMP_HEIGHT : float = 400.0
 
+@export_category("WALL JUMP")
+@export var VERTICAL_WALL_JUMP_HEIGHT = 400
+@export var HORIZONTAL_WALL_JUMP_HEIGHT = 400
+@export var WALL_DETECTION_RANGE = 400
+@export var WALL_LEFT_RAY : RayCast2D = null
+@export var WALL_RIGHT_RAY : RayCast2D = null
+
 @export_category("AIR MOVEMENT")
 @export var MOVE_SPEED_AIR : float = 250.0
 @export var ACCELERATION_AIR : float = 1500.0
@@ -147,3 +154,16 @@ func dash(dir : Vector2) -> bool:
 
 func end_dash():
 	characterBody2D.velocity *= 0.5
+
+func wall_jump():
+	if grounded(): return
+	if is_wall_left():
+		characterBody2D.velocity = Vector2(HORIZONTAL_WALL_JUMP_HEIGHT,-VERTICAL_WALL_JUMP_HEIGHT * 1.0)
+	elif is_wall_right():
+		characterBody2D.velocity = Vector2(-HORIZONTAL_WALL_JUMP_HEIGHT,-VERTICAL_WALL_JUMP_HEIGHT * 1.0)
+
+func is_wall_left():
+	return WALL_LEFT_RAY.is_colliding()
+
+func is_wall_right():
+	return WALL_RIGHT_RAY.is_colliding()

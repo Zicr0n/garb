@@ -16,6 +16,8 @@ var previous_state : PlayerState = null
 
 @export var disabled := false
 
+@export var stateLabel : Label = null
+
 enum FALL_SOURCE {
 	PLATFORM,
 	OTHER
@@ -63,6 +65,7 @@ func _input(event : InputEvent):
 				set_state(new_state)
 
 func _process(delta):
+	stateLabel.text = current_state.name
 	if disabled: return
 	if current_state:
 		var new_state : PlayerState = current_state.process(delta)

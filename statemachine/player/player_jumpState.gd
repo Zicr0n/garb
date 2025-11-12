@@ -1,6 +1,7 @@
 extends PlayerState
 
 @export var _fall_state : PlayerState = null
+@export var _walljump_state : PlayerState = null
 
 var dir_x = 0
 
@@ -10,10 +11,8 @@ func enter():
 	state_machine.move_component.jump()
 	
 	if Input.is_action_pressed("jump"):
-		print("not release jumpo")
 		has_released_jump = false
 	else:
-		print("release jump")
 		state_machine.move_component.variable_jump()
 		
 		has_released_jump = true
@@ -33,8 +32,13 @@ func input(event : InputEvent):
 
 func physics_process(delta):
 	state_machine.move_component.fall(delta)
+	
 	if state_machine.move_component.is_falling():
 		return _fall_state
+	
+	if state_machine.input_component.is_jump_just_pressed():
+		if state_machine.move_component.is_wall_left() || state_machine.move_component.is_wall_right():
+			return _walljump_state
 	
 	state_machine.move_component.move_in_air(dir_x, delta)
 	
