@@ -117,13 +117,16 @@ func move_in_air(direction : float, dt) -> void:
 	if direction != 0:
 		characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, target_speed, ACCELERATION_AIR * dt)
 	else:
-		characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, 0, DECELERATION_AIR * dt)
+		if characterBody2D.get_platform_velocity().x != 0.0:
+			characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, characterBody2D.get_platform_velocity().x, DECELERATION_AIR * dt)
+		
 
 func fall(dt, multiplier:=0):
 	var multi := FALL_MULTIPLIER if characterBody2D.velocity.y > 0.0 else 1.0
 
 	characterBody2D.velocity.y += GRAVITY * dt * multi
 	characterBody2D.velocity.y = clampf(characterBody2D.velocity.y, -99999, MAX_FALL_SPEED)
+	
 
 func fast_fall(dt):
 	characterBody2D.velocity.y += GRAVITY * dt * FAST_FALL_MULTIPLIER

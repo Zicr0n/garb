@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmr4lv376q4dx"]
+
+[ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_6sach"]
+[ext_resource type="Script" uid="uid://b0u0d6j0a3ips" path="res://scenes/moving_platform/moving_platform.gd" id="1_evb6x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_evb6x"]
+size = Vector2(100, 12)
+
+[node name="MovingPlatform" type="AnimatableBody2D" groups=["moving_platform"]]
+sync_to_physics = false
+script = ExtResource("1_evb6x")
+MAX_MOVE_SPEED = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_evb6x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.765625, 0.09374999)
+texture = ExtResource("1_6sach")
+
+[node name="Independent" type="Node" parent="."]
+
+[node name="StartPosition" type="Marker2D" parent="Independent"]
+
+[node name="EndPosition" type="Marker2D" parent="Independent"]
+position = Vector2(100, 0)
+
+[node name="WaitTime" type="Timer" parent="."]
+one_shot = true
