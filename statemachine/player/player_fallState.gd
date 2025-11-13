@@ -16,6 +16,10 @@ var fastfall = false
 func enter():
 	if state_machine.fall_source == state_machine.FALL_SOURCE.PLATFORM:
 		_coyote_timer.start()
+		return
+	
+	if state_machine.fall_source == state_machine.FALL_SOURCE.WALL:
+		return
 
 func process(_delta):
 	dir_x = state_machine.input_component.move_dir_x()
@@ -38,7 +42,10 @@ func process(_delta):
 		return _dash_state
 
 func physics_process(delta: float):
-	state_machine.move_component.fall(delta)
+	if state_machine.input_component.move_down():
+		state_machine.move_component.fast_fall(delta)
+	else:
+		state_machine.move_component.fall(delta)
 
 	if state_machine.move_component.grounded():
 		if buffer_timer.time_left > 0:

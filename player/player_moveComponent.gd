@@ -15,24 +15,31 @@ var _current_move_speed : float = 0.0
 @export_category("JUMP")
 @export var MAX_JUMP_HEIGHT : float = 400.0
 
+@export_category("FALLING")
+@export var GRAVITY : float = 200.0
+@export var GRAVITY_MULTIPLIER : float = 1.5 ## Gravity Multiplier, general
+@export var FALL_MULTIPLIER : float = 1.2 ## Applies to make falling faster than jumping
+@export var FAST_FALL_MULTIPLIER : float = 1.2 ## Applies to make falling faster than jumping
+@export var MAX_FALL_SPEED : float = 40.0
+@export var MAX_FAST_FALL_SPEED : float = 60.0
+
 @export_category("WALL JUMP")
 @export var VERTICAL_WALL_JUMP_HEIGHT = 400
 @export var HORIZONTAL_WALL_JUMP_HEIGHT = 400
 @export var HORIZONTAL_WALL_JUMP_HEIGHT_ON_INPUT = 600
-@export var WALL_DETECTION_RANGE = 400
+@export var WALL_JUMP_DURATION_LONG :float = 0.15
+@export var WALL_JUMP_DURATION_SHORT :float = 0.075
 @export var WALL_LEFT_RAY : RayCast2D = null
 @export var WALL_RIGHT_RAY : RayCast2D = null
+@export var WALL_LEFT_RAY_BOTTOM : RayCast2D = null
+@export var WALL_RIGHT_RAY_BOTTOM : RayCast2D = null
 
 @export_category("AIR MOVEMENT")
 @export var MOVE_SPEED_AIR : float = 250.0
 @export var ACCELERATION_AIR : float = 1500.0
 @export var DECELERATION_AIR : float = 3000.0
 
-@export_category("FALLING")
-@export var GRAVITY_MULTIPLIER : float = 1.5 ## Gravity Multiplier, general
-@export var FALL_MULTIPLIER : float = 1.2 ## Applies to make falling faster than jumping
-@export var MAX_FALL_SPEED : float = 40.0
-@export var MAX_FAST_FALL_SPEED : float = 60.0
+
 
 @export_category("YANK")
 @export var YANK_POWER : float = 600
@@ -112,13 +119,15 @@ func move_in_air(direction : float, dt) -> void:
 	else:
 		characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, 0, DECELERATION_AIR * dt)
 
-func fall(dt):
+func fall(dt, multiplier:=0):
 	var multi := FALL_MULTIPLIER if characterBody2D.velocity.y > 0.0 else 1.0
 
-	#characterBody2D.velocity.y = move_toward(characterBody2D.velocity.y, 0, DECELERATION_AIR * dt)
-
-	characterBody2D.velocity.y += characterBody2D.get_gravity().y * dt * GRAVITY_MULTIPLIER * multi
+	characterBody2D.velocity.y += GRAVITY * dt * multi
 	characterBody2D.velocity.y = clampf(characterBody2D.velocity.y, -99999, MAX_FALL_SPEED)
+
+func fast_fall(dt):
+	characterBody2D.velocity.y += GRAVITY * dt * FAST_FALL_MULTIPLIER
+	characterBody2D.velocity.y = clampf(characterBody2D.velocity.y, -99999, MAX_FAST_FALL_SPEED)
 
 func is_falling() -> bool:
 	return characterBody2D.velocity.y >= 0.0
@@ -151,6 +160,9 @@ func dash(dir : Vector2) -> bool:
 func end_dash():
 	characterBody2D.velocity *= 0.5
 
+##############
+## WALLJUMP ##
+##############
 func wall_jump(input : float = 0.0):
 	if grounded(): return
 	
@@ -165,7 +177,7 @@ func wall_jump(input : float = 0.0):
 	characterBody2D.velocity = Vector2(jump_power * dir,-VERTICAL_WALL_JUMP_HEIGHT * 1.0)
 
 func is_wall_left():
-	return WALL_LEFT_RAY.is_colliding()
+	return WALL_LEFT_RAY.is_colliding() || WALL_LEFT_RAY_BOTTOM.is_colliding()
 
 func is_wall_right():
-	return WALL_RIGHT_RAY.is_colliding()
+	return WALL_RIGHT_RAY.is_colliding() || WALL_RIGHT_RAY_BOTTOM.is_colliding()

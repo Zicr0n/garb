@@ -5,6 +5,8 @@ var has_interacted = false
 signal on_interact
 signal on_interaction_finished
 
+@export var auto_activate : bool = false
+
 func _init() -> void:
 	collision_layer = 128
 
