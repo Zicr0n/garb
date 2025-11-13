@@ -18,7 +18,6 @@ func interact() -> bool:
 func _on_area_entered(area: Area2D) -> void:
 	interract_area = area
 	# Connect to interaction area signals
-	print(area.name)
 	interract_area.on_interaction_finished.connect(on_ended_interaction)
 
 func _on_area_exited(area: Area2D) -> void:
@@ -26,7 +25,6 @@ func _on_area_exited(area: Area2D) -> void:
 		interract_area.on_interaction_finished.disconnect(on_ended_interaction)
 		
 		interract_area = null
-		print(area.name)
 
 func on_entered_interaction():
 	print("interaction initiated")

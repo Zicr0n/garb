@@ -24,35 +24,6 @@
 radius = 7.0
 height = 28.0
 
-[sub_resource type="Animation" id="Animation_c35mf"]
-resource_name = "land"
-length = 0.40001002
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0.11074219, 0.2109375), Vector2(0.15625, 0.13671875), Vector2(0.09374999, 0.23828126), Vector2(0.11074219, 0.2109375)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 4.75), Vector2(0, -1.7499988), Vector2(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_65viv"]
 length = 0.001
 tracks/0/type = "value"
@@ -82,6 +53,35 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_x7c3f"]
 resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_c35mf"]
+resource_name = "land"
+length = 0.40001002
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.11074219, 0.2109375), Vector2(0.15625, 0.13671875), Vector2(0.09374999, 0.23828126), Vector2(0.11074219, 0.2109375)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 4.75), Vector2(0, -1.7499988), Vector2(0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bjvpn"]
 _data = {
