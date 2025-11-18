@@ -6,11 +6,19 @@ extends PlayerState
 var dir_x = 0
 
 var has_released_jump = false
+var is_wall_kick = false
+
 
 func enter():
+	is_wall_kick = false
 	walljump_timer.start()
 	var inputDir = state_machine.input_component.move_dir_x()
 	state_machine.move_component.wall_jump(inputDir)
+	
+	if inputDir != 0:
+		is_wall_kick = true
+	
+	walljump_timer.wait_time = state_machine.move_component.WALL_JUMP_DURATION_LONG if is_wall_kick == true else state_machine.move_component.WALL_JUMP_DURATION_SHORT
 	
 	if Input.is_action_pressed("jump"):
 		has_released_jump = false

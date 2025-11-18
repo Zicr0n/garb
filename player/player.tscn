@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=29 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
@@ -90,14 +90,11 @@ _data = {
 &"land": SubResource("Animation_c35mf")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_e7oew"]
-radius = 22.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ebec5"]
-radius = 22.203604
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebec5"]
 size = Vector2(14, 26)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e7oew"]
+radius = 22.0
 
 [sub_resource type="Curve" id="Curve_32hag"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.35836914, 1), 0.0, 0.0, 0, 0, Vector2(0.5987125, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -127,24 +124,10 @@ points = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
 [node name="MaxSpeedBoost" type="Timer" parent="."]
 
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 30, 0)
-
-[node name="Interactor" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 128
-script = ExtResource("17_tqiix")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
-shape = SubResource("CircleShape2D_e7oew")
-
-[node name="YankDetect" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YankDetect"]
-shape = SubResource("CircleShape2D_ebec5")
-debug_color = Color(6.848802, 0, 13.539555, 0.0627451)
+[node name="YankDetector" parent="." node_paths=PackedStringArray("player", "yankArrow", "grapple_cursor") instance=ExtResource("15_wodsf")]
+player = NodePath("..")
+yankArrow = NodePath("../YankArrow")
+grapple_cursor = NodePath("../ParentIndependent/GrappleCursor")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 script = ExtResource("11_2ieo8")
@@ -153,13 +136,34 @@ metadata/_custom_type_script = "uid://ojfalqk7a0sv"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_ebec5")
 
+[node name="Interactor" type="Area2D" parent="." node_paths=PackedStringArray("player_state", "state_machine")]
+collision_layer = 0
+collision_mask = 128
+script = ExtResource("17_tqiix")
+player_state = NodePath("../Components/Statemachine/Dialogue")
+state_machine = NodePath("../Components/Statemachine")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
+shape = SubResource("CircleShape2D_e7oew")
+
 [node name="WallRays" type="Node2D" parent="."]
+position = Vector2(0, 4)
 
 [node name="Left" type="RayCast2D" parent="WallRays"]
-target_position = Vector2(-10, 0)
+position = Vector2(0, 8)
+target_position = Vector2(-20, 0)
 
 [node name="Right" type="RayCast2D" parent="WallRays"]
-target_position = Vector2(10, 0)
+position = Vector2(0, 8)
+target_position = Vector2(20, 0)
+
+[node name="LeftUp" type="RayCast2D" parent="WallRays"]
+position = Vector2(0, -16)
+target_position = Vector2(-20, 0)
+
+[node name="RightUp" type="RayCast2D" parent="WallRays"]
+position = Vector2(0, -16)
+target_position = Vector2(20, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.11074219, 0.2109375)
@@ -267,10 +271,10 @@ _fall_state = NodePath("../Fall")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
 [node name="WalljumpDuration" type="Timer" parent="Components/Statemachine/Walljump"]
-wait_time = 0.05
+wait_time = 0.12
 one_shot = true
 
-[node name="MoveComponent" type="Node" parent="Components" node_paths=PackedStringArray("characterBody2D", "yankDetector", "WALL_LEFT_RAY", "WALL_RIGHT_RAY")]
+[node name="MoveComponent" type="Node" parent="Components" node_paths=PackedStringArray("characterBody2D", "yankDetector", "WALL_LEFT_RAY", "WALL_RIGHT_RAY", "WALL_LEFT_RAY_BOTTOM", "WALL_RIGHT_RAY_BOTTOM")]
 script = ExtResource("3_rgyib")
 characterBody2D = NodePath("../..")
 yankDetector = NodePath("../../YankDetector")
@@ -279,12 +283,22 @@ ACCELERATION_GROUND = 4000.0
 DECELERATION_GROUND = 6000.0
 TURNING_ACCELERATION_GROUND = 100000.0
 TURNING_THRESHOLD_SPEED = 120.0
-MAX_JUMP_HEIGHT = 250.0
-VERTICAL_WALL_JUMP_HEIGHT = 250
-HORIZONTAL_WALL_JUMP_HEIGHT = 150
-HORIZONTAL_WALL_JUMP_HEIGHT_ON_INPUT = 250
-WALL_LEFT_RAY = NodePath("../../WallRays/Left")
-WALL_RIGHT_RAY = NodePath("../../WallRays/Right")
+MAX_JUMP_HEIGHT = 330.0
+GRAVITY = 800.0
+GRAVITY_MULTIPLIER = 1.0
+FALL_MULTIPLIER = 1.5
+FAST_FALL_MULTIPLIER = 2.25
+MAX_FALL_SPEED = 500.0
+MAX_FAST_FALL_SPEED = 800.0
+VERTICAL_WALL_JUMP_HEIGHT = 300
+HORIZONTAL_WALL_JUMP_HEIGHT = 250
+HORIZONTAL_WALL_JUMP_HEIGHT_ON_INPUT = 200
+WALL_JUMP_DURATION_LONG = 0.25
+WALL_JUMP_DURATION_SHORT = 0.05
+WALL_LEFT_RAY = NodePath("../../WallRays/LeftUp")
+WALL_RIGHT_RAY = NodePath("../../WallRays/RightUp")
+WALL_LEFT_RAY_BOTTOM = NodePath("../../WallRays/Left")
+WALL_RIGHT_RAY_BOTTOM = NodePath("../../WallRays/Right")
 MOVE_SPEED_AIR = 180.0
 ACCELERATION_AIR = 2000.0
 DECELERATION_AIR = 250.0
@@ -309,6 +323,14 @@ offset_bottom = -28.0
 text = "state"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="transition" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="hud" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -342,11 +364,6 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "VEL_Y : 0"
 
-[node name="YankDetector" parent="." node_paths=PackedStringArray("player", "yankArrow", "grapple_cursor") instance=ExtResource("15_wodsf")]
-player = NodePath("..")
-yankArrow = NodePath("../YankArrow")
-grapple_cursor = NodePath("../ParentIndependent/GrappleCursor")
-
 [node name="yankParticles" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 100
@@ -373,7 +390,5 @@ color_ramp = SubResource("Gradient_tqiix")
 
 [connection signal="area_entered" from="Interactor" to="Interactor" method="_on_area_entered"]
 [connection signal="area_exited" from="Interactor" to="Interactor" method="_on_area_exited"]
-[connection signal="area_entered" from="YankDetect" to="." method="_on_yank_detect_area_entered"]
-[connection signal="area_exited" from="YankDetect" to="." method="_on_yank_detect_area_exited"]
 
 [editable path="YankDetector"]
