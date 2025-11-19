@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dtjh7ox1kyry8" path="res://player/yank_detector.tscn" id="15_wodsf"]
 [ext_resource type="Script" uid="uid://bb2gheck2km73" path="res://statemachine/player/player_dialogueState.gd" id="16_e7oew"]
 [ext_resource type="Script" uid="uid://bsebrpsa7rt6v" path="res://statemachine/player/walljump.gd" id="16_tqiix"]
-[ext_resource type="Script" uid="uid://bn7f4lmksulal" path="res://interract_detector.gd" id="17_tqiix"]
+[ext_resource type="Script" uid="uid://bn7f4lmksulal" path="res://menus/dialougue/Interract/interract_detector.gd" id="17_tqiix"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
 radius = 7.0
@@ -106,7 +106,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.9376923, 0.9376923, 0.9376923, 1, 0.85, 
 metadata/_snap_enabled = true
 
 [node name="player" type="CharacterBody2D"]
-collision_layer = 10
+collision_layer = 266
 collision_mask = 5
 script = ExtResource("1_rkbax")
 
@@ -239,9 +239,8 @@ one_shot = true
 wait_time = 0.15
 one_shot = true
 
-[node name="Yank" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_yank_duration", "_particle_emitter")]
+[node name="Yank" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_yank_duration", "_particle_emitter")]
 script = ExtResource("14_kb6p2")
-_idle_state = NodePath("../Idle")
 _fall_state = NodePath("../Fall")
 _yank_duration = NodePath("yank_duration")
 _particle_emitter = NodePath("../../../yankParticles")
@@ -250,9 +249,8 @@ _particle_emitter = NodePath("../../../yankParticles")
 wait_time = 0.2
 one_shot = true
 
-[node name="Dash" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_dash_duration", "_particle_emitter")]
+[node name="Dash" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_dash_duration", "_particle_emitter")]
 script = ExtResource("15_32hag")
-_idle_state = NodePath("../Idle")
 _fall_state = NodePath("../Fall")
 _dash_duration = NodePath("dash_duration")
 _particle_emitter = NodePath("../../../dashParticles")
@@ -283,13 +281,13 @@ ACCELERATION_GROUND = 4000.0
 DECELERATION_GROUND = 6000.0
 TURNING_ACCELERATION_GROUND = 100000.0
 TURNING_THRESHOLD_SPEED = 120.0
-MAX_JUMP_HEIGHT = 330.0
+MAX_JUMP_HEIGHT = 350.0
 GRAVITY = 800.0
-GRAVITY_MULTIPLIER = 1.0
-FALL_MULTIPLIER = 1.5
+GRAVITY_MULTIPLIER = 0.5
+FALL_MULTIPLIER = 3.0
 FAST_FALL_MULTIPLIER = 2.25
-MAX_FALL_SPEED = 500.0
-MAX_FAST_FALL_SPEED = 800.0
+MAX_FALL_SPEED = 800.0
+MAX_FAST_FALL_SPEED = 1200.0
 VERTICAL_WALL_JUMP_HEIGHT = 300
 HORIZONTAL_WALL_JUMP_HEIGHT = 250
 HORIZONTAL_WALL_JUMP_HEIGHT_ON_INPUT = 200
@@ -302,10 +300,6 @@ WALL_RIGHT_RAY_BOTTOM = NodePath("../../WallRays/Right")
 MOVE_SPEED_AIR = 180.0
 ACCELERATION_AIR = 2000.0
 DECELERATION_AIR = 250.0
-GRAVITY_MULTIPLIER = 0.5
-FALL_MULTIPLIER = 3.0
-MAX_FALL_SPEED = 800.0
-MAX_FAST_FALL_SPEED = 1200.0
 DASH_VELOCITY = 600.0
 
 [node name="InputComponent" type="Node" parent="Components"]

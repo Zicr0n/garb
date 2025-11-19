@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://cwyrhtf1174g0"]
 
-[ext_resource type="Script" uid="uid://cl5vvgmim2y1q" path="res://interract_area.gd" id="1_dc5bv"]
+[ext_resource type="Script" uid="uid://cl5vvgmim2y1q" path="res://menus/dialougue/Interract/interract_area.gd" id="1_dc5bv"]
+
 
 [node name="InterractArea" type="Area2D"]
 collision_layer = 128

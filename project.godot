@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="garb"
-run/main_scene="uid://bu7tg0xwu83m2"
+run/main_scene="uid://edo7nvmtqnrp"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -92,6 +92,7 @@ interract={
 2d_physics/layer_6="hurtbox"
 2d_physics/layer_7="hitbox"
 2d_physics/layer_8="interract"
+2d_physics/layer_9="camera"
 
 [rendering]
 

@@ -1,6 +1,5 @@
 extends PlayerState
 
-@export var _idle_state : PlayerState = null
 @export var _fall_state : PlayerState = null
 @export var _yank_duration : Timer = null
 @export var _particle_emitter : CPUParticles2D = null
