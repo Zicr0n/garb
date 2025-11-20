@@ -4,16 +4,19 @@ extends Camera2D
 @export var look_ahead_distance := 40
 @export var shake_intensity := 2
 @export var shake_duration := 0.2
+@export var snap_duration := 1.0
 @export var player : CharacterBody2D = null
 @export var initial_room : Area2D = null
 var current_room : Area2D
 
 var target_pos := Vector2.ZERO
 var lookahead = false
+var tween : Tween
 
 func _ready() -> void:
 	current_room = initial_room
-	set_new_boundaries()
+	snap_to_room(current_room, true)
+	player.get_node("RoomDetect").room_area_entered.connect(_on_player_detector_area_entered)
 
 func _process(_delta):
 	if player and lookahead:
@@ -21,45 +24,60 @@ func _process(_delta):
 		target_pos = Vector2(player.global_position.x + look_ahead, player.global_position.y)
 		global_position = global_position.move_toward(target_pos,  1000)
 
+# ----------------------------
+# ROOM HANDLING
+# ----------------------------
+
+func snap_to_room(room : Area2D, instant := false) -> void:
+	var size = room.get_node("CollisionShape2D").shape.size
+	var half = size / 2
+	var pos = room.global_position
+
+	# Camera rect for this room
+	limit_left   = pos.x - half.x
+	limit_right  = pos.x + half.x
+	limit_top    = pos.y - half.y
+	limit_bottom = pos.y + half.y
+
+	# Center the camera on the room
+	var room_center = pos
+
+	if instant or snap_duration == 0:
+		global_position = room_center
+	else:
+		if tween:
+			tween.kill()        
+		tween = create_tween()
+		tween.tween_property(
+								self,
+								"global_position",
+								room_center,
+								snap_duration
+							).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tween.play()
+
 func shake() -> void:
 	var original_pos = position
 	var shake_count := 10
 
-	var tween : Tween = create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_SINE)
+	var shakeTween : Tween = create_tween()
+	shakeTween.set_ease(Tween.EASE_OUT)
+	shakeTween.set_trans(Tween.TRANS_SINE)
 
 	for i in shake_count:
-		var tween_offset = Vector2(
+		var shakeTween_offset = Vector2(
 			randf_range(-shake_intensity, shake_intensity),
 			randf_range(-shake_intensity, shake_intensity)
 		)
-		tween.tween_property(self, "position", original_pos + tween_offset, shake_duration / shake_count)
-	tween.start()
+		shakeTween.tween_property(self, "global_position", original_pos + shakeTween_offset, shake_duration / shake_count)
+	shakeTween.start()
 
-func set_new_boundaries() -> void:
-	limit_top = current_room.global_position.y - (current_room.box.shape.size.y / 2)
-	limit_left = current_room.global_position.x - (current_room.box.shape.size.x / 2)
-	limit_right = current_room.global_position.x + (current_room.box.shape.size.x / 2)
-	limit_bottom = current_room.global_position.y + (current_room.box.shape.size.y / 2)
+func _on_player_detector_area_entered(area):
+	if not area.is_in_group("Rooms"):
+		return
 
-func remove_boundaries() -> void:
-	limit_top = -10000000
-	limit_left = -10000000
-	limit_right = 10000000
-	limit_bottom = 10000000
+	if area.name == current_room.name:
+		return
 
-func follow_player() -> void:
-	remove_boundaries()
-	global_position = player.global_position
-
-func _on_player_detect_body_exited(body: Node2D) -> void:
-	if body.name == "player":
-		follow_player()
-
-
-
-func _on_room_detect_area_entered(area: Area2D) -> void:
-	if area.name.begins_with("Room"):
-		current_room = area
-		set_new_boundaries()
+	current_room = area
+	snap_to_room(area)

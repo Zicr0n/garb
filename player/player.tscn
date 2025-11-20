@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=31 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Script" uid="uid://c2ec4273d274r" path="res://player/room_detect.gd" id="2_65viv"]
 [ext_resource type="Texture2D" uid="uid://dyvhpsjm0vyja" path="res://cursor.png" id="2_yllr7"]
 [ext_resource type="Script" uid="uid://c1240vqmt4squ" path="res://statemachine/player/player_statemachine.gd" id="3_g1dw6"]
 [ext_resource type="Script" uid="uid://c3qb0f2v1g87h" path="res://player/player_moveComponent.gd" id="3_rgyib"]
@@ -90,6 +91,9 @@ _data = {
 &"land": SubResource("Animation_c35mf")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7c3f"]
+radius = 6.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebec5"]
 size = Vector2(14, 26)
 
@@ -123,6 +127,14 @@ autoplay = "idle"
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
 [node name="MaxSpeedBoost" type="Timer" parent="."]
+
+[node name="RoomDetect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 256
+script = ExtResource("2_65viv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDetect"]
+shape = SubResource("CircleShape2D_x7c3f")
 
 [node name="YankDetector" parent="." node_paths=PackedStringArray("player", "yankArrow", "grapple_cursor") instance=ExtResource("15_wodsf")]
 player = NodePath("..")
@@ -382,6 +394,7 @@ scale_amount_curve = SubResource("Curve_32hag")
 color = Color(0.6862745, 0.30980393, 0.8, 1)
 color_ramp = SubResource("Gradient_tqiix")
 
+[connection signal="area_entered" from="RoomDetect" to="RoomDetect" method="_on_area_entered"]
 [connection signal="area_entered" from="Interactor" to="Interactor" method="_on_area_entered"]
 [connection signal="area_exited" from="Interactor" to="Interactor" method="_on_area_exited"]
 
