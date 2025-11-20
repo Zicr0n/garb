@@ -42,6 +42,7 @@ enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
 
 moving_platform=""
 checkpoint_manager=""
+player="PLEASE NO OTHER NODE WITH THIS GROUP I BEG YOU!!!!!!!"
 
 [input]
 

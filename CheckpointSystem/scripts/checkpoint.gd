@@ -15,6 +15,8 @@ var has_been_captured = false
 
 signal checkpoint_triggered
 
+var id := 0
+
 func _ready() -> void:
 	# Configure collision layers
 	collision_layer = 0
@@ -45,5 +47,3 @@ func _on_checkpoint_triggered():
 	# Emit signal and update manager
 	checkpoint_triggered.emit() # might be useless idk, 
 	checkpoint_manager.update_checkpoint(self)
-	
-	print("Checkpoint triggered!")

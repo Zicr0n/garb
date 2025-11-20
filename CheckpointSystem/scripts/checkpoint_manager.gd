@@ -17,15 +17,19 @@ func _ready() -> void:
 	# Declare to the system that we are currently using THIS manager and THESE checkpoints
 	CheckpointSystem.set_current_checkpoint_manager(self)
 	
-	# Get all checkpoints
+	# Get all checkpoints and assign ID (always the same id each scene reload)
+	var i := 0
 	for object in get_children():
 		if object is Checkpoint:
+			object.id = i
 			checkpoints.append(object)
+			
+		i += 1
 	
-	# Set current checkpoint
-	if checkpoints.size() > 0:
-		current_checkpoint = checkpoints[0]
-	else:
+	if CheckpointSystem.latestCheckpointId != null:
+		current_checkpoint = checkpoints[CheckpointSystem.latestCheckpointId]
+	
+	if checkpoints.size() <= 0:
 		# Just to prevent gamebreaking errors (it wont happen), a lil fix
 		push_error("NO CHECKPOINTS FOUND; CREATING ONE")
 		
@@ -37,4 +41,11 @@ func _ready() -> void:
 # Self explanatory
 func update_checkpoint(checkpoint : Checkpoint):
 	if checkpoints.has(checkpoint):
-		current_checkpoint = checkpoint
+		var id = checkpoint.id
+		if !CheckpointSystem.is_in_non_recaptures(id):
+			
+			if checkpoint.can_be_recaptured == false:
+				CheckpointSystem.add_captured_checkpoint(id)
+			
+			current_checkpoint = checkpoint
+			CheckpointSystem.latestCheckpointId = checkpoint.id

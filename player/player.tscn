@@ -105,7 +105,7 @@ offsets = PackedFloat32Array(0, 0.002272725, 0.5, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.9376923, 0.9376923, 0.9376923, 1, 0.85, 0.85, 0.85, 1, 0, 0, 0, 1)
 metadata/_snap_enabled = true
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("statemachine")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("statemachine") groups=["player"]]
 collision_layer = 10
 collision_mask = 5
 script = ExtResource("1_rkbax")
