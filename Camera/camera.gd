@@ -15,7 +15,7 @@ var tween : Tween
 
 func _ready() -> void:
 	current_room = initial_room
-	snap_to_room(current_room, true)
+	#snap_to_room(current_room, true)
 	player.get_node("RoomDetect").room_area_entered.connect(_on_player_detector_area_entered)
 
 func _process(_delta):

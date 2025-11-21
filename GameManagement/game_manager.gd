@@ -40,6 +40,7 @@ func player_died(_player : Player):
 
 	if player:
 		player.global_position = position
+		print("playetrois")
 	else:
 		push_error("PLAYER SOMEHOW NOT FOUND!!! MAYDAY MAYDAY!!")
 	

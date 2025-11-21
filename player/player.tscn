@@ -109,11 +109,10 @@ offsets = PackedFloat32Array(0, 0.002272725, 0.5, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.9376923, 0.9376923, 0.9376923, 1, 0.85, 0.85, 0.85, 1, 0, 0, 0, 1)
 metadata/_snap_enabled = true
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 266
 collision_mask = 5
 script = ExtResource("1_rkbax")
-statemachine = NodePath("Components/Statemachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_rkbax")

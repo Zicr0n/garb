@@ -7,7 +7,7 @@ var dashes := MAX_DASHES
 @onready var x: Label = $CanvasLayer/hud/velocities/X
 @onready var y: Label = $CanvasLayer/hud/velocities/Y
 
-@export var statemachine : PlayerStateMachine = null
+@onready var statemachine : PlayerStateMachine =  $Components/Statemachine
 
 func _ready() -> void:
 	enable()

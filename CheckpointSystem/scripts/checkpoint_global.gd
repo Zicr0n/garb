@@ -13,6 +13,7 @@ func remove_current_checkpoint_manager():
 
 func get_current_checkpoint() -> Checkpoint:
 	if current_checkpoint_manager:
+		print("cur chec")
 		return current_checkpoint_manager.current_checkpoint
 	
 	return null
