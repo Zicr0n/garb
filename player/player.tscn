@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=31 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Script" uid="uid://c2ec4273d274r" path="res://player/room_detect.gd" id="2_65viv"]
 [ext_resource type="Texture2D" uid="uid://dyvhpsjm0vyja" path="res://cursor.png" id="2_yllr7"]
 [ext_resource type="Script" uid="uid://c1240vqmt4squ" path="res://statemachine/player/player_statemachine.gd" id="3_g1dw6"]
 [ext_resource type="Script" uid="uid://c3qb0f2v1g87h" path="res://player/player_moveComponent.gd" id="3_rgyib"]
@@ -18,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dtjh7ox1kyry8" path="res://player/yank_detector.tscn" id="15_wodsf"]
 [ext_resource type="Script" uid="uid://bb2gheck2km73" path="res://statemachine/player/player_dialogueState.gd" id="16_e7oew"]
 [ext_resource type="Script" uid="uid://bsebrpsa7rt6v" path="res://statemachine/player/walljump.gd" id="16_tqiix"]
-[ext_resource type="Script" uid="uid://bn7f4lmksulal" path="res://interract_detector.gd" id="17_tqiix"]
+[ext_resource type="Script" uid="uid://bn7f4lmksulal" path="res://menus/dialougue/Interract/interract_detector.gd" id="17_tqiix"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
 radius = 7.0
@@ -90,6 +91,9 @@ _data = {
 &"land": SubResource("Animation_c35mf")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7c3f"]
+radius = 6.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebec5"]
 size = Vector2(14, 26)
 
@@ -105,8 +109,8 @@ offsets = PackedFloat32Array(0, 0.002272725, 0.5, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.9376923, 0.9376923, 0.9376923, 1, 0.85, 0.85, 0.85, 1, 0, 0, 0, 1)
 metadata/_snap_enabled = true
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("statemachine") groups=["player"]]
-collision_layer = 10
+[node name="player" type="CharacterBody2D"]
+collision_layer = 266
 collision_mask = 5
 script = ExtResource("1_rkbax")
 statemachine = NodePath("Components/Statemachine")
@@ -124,6 +128,14 @@ autoplay = "idle"
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
 [node name="MaxSpeedBoost" type="Timer" parent="."]
+
+[node name="RoomDetect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 256
+script = ExtResource("2_65viv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDetect"]
+shape = SubResource("CircleShape2D_x7c3f")
 
 [node name="YankDetector" parent="." node_paths=PackedStringArray("player", "yankArrow", "grapple_cursor") instance=ExtResource("15_wodsf")]
 player = NodePath("..")
@@ -240,9 +252,8 @@ one_shot = true
 wait_time = 0.15
 one_shot = true
 
-[node name="Yank" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_yank_duration", "_particle_emitter")]
+[node name="Yank" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_yank_duration", "_particle_emitter")]
 script = ExtResource("14_kb6p2")
-_idle_state = NodePath("../Idle")
 _fall_state = NodePath("../Fall")
 _yank_duration = NodePath("yank_duration")
 _particle_emitter = NodePath("../../../yankParticles")
@@ -251,9 +262,8 @@ _particle_emitter = NodePath("../../../yankParticles")
 wait_time = 0.2
 one_shot = true
 
-[node name="Dash" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_idle_state", "_fall_state", "_dash_duration", "_particle_emitter")]
+[node name="Dash" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_dash_duration", "_particle_emitter")]
 script = ExtResource("15_32hag")
-_idle_state = NodePath("../Idle")
 _fall_state = NodePath("../Fall")
 _dash_duration = NodePath("dash_duration")
 _particle_emitter = NodePath("../../../dashParticles")
@@ -284,7 +294,7 @@ ACCELERATION_GROUND = 4000.0
 DECELERATION_GROUND = 6000.0
 TURNING_ACCELERATION_GROUND = 100000.0
 TURNING_THRESHOLD_SPEED = 120.0
-MAX_JUMP_HEIGHT = 330.0
+MAX_JUMP_HEIGHT = 350.0
 GRAVITY = 800.0
 GRAVITY_MULTIPLIER = 0.5
 FALL_MULTIPLIER = 3.0
@@ -395,6 +405,7 @@ scale_amount_curve = SubResource("Curve_32hag")
 color = Color(0.6862745, 0.30980393, 0.8, 1)
 color_ramp = SubResource("Gradient_tqiix")
 
+[connection signal="area_entered" from="RoomDetect" to="RoomDetect" method="_on_area_entered"]
 [connection signal="area_entered" from="Interactor" to="Interactor" method="_on_area_entered"]
 [connection signal="area_exited" from="Interactor" to="Interactor" method="_on_area_exited"]
 

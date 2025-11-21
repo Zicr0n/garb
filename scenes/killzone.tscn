@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cns2l6443hh1e" path="res://hit_system/hitbox.gd" id="1_xlapc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8fp"]
-size = Vector2(96, 49)
+size = Vector2(16, 16)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xlapc"]
 bg_color = Color(1, 0, 0.03137255, 0.5568628)
@@ -22,12 +22,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.5
-offset_top = -24.5
-offset_right = 48.5
-offset_bottom = 24.5
+offset_left = -8.0
+offset_top = -11.5
+offset_right = 8.0
+offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_xlapc")
-text = "im a killzone
-ill kill you :)"
+text = ";("

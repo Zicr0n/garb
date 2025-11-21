@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6jqpfm5h82k4"]
+
+[ext_resource type="Script" uid="uid://fu3yke0fod2f" path="res://Camera/Boundaries/room_bounds.gd" id="1_rqnq2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rfktq"]
+size = Vector2(640, 360)
+
+[node name="RoomBounds" type="Area2D"]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("1_rqnq2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rfktq")

@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://eka64b4s7gma"]
 
-[ext_resource type="Script" uid="uid://bn7f4lmksulal" path="res://interract_detector.gd" id="1_n0bbq"]
+[ext_resource type="Script" uid="uid://bn7f4lmksulal" path="res://menus/dialougue/Interract/interract_detector.gd" id="1_n0bbq"]
+
 
 [node name="InterractDetector" type="Area2D"]
 collision_layer = 0

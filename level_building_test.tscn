@@ -1,10 +1,10 @@
 [gd_scene load_steps=18 format=4 uid="uid://bu7tg0xwu83m2"]
 
-[ext_resource type="TileSet" uid="uid://ctdunf85qx8fy" path="res://Levels.tres" id="1_g65hp"]
+[ext_resource type="TileSet" uid="uid://ctdunf85qx8fy" path="res://Levels/Levels.tres" id="1_g65hp"]
 [ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://player/player.tscn" id="2_oomf2"]
 [ext_resource type="PackedScene" uid="uid://d4hwe3dbyj3pg" path="res://Camera/camera.tscn" id="3_5dgbu"]
 [ext_resource type="Texture2D" uid="uid://rnuhc8k5unmn" path="res://Sprites/testtiles/tilesheet.png" id="4_42lb2"]
-[ext_resource type="PackedScene" path="res://Levels/Level Parts/Scenes/guide_char.tscn" id="5_s7otp"]
+[ext_resource type="PackedScene" uid="uid://bsoq3wpilqxjt" path="res://Levels/Level Parts/Scenes/guide_char.tscn" id="5_s7otp"]
 [ext_resource type="Script" uid="uid://45iscrlurtqo" path="res://area_2d.gd" id="6_5wngn"]
 [ext_resource type="PackedScene" uid="uid://c3enjcjsegug" path="res://scenes/teleport/teleporter.tscn" id="7_350gb"]
 [ext_resource type="PackedScene" uid="uid://bmr4lv376q4dx" path="res://scenes/moving_platform/moving_platform.tscn" id="8_jk7cy"]

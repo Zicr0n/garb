@@ -123,7 +123,7 @@ func move_in_air(direction : float, dt) -> void:
 			characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, 0.0, dt * DECELERATION_AIR)
 		
 
-func fall(dt, multiplier:=0):
+func fall(dt, _multiplier:=0):
 	var multi := FALL_MULTIPLIER if characterBody2D.velocity.y > 0.0 else 1.0
 
 	characterBody2D.velocity.y += GRAVITY * dt * multi
