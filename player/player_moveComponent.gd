@@ -119,6 +119,8 @@ func move_in_air(direction : float, dt) -> void:
 	else:
 		if characterBody2D.get_platform_velocity().x != 0.0:
 			characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, characterBody2D.get_platform_velocity().x, DECELERATION_AIR * dt)
+		else:
+			characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, 0.0, dt * DECELERATION_AIR)
 		
 
 func fall(dt, _multiplier:=0):

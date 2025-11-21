@@ -4,7 +4,7 @@ extends Control
 @export var level_1 = null
 
 func _on_level_1_pressed() -> void:
-	get_tree().change_scene_to_file("res://test-scene.tscn")
+	GameManager.load_level("level1")
 
 
 func _on_level_2_pressed() -> void:

@@ -3,16 +3,20 @@ class_name Player
 
 const MAX_DASHES : int = 1
 var dashes := MAX_DASHES
-#
+
 @onready var x: Label = $CanvasLayer/hud/velocities/X
 @onready var y: Label = $CanvasLayer/hud/velocities/Y
 
-#@onready var yankf: Node = $Statemachine/Yank
-#
-#@export var statemachine: PlayerStateMachine = null
-#
-#func _input(_event: InputEvent) -> void:
-	#pass
+@export var statemachine : PlayerStateMachine = null
+
+func _ready() -> void:
+	enable()
+
+func disable():
+	statemachine.disabled = true
+
+func enable():
+	statemachine.disabled = false
 
 func _physics_process(_delta: float) -> void:
 	if is_on_floor():

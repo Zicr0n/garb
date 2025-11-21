@@ -113,6 +113,7 @@ metadata/_snap_enabled = true
 collision_layer = 266
 collision_mask = 5
 script = ExtResource("1_rkbax")
+statemachine = NodePath("Components/Statemachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_rkbax")
@@ -311,7 +312,7 @@ WALL_LEFT_RAY_BOTTOM = NodePath("../../WallRays/Left")
 WALL_RIGHT_RAY_BOTTOM = NodePath("../../WallRays/Right")
 MOVE_SPEED_AIR = 180.0
 ACCELERATION_AIR = 2000.0
-DECELERATION_AIR = 250.0
+DECELERATION_AIR = 500.0
 DASH_VELOCITY = 600.0
 
 [node name="InputComponent" type="Node" parent="Components"]
@@ -331,12 +332,22 @@ text = "state"
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="transition" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/transition"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="hud" type="Control" parent="CanvasLayer"]
 layout_mode = 3
