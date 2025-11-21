@@ -54,7 +54,6 @@ func set_state(new_state : PlayerState):
 	
 	current_state = new_state
 	current_state.enter()
-	
 
 func _input(event : InputEvent):
 	if disabled: return
