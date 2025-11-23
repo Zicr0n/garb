@@ -6,7 +6,7 @@ class_name Hurtbox
 
 signal on_hitbox_entered(hitbox)
 
-func _init():
+func _ready():
 	collision_layer = hurtboxLayer
 	collision_mask = hitboxLayer
 	
