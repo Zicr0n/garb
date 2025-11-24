@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://edo7nvmtqnrp"]
+[gd_scene load_steps=17 format=3 uid="uid://edo7nvmtqnrp"]
 
 [ext_resource type="TileSet" uid="uid://ctdunf85qx8fy" path="res://Levels/Levels.tres" id="1_n0qsc"]
 [ext_resource type="PackedScene" uid="uid://cfe7htucjw6bh" path="res://Levels/Level Parts/Scenes/yank_point.tscn" id="2_3mhv4"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://c6jqpfm5h82k4" path="res://Levels/Level Parts/Scenes/room_bounds.tscn" id="4_syshm"]
 [ext_resource type="Script" uid="uid://cm16s2jky6g2j" path="res://Levels/elevator.gd" id="6_rfktq"]
 [ext_resource type="PackedScene" uid="uid://06743jtpeump" path="res://Levels/LevelTester/level_tester.tscn" id="7_0urlm"]
+[ext_resource type="Script" uid="uid://d2bs7i87t7h2s" path="res://CheckpointSystem/scripts/checkpoint_manager.gd" id="8_xoyoh"]
+[ext_resource type="Script" uid="uid://dkbglh8kwo400" path="res://CheckpointSystem/scripts/checkpoint.gd" id="9_f4pg2"]
 
 [sub_resource type="Animation" id="Animation_syshm"]
 resource_name = "Elevator"
@@ -113,6 +115,8 @@ size = Vector2(80, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rfktq"]
 size = Vector2(32, 64)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_62b6n"]
+
 [node name="Level 1" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -199,6 +203,18 @@ disabled = true
 [node name="LevelTester" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_0urlm")]
 player = NodePath("../player")
 interval = 0.05
+
+[node name="CheckpointManager" type="Node" parent="."]
+script = ExtResource("8_xoyoh")
+metadata/_custom_type_script = "uid://d2bs7i87t7h2s"
+
+[node name="Checkpoint" type="Area2D" parent="CheckpointManager"]
+position = Vector2(-1168, -1040)
+script = ExtResource("9_f4pg2")
+metadata/_custom_type_script = "uid://dkbglh8kwo400"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointManager/Checkpoint"]
+shape = SubResource("RectangleShape2D_62b6n")
 
 [connection signal="body_entered" from="Elevator/PlayerDetect" to="Elevator" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Elevator/PlayerDetect" to="Elevator" method="_on_player_detect_body_exited"]

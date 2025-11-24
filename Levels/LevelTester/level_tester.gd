@@ -10,6 +10,8 @@ func _ready() -> void:
 	timer.wait_time = interval
 
 func _on_interval_timeout() -> void:
+	if player.global_position == playerPositions.back():
+		return
 	playerPositions.append(player.global_position)
 	var snapshot := Sprite2D.new()
 	var sprite_child := player.get_node_or_null("Sprite2D")
