@@ -9,6 +9,7 @@ var processing_death = false
 
 func _ready() -> void:
 	add_child(dimmer)
+	dimmer.visible = false
 
 ## TODO - Make screen go dim (cool transition perhaps), reload scene, reposition at correct checkpoint, brighten screen again
 func player_died(_player : Player):

@@ -39,8 +39,6 @@ var _current_move_speed : float = 0.0
 @export var ACCELERATION_AIR : float = 1500.0
 @export var DECELERATION_AIR : float = 3000.0
 
-
-
 @export_category("YANK")
 @export var YANK_POWER : float = 600
 
@@ -57,6 +55,9 @@ var is_turning = false
 
 func _physics_process(_dt) -> void:
 	characterBody2D.move_and_slide()
+
+func custom_set_velocity(new_velocity):
+	pass
 
 ############
 ## GROUND ##
