@@ -1,22 +1,45 @@
 extends Node
 
 var dimmer : Dimmer = preload("res://GameManagement/dimmer.tscn").instantiate()
+var level_system : LevelSystem = preload("res://LevelSystem/levelsystem.tscn").instantiate()
+var win_screen = preload("res://GameManagement/win_screen.tscn")
 var processing_death = false
 
 @export var levels = {
-	"level1" : "res://Levels/level_1.tscn"
+	"level1" : "res://Levels/level_1.tscn",
+	"level2" : "res://level_building_test.tscn"
 }
+
+var current_level = null
+var current_deaths = 0
+var winscreen_instance : WinScreen = null
+
+signal level_started
+signal level_ended
+
+var gameTime = null
+
+func _process(delta: float) -> void:
+	if current_level:
+		if gameTime == null:
+			gameTime = 0
+		else:
+			gameTime += delta
+	else:
+		gameTime = null
 
 func _ready() -> void:
 	add_child(dimmer)
+	add_child(level_system)
 
-## TODO - Make screen go dim (cool transition perhaps), reload scene, reposition at correct checkpoint, brighten screen again
 func player_died(_player : Player):
 	if processing_death:
 		return
 	
 	# Dim screen
 	processing_death = true
+	current_deaths += 1
+	
 	await dimmer.dim()
 	
 	# Save the checkpoint position and just remove the manager
@@ -24,7 +47,6 @@ func player_died(_player : Player):
 	
 	# If no checkpoint just skip to reloading
 	if !deathCheckpoint:
-		print("no checkpoint")
 		await reload_current_level()
 		dimmer.brighten()
 		return
@@ -40,7 +62,6 @@ func player_died(_player : Player):
 
 	if player:
 		player.global_position = position
-		print("playetrois")
 	else:
 		push_error("PLAYER SOMEHOW NOT FOUND!!! MAYDAY MAYDAY!!")
 	
@@ -51,13 +72,69 @@ func player_died(_player : Player):
 func load_level(sceneName):
 	var scene = levels[sceneName]
 	
+	if level_system.is_level_locked(sceneName):
+		print("locked")
+		return
+	
+	await dimmer.dim()
+
 	if scene:
 		get_tree().change_scene_to_file(scene)
+		level_system.set_current_level(sceneName)
+		await get_tree().process_frame
+		
+		current_level = scene
+		current_deaths = 0
+		
 	else:
 		push_error("SCENE NOT FOUND!!!!!!!!!!! THE END IS NEAR!!!!!!!")
+	
+	dimmer.brighten()
+
+func return_to_main_menu():
+	await dimmer.dim()
+	
+	winscreen_instance.queue_free()
+	current_level = null
+	get_tree().change_scene_to_file("res://menus/main_menu.tscn")
+	
+	await get_tree().process_frame
+	
+	dimmer.brighten()
 
 func reload_current_level():
 	get_tree().reload_current_scene()
 	
 	# Sometiems the scene doesnt load instantly, so wait for the scene to run its first frame
 	await get_tree().process_frame  # Wait for scene to fully reload (fuck you chatgpt)
+
+func on_level_ended():
+	## TODO
+	# Get time
+	var timeToComplete = gameTime
+	
+	# Get deaths
+	print(current_deaths)
+	print("current deaths")
+	var totalDeaths = current_deaths
+	
+	# Unlock next level
+	level_system.unlock_next_level()
+	
+	# Return to level select screen
+	level_system.set_current_level("")
+	
+	# Reset
+	current_level = null
+	
+	await dimmer.dim()
+	# Show that the level was unlocked
+	winscreen_instance = win_screen.instantiate()
+	print(totalDeaths)
+	print("total deaths")
+	winscreen_instance.set_deaths(totalDeaths)
+	winscreen_instance.set_time(str(timeToComplete))
+	add_child(winscreen_instance)
+	
+	dimmer.brighten()
+	

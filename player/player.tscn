@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=33 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://bb2gheck2km73" path="res://statemachine/player/player_dialogueState.gd" id="16_e7oew"]
 [ext_resource type="Script" uid="uid://bsebrpsa7rt6v" path="res://statemachine/player/walljump.gd" id="16_tqiix"]
 [ext_resource type="Script" uid="uid://bn7f4lmksulal" path="res://menus/dialougue/Interract/interract_detector.gd" id="17_tqiix"]
+[ext_resource type="Script" uid="uid://bt1kk0nanswig" path="res://player/timerui.gd" id="21_x7c3f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
 radius = 7.0
@@ -100,6 +101,8 @@ size = Vector2(14, 26)
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7oew"]
 radius = 22.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_65viv"]
+
 [sub_resource type="Curve" id="Curve_32hag"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.35836914, 1), 0.0, 0.0, 0, 0, Vector2(0.5987125, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -112,6 +115,7 @@ metadata/_snap_enabled = true
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 266
 collision_mask = 5
+platform_on_leave = 1
 script = ExtResource("1_rkbax")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -358,7 +362,8 @@ grow_vertical = 2
 
 [node name="velocities" type="Control" parent="CanvasLayer/hud"]
 anchors_preset = 0
-offset_right = 150.0
+offset_left = 569.0
+offset_right = 640.0
 offset_bottom = 56.0
 
 [node name="X" type="Label" parent="CanvasLayer/hud/velocities"]
@@ -379,6 +384,25 @@ offset_top = -23.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "VEL_Y : 0"
+
+[node name="timer" type="Control" parent="CanvasLayer/hud"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -473.0
+offset_bottom = 62.0
+grow_horizontal = 2
+script = ExtResource("21_x7c3f")
+
+[node name="Label" type="Label" parent="CanvasLayer/hud/timer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "number goes here"
+label_settings = SubResource("LabelSettings_65viv")
 
 [node name="yankParticles" type="CPUParticles2D" parent="."]
 emitting = false

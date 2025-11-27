@@ -64,6 +64,7 @@ func _physics_process(_dt) -> void:
 func idle(dt):
 	_current_move_speed = move_toward(_current_move_speed, 0, DECELERATION_GROUND * dt)
 	characterBody2D.velocity.x = _current_move_speed
+	characterBody2D.velocity.y = 0
 
 func move_on_ground(direction : float, dt : float) -> void:
 	var target_speed = MOVE_SPEED_GROUND * direction

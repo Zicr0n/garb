@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx3twa4wdfc22"]
+
+[ext_resource type="Script" uid="uid://bdsjloxsyqgxh" path="res://LevelSystem/levelsystem.gd" id="1_4xp68"]
+[ext_resource type="Script" uid="uid://cl3v2iy5bexpl" path="res://LevelSystem/level.gd" id="2_r1836"]
+
+[node name="LevelSystem" type="Node"]
+script = ExtResource("1_4xp68")
+
+[node name="Level0" type="Node" parent="."]
+script = ExtResource("2_r1836")
+levelName = "level1"
+unlocked = true
+metadata/_custom_type_script = "uid://cl3v2iy5bexpl"
+
+[node name="Level1" type="Node" parent="."]
+script = ExtResource("2_r1836")
+id = 1
+levelName = "level2"
+scenePath = "res://level_building_test.tscn"
+metadata/_custom_type_script = "uid://cl3v2iy5bexpl"
+
+[node name="Level2" type="Node" parent="."]
+script = ExtResource("2_r1836")
+id = 2
+metadata/_custom_type_script = "uid://cl3v2iy5bexpl"
