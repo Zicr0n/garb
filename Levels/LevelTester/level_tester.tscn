@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://lk5bdfclme4i" path="res://Levels/LevelTester/level_tester.gd" id="1_j63fx"]
 
-
 [node name="LevelTester" type="Node" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_j63fx")
 timer = NodePath("Interval")

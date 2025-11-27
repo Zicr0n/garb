@@ -13,3 +13,8 @@ func yanked():
 func _on_yank_point_cooldown_timeout() -> void:
 	active = true
 	#animate
+
+
+func _on_lifeender_body_entered(body: Node2D) -> void:
+	print("NEGA")
+	GameManager.on_level_ended()

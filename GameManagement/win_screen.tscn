@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=3 uid="uid://e44dt5ptjwmf"]
+
+[ext_resource type="Script" uid="uid://de5marsi8t5dq" path="res://GameManagement/win_screen.gd" id="1_05o6n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vt2rv"]
+font_size = 64
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.78431374)
+
+[node name="WinScreen" type="CanvasLayer" node_paths=PackedStringArray("deaths", "time")]
+layer = 99
+script = ExtResource("1_05o6n")
+deaths = NodePath("Contril/Deaths")
+time = NodePath("Contril/Time")
+
+[node name="Contril" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Contril"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.19434929, 0.19434926, 0.19434926, 1)
+
+[node name="MainMenu" type="Button" parent="Contril"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = -93.0
+offset_right = -160.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Affirm"
+
+[node name="LevelComplete" type="Label" parent="Contril"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1.0
+offset_top = 50.0
+offset_right = 1.0
+offset_bottom = 138.0
+grow_horizontal = 2
+text = "Level Complete!"
+label_settings = SubResource("LabelSettings_vt2rv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="Contril"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -29.0
+offset_right = 78.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Deaths" type="Label" parent="Contril"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = 5.0
+offset_right = 78.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="Contril/MainMenu" to="." method="_on_main_menu_pressed"]

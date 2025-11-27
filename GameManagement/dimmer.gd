@@ -11,7 +11,6 @@ func brighten():
 
 func dim(id : String = ""):
 	if id != "":
-		print("gooey oooey cheesy")
 		return
 	
 	animation_player.play("dim")
