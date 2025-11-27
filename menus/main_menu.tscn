@@ -150,6 +150,6 @@ offset_right = 320.0
 offset_bottom = 500.0
 main_menu = NodePath("../mainMenuButtons")
 
-[connection signal="button_down" from="mainMenuButtons/VBoxContainer/StartGame" to="mainMenuButtons" method="_on_start_game_button_down"]
-[connection signal="button_down" from="mainMenuButtons/VBoxContainer/Settings" to="mainMenuButtons" method="_on_settings_button_down"]
-[connection signal="button_down" from="mainMenuButtons/VBoxContainer/QuitGame" to="mainMenuButtons" method="_on_quit_game_button_down"]
+[connection signal="pressed" from="mainMenuButtons/VBoxContainer/StartGame" to="mainMenuButtons" method="_on_start_game_pressed"]
+[connection signal="pressed" from="mainMenuButtons/VBoxContainer/Settings" to="mainMenuButtons" method="_on_settings_pressed"]
+[connection signal="pressed" from="mainMenuButtons/VBoxContainer/QuitGame" to="mainMenuButtons" method="_on_quit_game_pressed"]

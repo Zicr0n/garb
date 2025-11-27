@@ -43,4 +43,3 @@ func physics_process(delta):
 
 func exit():
 	state_machine.fall_source = state_machine.FALL_SOURCE.PLATFORM
-	

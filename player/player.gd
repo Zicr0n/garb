@@ -26,3 +26,6 @@ func _physics_process(_delta: float) -> void:
 
 	x.text = "VEL_X : " + "%0.2f" % velocity.x
 	y.text = "VEL_Y : " + "%0.2f" % velocity.y
+
+func custom_set_velocity(new_velocity):
+	statemachine.move_component.set_velocity(new_velocity)
