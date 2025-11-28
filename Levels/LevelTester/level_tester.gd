@@ -21,7 +21,7 @@ func _on_interval_timeout() -> void:
 		snapshot.flip_h = sprite_child.flip_h
 		snapshot.global_position = player.global_position
 		snapshot.scale = sprite_child.scale
-		snapshot.modulate = Color(1, 1, 1, 0.3)# transparent so it looks ghostly
+		snapshot.modulate = Color(1, 1, 1, 0.1)# transparent so it looks ghostly
 
 	get_tree().current_scene.add_child(snapshot)
 	playerPositions.append(snapshot.global_position)

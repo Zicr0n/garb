@@ -57,7 +57,7 @@ func _physics_process(_dt) -> void:
 	characterBody2D.move_and_slide()
 
 func custom_set_velocity(new_velocity):
-	pass
+	characterBody2D.velocity = new_velocity
 
 ############
 ## GROUND ##
@@ -158,8 +158,8 @@ func end_yank():
 ##########
 func dash(dir : Vector2) -> bool:
 	if dir != Vector2.ZERO:
-		characterBody2D.velocity = dir * DASH_VELOCITY
 		characterBody2D.dashes -= 1
+		characterBody2D.velocity = dir * DASH_VELOCITY
 		return true
 	else:
 		return false

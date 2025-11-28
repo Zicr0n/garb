@@ -38,7 +38,7 @@ func process(_delta):
 			
 		buffer_timer.start()
 
-	if state_machine.input_component.is_dash_just_pressed():
+	if state_machine.input_component.is_dash_just_pressed() and state_machine.character.dashes > 0:
 		return _dash_state
 
 func physics_process(delta: float):

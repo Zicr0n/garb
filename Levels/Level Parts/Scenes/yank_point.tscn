@@ -3,9 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://sypl2u85cu64" path="res://YankTest/wanker.jpg" id="1_8o77c"]
 [ext_resource type="Script" uid="uid://c6bnlbgeosmhn" path="res://Levels/Level Parts/Scripts/yank_point.gd" id="1_e7mh1"]
 
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7mh1"]
-radius = 139.0
+radius = 112.0
 
 [node name="YankPoint" type="Area2D"]
 collision_layer = 16
@@ -17,7 +16,7 @@ shape = SubResource("CircleShape2D_e7mh1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -1.5)
-scale = Vector2(0.09183673, 0.08061224)
+scale = Vector2(0.03265306, 0.035714284)
 texture = ExtResource("1_8o77c")
 
 [node name="YankPointCooldown" type="Timer" parent="."]

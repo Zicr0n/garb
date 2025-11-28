@@ -262,7 +262,7 @@ _yank_duration = NodePath("yank_duration")
 _particle_emitter = NodePath("../../../yankParticles")
 
 [node name="yank_duration" type="Timer" parent="Components/Statemachine/Yank"]
-wait_time = 0.2
+wait_time = 0.25
 one_shot = true
 
 [node name="Dash" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_dash_duration", "_particle_emitter")]
@@ -272,7 +272,7 @@ _dash_duration = NodePath("dash_duration")
 _particle_emitter = NodePath("../../../dashParticles")
 
 [node name="dash_duration" type="Timer" parent="Components/Statemachine/Dash"]
-wait_time = 0.15
+wait_time = 0.1
 one_shot = true
 
 [node name="Dialogue" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_idle_state")]
@@ -316,6 +316,7 @@ WALL_RIGHT_RAY_BOTTOM = NodePath("../../WallRays/Right")
 MOVE_SPEED_AIR = 180.0
 ACCELERATION_AIR = 2000.0
 DECELERATION_AIR = 500.0
+YANK_POWER = 700.0
 DASH_VELOCITY = 600.0
 
 [node name="InputComponent" type="Node" parent="Components"]

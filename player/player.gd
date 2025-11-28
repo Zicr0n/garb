@@ -8,6 +8,7 @@ var dashes := MAX_DASHES
 @onready var y: Label = $CanvasLayer/hud/velocities/Y
 
 @onready var statemachine : PlayerStateMachine =  $Components/Statemachine
+var was_on_floor = false
 
 func _ready() -> void:
 	enable()
@@ -19,7 +20,7 @@ func enable():
 	statemachine.disabled = false
 
 func _physics_process(_delta: float) -> void:
-	if is_on_floor():
+	if is_on_floor() and statemachine.current_state.name != "Dash":
 		#statemachine.disabled = false
 		dashes = MAX_DASHES
 	#move_and_slide()
