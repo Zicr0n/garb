@@ -1,9 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpoqy0mxo7vqi"]
+[gd_scene load_steps=5 format=3 uid="uid://bpoqy0mxo7vqi"]
 
 [ext_resource type="Script" uid="uid://b3ef2iruvjm6" path="res://Levels/Level Parts/Scripts/bounce_pad.gd" id="1_6dmuu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gxl4k"]
-size = Vector2(16, 16)
+size = Vector2(16, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_05o81"]
+size = Vector2(3.75, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6dmuu"]
 size = Vector2(16, 16)
@@ -15,13 +18,22 @@ script = ExtResource("1_6dmuu")
 bounce_power = 400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_gxl4k")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-9.75, -2)
+shape = SubResource("RectangleShape2D_05o81")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(9.875, -2)
+shape = SubResource("RectangleShape2D_05o81")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_6dmuu")
-disabled = true
+one_way_collision = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
