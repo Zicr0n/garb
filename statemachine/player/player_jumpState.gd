@@ -3,6 +3,7 @@ extends PlayerState
 @export var _fall_state : PlayerState = null
 @export var _walljump_state : PlayerState = null
 @export var _dash_state: PlayerState = null
+@export var _yank_state: PlayerState = null
 
 var dir_x = 0
 
@@ -33,6 +34,10 @@ func input(event : InputEvent):
 
 func physics_process(delta):
 	state_machine.move_component.fall(delta)
+	
+	if state_machine.input_component.is_yank_just_pressed():
+		if state_machine.move_component.can_yank():
+			return _yank_state
 	
 	if state_machine.move_component.is_falling():
 		return _fall_state

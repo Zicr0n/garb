@@ -113,6 +113,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.9376923, 0.9376923, 0.9376923, 1, 0.85, 
 metadata/_snap_enabled = true
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(-32, -49)
 collision_layer = 266
 collision_mask = 5
 platform_on_leave = 1
@@ -144,6 +145,9 @@ shape = SubResource("CircleShape2D_x7c3f")
 player = NodePath("..")
 yankArrow = NodePath("../YankArrow")
 grapple_cursor = NodePath("../ParentIndependent/GrappleCursor")
+
+[node name="RayCast2D" type="RayCast2D" parent="YankDetector"]
+target_position = Vector2(0, 0)
 
 [node name="Hurtbox" type="Area2D" parent="."]
 script = ExtResource("11_2ieo8")
@@ -226,11 +230,12 @@ _dash_state = NodePath("../Dash")
 _dialogue_state = NodePath("../Dialogue")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="Jump" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_walljump_state", "_dash_state")]
+[node name="Jump" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_walljump_state", "_dash_state", "_yank_state")]
 script = ExtResource("6_boad6")
 _fall_state = NodePath("../Fall")
 _walljump_state = NodePath("../Walljump")
 _dash_state = NodePath("../Dash")
+_yank_state = NodePath("../Yank")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
 [node name="Death" type="Node" parent="Components/Statemachine"]
@@ -262,7 +267,7 @@ _yank_duration = NodePath("yank_duration")
 _particle_emitter = NodePath("../../../yankParticles")
 
 [node name="yank_duration" type="Timer" parent="Components/Statemachine/Yank"]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="Dash" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_dash_duration", "_particle_emitter")]
@@ -316,6 +321,7 @@ WALL_RIGHT_RAY_BOTTOM = NodePath("../../WallRays/Right")
 MOVE_SPEED_AIR = 180.0
 ACCELERATION_AIR = 2000.0
 DECELERATION_AIR = 500.0
+YANK_POWER = 800.0
 DASH_VELOCITY = 600.0
 
 [node name="InputComponent" type="Node" parent="Components"]

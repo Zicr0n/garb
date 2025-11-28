@@ -23,6 +23,7 @@ var previous_state : PlayerState = null
 enum FALL_SOURCE {
 	PLATFORM,
 	WALL,
+	YANK,
 	OTHER
 }
 

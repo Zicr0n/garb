@@ -26,17 +26,22 @@ func _ready() -> void:
 			
 		i += 1
 	
-	if CheckpointSystem.latestCheckpointId != null:
-		current_checkpoint = checkpoints[CheckpointSystem.latestCheckpointId]
-	
 	if checkpoints.size() <= 0:
-		# Just to prevent gamebreaking errors (it wont happen), a lil fix
+		# Just to prevent gamebreaking errors (it wont happen), a lil fix (it did)
 		push_error("NO CHECKPOINTS FOUND; CREATING ONE")
 		
 		var checkpoint = Checkpoint.new()
 		checkpoint.checkpoint_manager = self
 		checkpoint.global_position = Vector2.ZERO
+		checkpoints.append(checkpoint)
 		add_child(checkpoint)
+		
+		current_checkpoint = checkpoint
+	else:
+		if CheckpointSystem.latestCheckpointId != null:
+			current_checkpoint = checkpoints[CheckpointSystem.latestCheckpointId]
+		else:
+			current_checkpoint = checkpoints[0]
 
 # Self explanatory
 func update_checkpoint(checkpoint : Checkpoint):

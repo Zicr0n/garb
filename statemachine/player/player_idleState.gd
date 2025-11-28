@@ -13,7 +13,8 @@ func enter():
 
 func process(_delta):
 	if state_machine.input_component.is_yank_just_pressed():
-		return _yank_state
+		if state_machine.move_component.can_yank():
+			return _yank_state
 
 	if state_machine.input_component.is_dash_just_pressed():
 		return _dash_state
