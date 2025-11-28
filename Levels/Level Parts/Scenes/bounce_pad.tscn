@@ -17,22 +17,22 @@ collision_mask = 2
 script = ExtResource("1_6dmuu")
 bounce_power = 400
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Dector" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_gxl4k")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+[node name="Dector2" type="CollisionShape2D" parent="."]
 position = Vector2(-9.75, -2)
 shape = SubResource("RectangleShape2D_05o81")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+[node name="Dector3" type="CollisionShape2D" parent="."]
 position = Vector2(9.875, -2)
 shape = SubResource("RectangleShape2D_05o81")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Collider" type="StaticBody2D" parent="."]
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
 shape = SubResource("RectangleShape2D_6dmuu")
 one_way_collision = true
 

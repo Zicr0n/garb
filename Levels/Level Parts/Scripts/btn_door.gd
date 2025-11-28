@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-@export var button = null
+@export var button : Area2D = null
 
 func _ready() -> void:
 	$CollisionShape2D.disabled = false
