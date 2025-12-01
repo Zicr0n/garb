@@ -2,7 +2,7 @@ extends Node
 class_name PlayerMoveComponent
 
 @export var characterBody2D : CharacterBody2D = null
-@export var yankDetector : Area2D = null
+@export var yankDetector : YankDetector = null
 
 @export_category("GROUND MOVEMENT")
 @export var MOVE_SPEED_GROUND : float = 100.0
@@ -113,14 +113,14 @@ func variable_jump():
 ##########
 ## FALL ##
 ##########
-func move_in_air(direction : float, dt) -> void:
+func move_in_air(direction : float, dt, air_fric_multi = 1.0) -> void:
 	var target_speed := MOVE_SPEED_AIR * direction
 	
 	if direction != 0:
-		characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, target_speed, ACCELERATION_AIR * dt)
+		characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, target_speed, ACCELERATION_AIR * dt * air_fric_multi)
 	else:
 		if characterBody2D.get_platform_velocity().x != 0.0:
-			characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, characterBody2D.get_platform_velocity().x, DECELERATION_AIR * dt)
+			characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, characterBody2D.get_platform_velocity().x, DECELERATION_AIR * dt * air_fric_multi)
 		else:
 			characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, 0.0, dt * DECELERATION_AIR)
 		
@@ -142,13 +142,20 @@ func is_falling() -> bool:
 ##########
 ## YANK ##
 ##########
-func yank():
-	if yankDetector.nearestPoint():
-		var yank_dir = (yankDetector.nearestPoint().global_position - characterBody2D.global_position).normalized()
-		characterBody2D.velocity = yank_dir * YANK_POWER
+func yank(input_dir):
+	var nearest_point : YankPoint = yankDetector.get_nearest_point()
+	
+	if nearest_point:
+		var yank_dir = (nearest_point.global_position - characterBody2D.global_position).normalized()
+		var dist_to_point = nearest_point.global_position.distance_to(characterBody2D.global_position)
+		var dist_multiplier = lerp(0.5, 1.5, (dist_to_point / nearest_point.radius))
+		characterBody2D.velocity = yank_dir * YANK_POWER * dist_multiplier  + Vector2(input_dir * MOVE_SPEED_AIR, 0)
 		return true
 	else:
 		return false
+
+func can_yank() -> bool:
+	return yankDetector.get_nearest_point() != null
 
 func end_yank():
 	characterBody2D.velocity *= 0.5
