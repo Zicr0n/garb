@@ -267,7 +267,7 @@ _yank_duration = NodePath("yank_duration")
 _particle_emitter = NodePath("../../../yankParticles")
 
 [node name="yank_duration" type="Timer" parent="Components/Statemachine/Yank"]
-wait_time = 0.1
+wait_time = 0.25
 one_shot = true
 
 [node name="Dash" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_dash_duration", "_particle_emitter")]
@@ -277,7 +277,7 @@ _dash_duration = NodePath("dash_duration")
 _particle_emitter = NodePath("../../../dashParticles")
 
 [node name="dash_duration" type="Timer" parent="Components/Statemachine/Dash"]
-wait_time = 0.15
+wait_time = 0.1
 one_shot = true
 
 [node name="Dialogue" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_idle_state")]

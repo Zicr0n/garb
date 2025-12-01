@@ -1,9 +1,10 @@
-[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://ctdunf85qx8fy"]
+[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://ctdunf85qx8fy"]
 
 [ext_resource type="PackedScene" uid="uid://ca0715cgxnxcb" path="res://scenes/killzone.tscn" id="1_7kl0p"]
 [ext_resource type="PackedScene" uid="uid://di4cl6i0wcrea" path="res://Levels/Level Parts/Scenes/wind_tunnel.tscn" id="2_op6a5"]
 [ext_resource type="PackedScene" uid="uid://cfe7htucjw6bh" path="res://Levels/Level Parts/Scenes/yank_point.tscn" id="3_6pwpj"]
 [ext_resource type="PackedScene" uid="uid://dlwh43kpokxq2" path="res://Levels/Level Parts/Scenes/one_way_platform.tscn" id="4_7kl0p"]
+[ext_resource type="PackedScene" uid="uid://bpoqy0mxo7vqi" path="res://Levels/Level Parts/Scenes/bounce_pad.tscn" id="4_op6a5"]
 [ext_resource type="Texture2D" uid="uid://cwfj1fe7mrasg" path="res://Assets/FREE/5. Industrial Tileset - Starter Pack 32p/0_Template_Tileset.png" id="5_h3n1o"]
 [ext_resource type="Texture2D" uid="uid://bpspas84att13" path="res://Assets/FREE/5. Industrial Tileset - Starter Pack 32p/1_Industrial_Tileset_1.png" id="6_l2pf0"]
 
@@ -11,6 +12,7 @@
 scenes/1/scene = ExtResource("1_7kl0p")
 scenes/2/scene = ExtResource("2_op6a5")
 scenes/3/scene = ExtResource("3_6pwpj")
+scenes/4/scene = ExtResource("4_op6a5")
 scenes/6/scene = ExtResource("4_7kl0p")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vreee"]

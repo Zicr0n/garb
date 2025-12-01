@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhle1s1ioja0u"]
+
+[ext_resource type="Script" uid="uid://bs8lyqq7wknt8" path="res://Levels/Level Parts/Scripts/btn_door.gd" id="1_van3d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_van3d"]
+size = Vector2(16, 48)
+
+[node name="BtnDoor" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_van3d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, -24)
+shape = SubResource("RectangleShape2D_van3d")

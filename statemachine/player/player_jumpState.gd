@@ -22,6 +22,9 @@ func enter():
 func process(_delta):
 	dir_x = state_machine.input_component.move_dir_x()
 
+	if state_machine.input_component.is_yank_just_pressed():
+		return _yank_state
+
 	return null
 
 func input(event : InputEvent):
@@ -46,7 +49,7 @@ func physics_process(delta):
 		if state_machine.move_component.is_wall_left() || state_machine.move_component.is_wall_right():
 			return _walljump_state
 	
-	if state_machine.input_component.is_dash_just_pressed():
+	if state_machine.input_component.is_dash_just_pressed() and state_machine.character.dashes > 0:
 		return _dash_state
 	
 	state_machine.move_component.move_in_air(dir_x, delta)
