@@ -26,7 +26,8 @@ func process(_delta):
 	#fastfall = state_machine.input_component.move_down()
 
 	if state_machine.input_component.is_yank_just_pressed():
-		return _yank_state
+		if state_machine.move_component.can_yank():
+			return _yank_state
 
 	if _coyote_timer.time_left > 0 and state_machine.input_component.is_jump_just_pressed():
 		_coyote_timer.stop()
@@ -55,6 +56,11 @@ func physics_process(delta: float):
 		else:
 			return _idle_state
 	
-	state_machine.move_component.move_in_air(dir_x, delta)
+	# Reduce air friction after yank to simulate "momentum" (not the best approach but what can i say)
+	var air_friction_multi = 1.0
+	if state_machine.fall_source == state_machine.FALL_SOURCE.YANK && sign(dir_x) == sign(state_machine.character.velocity.x):
+		air_friction_multi = 0.2
+	
+	state_machine.move_component.move_in_air(dir_x, delta, air_friction_multi)
 	
 	return null

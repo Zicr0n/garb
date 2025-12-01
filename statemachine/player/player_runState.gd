@@ -16,7 +16,8 @@ func process(_delta):
 	x_dir = state_machine.input_component.move_dir_x()
 
 	if state_machine.input_component.is_yank_just_pressed():
-		return _yank_state
+		if state_machine.move_component.can_yank():
+			return _yank_state
 
 	if state_machine.input_component.is_dash_just_pressed() and state_machine.character.dashes > 0:
 		return _dash_state
