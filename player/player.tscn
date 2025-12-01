@@ -226,11 +226,12 @@ _dash_state = NodePath("../Dash")
 _dialogue_state = NodePath("../Dialogue")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="Jump" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_walljump_state", "_dash_state")]
+[node name="Jump" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_walljump_state", "_dash_state", "_yank_state")]
 script = ExtResource("6_boad6")
 _fall_state = NodePath("../Fall")
 _walljump_state = NodePath("../Walljump")
 _dash_state = NodePath("../Dash")
+_yank_state = NodePath("../Yank")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
 [node name="Death" type="Node" parent="Components/Statemachine"]
