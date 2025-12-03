@@ -76,7 +76,6 @@ func _process(delta):
 			# Returned a state, change to it
 			set_state(new_state)
 
-
 func _physics_process(delta):
 	if disabled: return
 	if current_state:

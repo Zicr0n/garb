@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 CheckpointSystem="*res://CheckpointSystem/scripts/checkpoint_global.gd"
 GameManager="*res://GameManagement/game_manager.gd"
+SccoreManager="*res://Score/score_manager.gd"
 
 [display]
 
@@ -105,6 +106,7 @@ interract={
 2d_physics/layer_7="hitbox"
 2d_physics/layer_8="interract"
 2d_physics/layer_9="camera"
+2d_physics/layer_10="collectible"
 
 [rendering]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=35 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://b5psxt4dsqn1t" path="res://statemachine/player/player_idleState.gd" id="4_yw30f"]
 [ext_resource type="Script" uid="uid://cyrk46itcj7hg" path="res://statemachine/player/player_runState.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://qlk0erq25k8y" path="res://player/input_component.gd" id="5_qjkh3"]
+[ext_resource type="Script" uid="uid://bwxecvqrrht1c" path="res://player/collector.gd" id="6_bjvpn"]
 [ext_resource type="Script" uid="uid://ciuanf5meh5yq" path="res://statemachine/player/player_jumpState.gd" id="6_boad6"]
 [ext_resource type="Script" uid="uid://d0og7kbpdb86e" path="res://player/player_healthComponent.gd" id="6_ebec5"]
 [ext_resource type="Script" uid="uid://bt7jmrbfpepbj" path="res://statemachine/player/player_fallState.gd" id="8_hg6s5"]
@@ -101,6 +102,9 @@ size = Vector2(14, 26)
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7oew"]
 radius = 22.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_bjvpn"]
+radius = 17.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_65viv"]
 
 [sub_resource type="Curve" id="Curve_32hag"]
@@ -165,6 +169,14 @@ state_machine = NodePath("../Components/Statemachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
 shape = SubResource("CircleShape2D_e7oew")
+
+[node name="Collector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 512
+script = ExtResource("6_bjvpn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collector"]
+shape = SubResource("CircleShape2D_bjvpn")
 
 [node name="WallRays" type="Node2D" parent="."]
 position = Vector2(0, 4)
@@ -437,5 +449,6 @@ color_ramp = SubResource("Gradient_tqiix")
 [connection signal="area_entered" from="RoomDetect" to="RoomDetect" method="_on_area_entered"]
 [connection signal="area_entered" from="Interactor" to="Interactor" method="_on_area_entered"]
 [connection signal="area_exited" from="Interactor" to="Interactor" method="_on_area_exited"]
+[connection signal="area_entered" from="Collector" to="Collector" method="_on_area_entered"]
 
 [editable path="YankDetector"]

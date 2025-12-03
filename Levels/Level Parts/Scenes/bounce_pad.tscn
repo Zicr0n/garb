@@ -1,12 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpoqy0mxo7vqi"]
+[gd_scene load_steps=9 format=3 uid="uid://bpoqy0mxo7vqi"]
 
 [ext_resource type="Script" uid="uid://b3ef2iruvjm6" path="res://Levels/Level Parts/Scripts/bounce_pad.gd" id="1_6dmuu"]
+[ext_resource type="Texture2D" uid="uid://djngffi4ano0t" path="res://Assets/AseFiles/SpringBounce.png" id="2_05o81"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gxl4k"]
 size = Vector2(24, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6dmuu"]
 size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgmto"]
+atlas = ExtResource("2_05o81")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mo11o"]
+atlas = ExtResource("2_05o81")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldoxd"]
+atlas = ExtResource("2_05o81")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lus7u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgmto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mo11o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldoxd")
+}],
+"loop": false,
+"name": &"bounce",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldoxd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="BouncePad" type="Area2D"]
 collision_layer = 0
@@ -24,6 +62,11 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
 shape = SubResource("RectangleShape2D_6dmuu")
 one_way_collision = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lus7u")
+animation = &"bounce"
+autoplay = "default"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
