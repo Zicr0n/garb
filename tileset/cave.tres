@@ -1,7 +1,11 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://c8ijpwpmgvkts"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://c8ijpwpmgvkts"]
 
 [ext_resource type="Texture2D" uid="uid://dv273kep03pls" path="res://Assets/AseFiles/tilesheet.png" id="1_qfdgh"]
 [ext_resource type="PackedScene" uid="uid://cfe7htucjw6bh" path="res://Levels/Level Parts/Scenes/yank_point.tscn" id="2_er0nc"]
+[ext_resource type="PackedScene" uid="uid://bpoqy0mxo7vqi" path="res://Levels/Level Parts/Scenes/bounce_pad.tscn" id="3_bk0ac"]
+[ext_resource type="PackedScene" uid="uid://dlwh43kpokxq2" path="res://Levels/Level Parts/Scenes/one_way_platform.tscn" id="4_axvl6"]
+[ext_resource type="PackedScene" uid="uid://di4cl6i0wcrea" path="res://Levels/Level Parts/Scenes/wind_tunnel.tscn" id="5_oyo6l"]
+[ext_resource type="PackedScene" uid="uid://ca0715cgxnxcb" path="res://scenes/killzone.tscn" id="6_8tqy2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kkcth"]
 texture = ExtResource("1_qfdgh")
@@ -384,6 +388,10 @@ texture = ExtResource("1_qfdgh")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_1mivt"]
 scenes/1/scene = ExtResource("2_er0nc")
+scenes/2/scene = ExtResource("3_bk0ac")
+scenes/3/scene = ExtResource("4_axvl6")
+scenes/4/scene = ExtResource("5_oyo6l")
+scenes/5/scene = ExtResource("6_8tqy2")
 
 [resource]
 physics_layer_0/collision_layer = 1

@@ -32,7 +32,6 @@ func process(_delta):
 	if state_machine.input_component.move_dir_x() != 0:
 		return _run_state;
 		
-	state_machine.character.velocity = Vector2.ZERO
 	
 	return null
 
@@ -40,7 +39,8 @@ func physics_process(delta):
 	if !state_machine.move_component.grounded():
 		return _fall_state
 	
-	state_machine.move_component.idle(delta)
+	#state_machine.move_component.idle(delta)
+	state_machine.character.velocity.x = 0
 	
 	return null
 

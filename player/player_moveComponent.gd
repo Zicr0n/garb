@@ -58,6 +58,7 @@ func _physics_process(_dt) -> void:
 
 func custom_set_velocity(new_velocity):
 	characterBody2D.velocity = new_velocity
+	#characterBody2D.state_machine.set_state()
 
 ############
 ## GROUND ##

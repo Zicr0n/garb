@@ -36,9 +36,9 @@ offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="UXImprovements" type="CheckBox" parent="VBoxContainer"]
+[node name="ExtraSpice" type="CheckBox" parent="VBoxContainer"]
 layout_mode = 2
-text = "UX-Upgrades"
+text = "Extra Spice"
 
 [node name="AnotherONE" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -60,5 +60,5 @@ offset_bottom = 17.0
 grow_vertical = 0
 text = "Back To Main Menu"
 
-[connection signal="toggled" from="VBoxContainer/UXImprovements" to="." method="_on_ux_improvements_toggled"]
+[connection signal="toggled" from="VBoxContainer/ExtraSpice" to="." method="_on_ux_improvements_toggled"]
 [connection signal="pressed" from="BackButtonS" to="." method="_on_back_button_pressed"]
