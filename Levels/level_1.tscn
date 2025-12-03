@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://d4hwe3dbyj3pg" path="res://Camera/camera.tscn" id="4_rf6l5"]
 [ext_resource type="PackedScene" uid="uid://c6jqpfm5h82k4" path="res://Levels/Level Parts/Scenes/room_bounds.tscn" id="4_syshm"]
 [ext_resource type="Script" uid="uid://cm16s2jky6g2j" path="res://Levels/elevator.gd" id="6_rfktq"]
-[ext_resource type="PackedScene" uid="uid://bhle1s1ioja0u" path="res://Levels/Level Parts/Scenes/btn_door.tscn" id="8_77x7w"]
-[ext_resource type="PackedScene" uid="uid://l8b8bf2iqn2e" path="res://Levels/Level Parts/Scenes/button.tscn" id="9_62b6n"]
+[ext_resource type="PackedScene" uid="uid://dips7kivqxr0y" path="res://Levels/Level Parts/Scenes/btn_door.tscn" id="8_77x7w"]
+[ext_resource type="PackedScene" path="res://Levels/Level Parts/Scenes/button.tscn" id="9_62b6n"]
 [ext_resource type="Script" uid="uid://d2bs7i87t7h2s" path="res://CheckpointSystem/scripts/checkpoint_manager.gd" id="9_f4pg2"]
 [ext_resource type="Script" uid="uid://dkbglh8kwo400" path="res://CheckpointSystem/scripts/checkpoint.gd" id="9_xoyoh"]
 
