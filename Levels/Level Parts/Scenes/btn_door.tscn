@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dips7kivqxr0y"]
+[gd_scene load_steps=5 format=3 uid="uid://bhle1s1ioja0u"]
 
 [ext_resource type="Script" uid="uid://bs8lyqq7wknt8" path="res://Levels/Level Parts/Scripts/btn_door.gd" id="1_van3d"]
+[ext_resource type="Texture2D" uid="uid://b285gey6vh4hj" path="res://Assets/AseFiles/weakspot.png" id="2_qn5oh"]
+[ext_resource type="Gradient" uid="uid://baxxqcpvwtlo7" path="res://Levels/Level Parts/Scenes/ExplosionGradient.tres" id="3_130oe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_van3d"]
 size = Vector2(16, 48)
@@ -13,3 +15,26 @@ script = ExtResource("1_van3d")
 position = Vector2(8, -24)
 shape = SubResource("RectangleShape2D_van3d")
 disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, -24)
+rotation = 1.5707964
+texture = ExtResource("2_qn5oh")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(8, -24)
+emitting = false
+amount = 50
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.9
+randomness = 0.15
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 8.0
+spread = 180.0
+initial_velocity_min = 311.48
+initial_velocity_max = 311.48
+scale_amount_min = 2.0
+scale_amount_max = 8.0
+color_initial_ramp = ExtResource("3_130oe")
