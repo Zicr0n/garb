@@ -9,9 +9,15 @@ func _ready() -> void:
 	collision_shape_2d.disabled = false
 	sprite_2d.visible = true
 	button.pressed.connect(activate)
+	button.open_silently.connect(activate_silently)
 
 func activate() -> void:
 	collision_shape_2d.disabled = true
 	collision_shape_2d.set_deferred("disabled", true)
 	sprite_2d.visible = false
 	cpu_particles_2d.emitting = true
+
+func activate_silently() -> void:
+	collision_shape_2d.disabled = true
+	collision_shape_2d.set_deferred("disabled", true)
+	sprite_2d.visible = false
