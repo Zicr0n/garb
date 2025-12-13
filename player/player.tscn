@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=37 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
@@ -105,6 +105,15 @@ radius = 22.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_bjvpn"]
 radius = 17.0
 
+[sub_resource type="Gradient" id="Gradient_34erp"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bjvpn"]
+gradient = SubResource("Gradient_34erp")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
 [sub_resource type="LabelSettings" id="LabelSettings_65viv"]
 
 [sub_resource type="Curve" id="Curve_32hag"]
@@ -198,8 +207,16 @@ position = Vector2(0, -16)
 target_position = Vector2(20, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
 scale = Vector2(0.11074219, 0.2109375)
 texture = ExtResource("1_oul6g")
+
+[node name="PlayerLight" type="PointLight2D" parent="."]
+scale = Vector2(3.0625, 2.71875)
+energy = 0.4
+range_item_cull_mask = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_bjvpn")
 
 [node name="ParentIndependent" type="Node" parent="."]
 
