@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=40 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
@@ -105,6 +105,40 @@ radius = 22.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_bjvpn"]
 radius = 17.0
 
+[sub_resource type="Gradient" id="Gradient_bjvpn"]
+offsets = PackedFloat32Array(0, 0.6122449, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s7qer"]
+gradient = SubResource("Gradient_bjvpn")
+
+[sub_resource type="Curve" id="Curve_g4c7l"]
+_data = [Vector2(0.24855489, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_knn7v"]
+curve = SubResource("Curve_g4c7l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7pqkx"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 2, 1)
+angle_min = -360.0
+angle_max = 360.00003
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+angular_velocity_min = -360.0
+angular_velocity_max = 359.99997
+gravity = Vector3(0, 10, 0)
+damping_min = 3.0000002
+damping_max = 8.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_knn7v")
+scale_over_velocity_max = 100.0
+color_ramp = SubResource("GradientTexture1D_s7qer")
+
 [sub_resource type="LabelSettings" id="LabelSettings_65viv"]
 
 [sub_resource type="Curve" id="Curve_32hag"]
@@ -210,7 +244,7 @@ texture = ExtResource("2_yllr7")
 
 [node name="Components" type="Node" parent="."]
 
-[node name="Statemachine" type="Node" parent="Components" node_paths=PackedStringArray("character", "start_state", "_death_state", "input_component", "move_component", "health_component", "animation_player", "interactor", "stateLabel")]
+[node name="Statemachine" type="Node" parent="Components" node_paths=PackedStringArray("character", "start_state", "_death_state", "input_component", "move_component", "health_component", "animation_player", "feet_positon", "interactor", "stateLabel")]
 script = ExtResource("3_g1dw6")
 character = NodePath("../..")
 call_input = true
@@ -220,6 +254,7 @@ input_component = NodePath("../InputComponent")
 move_component = NodePath("../MoveComponent")
 health_component = NodePath("../HealthComponent")
 animation_player = NodePath("../../AnimationPlayer")
+feet_positon = NodePath("../../FeetPosition")
 interactor = NodePath("../../Interactor")
 stateLabel = NodePath("../../currentstate")
 
@@ -272,6 +307,16 @@ one_shot = true
 wait_time = 0.15
 one_shot = true
 
+[node name="LandDust" type="GPUParticles2D" parent="Components/Statemachine/Fall"]
+position = Vector2(-32, -36)
+emitting = false
+amount = 10
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_7pqkx")
+
 [node name="Yank" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_yank_duration", "_particle_emitter")]
 script = ExtResource("14_kb6p2")
 _fall_state = NodePath("../Fall")
@@ -316,8 +361,8 @@ TURNING_ACCELERATION_GROUND = 100000.0
 TURNING_THRESHOLD_SPEED = 120.0
 MAX_JUMP_HEIGHT = 350.0
 GRAVITY = 800.0
-GRAVITY_MULTIPLIER = 0.5
-FALL_MULTIPLIER = 3.0
+GRAVITY_MULTIPLIER = 1.1
+FALL_MULTIPLIER = 2.7
 FAST_FALL_MULTIPLIER = 2.25
 MAX_FALL_SPEED = 800.0
 MAX_FAST_FALL_SPEED = 1200.0
@@ -445,6 +490,11 @@ scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_32hag")
 color = Color(0.6862745, 0.30980393, 0.8, 1)
 color_ramp = SubResource("Gradient_tqiix")
+
+[node name="LandDustHolder" type="Node" parent="."]
+
+[node name="FeetPosition" type="Marker2D" parent="."]
+position = Vector2(0, 13)
 
 [connection signal="area_entered" from="RoomDetect" to="RoomDetect" method="_on_area_entered"]
 [connection signal="area_entered" from="Interactor" to="Interactor" method="_on_area_entered"]

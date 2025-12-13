@@ -9,6 +9,7 @@ extends PlayerState
 
 @onready var _coyote_timer: Timer = $coyote_timer
 @onready var buffer_timer: Timer = $buffer_timer
+@onready var land_dust: GPUParticles2D = $LandDust
 
 var dir_x = 0
 var fastfall = false
@@ -49,12 +50,15 @@ func physics_process(delta: float):
 		state_machine.move_component.fall(delta)
 
 	if state_machine.move_component.grounded():
+		emit_particles()
+		
 		if buffer_timer.time_left > 0:
 			return _jump_state
 		if state_machine.input_component.move_dir_x() != 0:
 			return _run_state
 		else:
 			return _idle_state
+		
 	
 	# Reduce air friction after yank to simulate "momentum" (not the best approach but what can i say)
 	var air_friction_multi = 1.0
@@ -64,3 +68,8 @@ func physics_process(delta: float):
 	state_machine.move_component.move_in_air(dir_x, delta, air_friction_multi)
 	
 	return null
+
+func emit_particles():
+	land_dust.emitting = false
+	land_dust.global_position = state_machine.feet_positon.global_position
+	land_dust.emitting = true

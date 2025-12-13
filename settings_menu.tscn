@@ -1,0 +1,135 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxs365tpdjpek"]
+
+[ext_resource type="Script" uid="uid://cal2iiq6cmrto" path="res://setting_slider.gd" id="1_ufg0w"]
+[ext_resource type="Script" uid="uid://brb6ees2g5kk4" path="res://setting_toggle.gd" id="2_0cmel"]
+[ext_resource type="Script" uid="uid://bwyosr8gb6tgw" path="res://setting_dropdown.gd" id="3_mlw3h"]
+[ext_resource type="Script" uid="uid://ce5734tuvno20" path="res://setting_keybind.gd" id="4_d0eu6"]
+
+[sub_resource type="Theme" id="Theme_7420o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_27okc"]
+font_size = 48
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oerog"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ufg0w"]
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_7420o")
+color = Color(0.20784314, 0.20784314, 0.20784314, 1)
+
+[node name="Header" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 88.0
+grow_horizontal = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_27okc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.312
+anchor_right = 0.75000006
+anchor_bottom = 1.0
+offset_top = 0.1800003
+offset_right = -3.0517578e-05
+offset_bottom = -112.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Setting_Slider" type="PanelContainer" parent="Settings" node_paths=PackedStringArray("slider")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oerog")
+script = ExtResource("1_ufg0w")
+slider = NodePath("Setting_Slider/HSlider")
+
+[node name="Setting_Slider" type="VBoxContainer" parent="Settings/Setting_Slider"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="Settings/Setting_Slider/Setting_Slider"]
+layout_mode = 2
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_ufg0w")
+
+[node name="HSlider" type="HSlider" parent="Settings/Setting_Slider/Setting_Slider"]
+layout_mode = 2
+
+[node name="Setting_Toggle" type="HBoxContainer" parent="Settings" node_paths=PackedStringArray("checkbox")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_0cmel")
+checkbox = NodePath("CheckBox")
+
+[node name="CheckBox" type="CheckBox" parent="Settings/Setting_Toggle"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/Setting_Toggle"]
+layout_mode = 2
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_ufg0w")
+
+[node name="Setting_Dropdown" type="VBoxContainer" parent="Settings"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("3_mlw3h")
+
+[node name="Label" type="Label" parent="Settings/Setting_Dropdown"]
+layout_mode = 2
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_ufg0w")
+
+[node name="CheckBox" type="OptionButton" parent="Settings/Setting_Dropdown"]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Epstone"
+popup/item_0/id = 0
+popup/item_0/separator = true
+popup/item_1/text = "Trumpet"
+popup/item_1/id = 1
+popup/item_2/text = "kark"
+popup/item_2/id = 2
+
+[node name="Setting_Keybind" type="Control" parent="Settings"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_d0eu6")
+ACTION = "dash"
+
+[node name="Label" type="Label" parent="Settings/Setting_Keybind"]
+layout_mode = 0
+offset_right = 118.0
+offset_bottom = 23.0
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_ufg0w")
+
+[node name="Button" type="Button" parent="Settings/Setting_Keybind"]
+layout_mode = 0
+offset_left = 122.0
+offset_right = 147.0
+offset_bottom = 23.0
+
+[connection signal="pressed" from="Settings/Setting_Keybind/Button" to="Settings/Setting_Keybind" method="_on_button_pressed"]
