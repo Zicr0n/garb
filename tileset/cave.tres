@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://c8ijpwpmgvkts"]
+[gd_resource type="TileSet" load_steps=14 format=3 uid="uid://c8ijpwpmgvkts"]
 
 [ext_resource type="Texture2D" uid="uid://dv273kep03pls" path="res://Assets/AseFiles/tilesheet.png" id="1_qfdgh"]
 [ext_resource type="PackedScene" uid="uid://cfe7htucjw6bh" path="res://Levels/Level Parts/Scenes/yank_point.tscn" id="2_er0nc"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dlwh43kpokxq2" path="res://Levels/Level Parts/Scenes/one_way_platform.tscn" id="4_axvl6"]
 [ext_resource type="PackedScene" uid="uid://di4cl6i0wcrea" path="res://Levels/Level Parts/Scenes/wind_tunnel.tscn" id="5_oyo6l"]
 [ext_resource type="PackedScene" uid="uid://ca0715cgxnxcb" path="res://scenes/killzone.tscn" id="6_8tqy2"]
+[ext_resource type="PackedScene" uid="uid://bpy2lgj7leq3l" path="res://Levels/Level Parts/Scenes/ropes.tscn" id="7_axvl6"]
+[ext_resource type="Texture2D" uid="uid://b34qydjy8b1xm" path="res://Assets/AseFiles/pillarleft.png" id="8_8tqy2"]
+[ext_resource type="Texture2D" uid="uid://c2e1ltbi4hnk8" path="res://Assets/AseFiles/pillarright.png" id="9_1i76r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kkcth"]
 texture = ExtResource("1_qfdgh")
@@ -392,6 +395,15 @@ scenes/2/scene = ExtResource("3_bk0ac")
 scenes/3/scene = ExtResource("4_axvl6")
 scenes/4/scene = ExtResource("5_oyo6l")
 scenes/5/scene = ExtResource("6_8tqy2")
+scenes/6/scene = ExtResource("7_axvl6")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_up72y"]
+texture = ExtResource("8_8tqy2")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ui71t"]
+texture = ExtResource("9_1i76r")
+0:0/0 = 0
 
 [resource]
 physics_layer_0/collision_layer = 1
@@ -400,3 +412,5 @@ terrain_set_0/terrain_0/name = "Stone"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_kkcth")
 sources/1 = SubResource("TileSetScenesCollectionSource_1mivt")
+sources/2 = SubResource("TileSetAtlasSource_up72y")
+sources/3 = SubResource("TileSetAtlasSource_ui71t")

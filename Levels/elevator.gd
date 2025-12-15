@@ -9,5 +9,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 func bounce():
 	if player:
-		player.velocity.y =- 1000
+		player.velocity.y =- 100
 	player = null

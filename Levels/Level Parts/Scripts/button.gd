@@ -1,16 +1,28 @@
 extends Area2D
 
 signal pressed
+signal open_silently
 
-# Denna scen ska man koppla med en @export till en annan nod som ska aktiveras. Kan vara dörr eller annat.
+@export var manager_index = 0
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
-	$CollisionShape2D.disabled = false
+	collision_shape_2d.disabled = false
+	if Level1Manager.activated_buttons.has(manager_index):
+		alreadyDone()
 
 func _on_body_entered(_body):
 	press()
 
 func press() -> void:
 	#anim_player.play("button_pressed")# skapa denna animation
-	$CollisionShape2D.disabled = true
+	collision_shape_2d.disabled = true
+	collision_shape_2d.set_deferred("disabled", true)
 	pressed.emit()
+	Level1Manager.activated_buttons.append(manager_index)
+
+func alreadyDone():
+	collision_shape_2d.disabled = true
+	collision_shape_2d.set_deferred("disabled", true)
+	open_silently.emit()
+	#anim_player.play("button_pressed")
