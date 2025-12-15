@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 CheckpointSystem="*res://CheckpointSystem/scripts/checkpoint_global.gd"
 GameManager="*res://GameManagement/game_manager.gd"
-SccoreManager="*res://Score/score_manager.gd"
+Level1Manager="*res://GameManagement/level_1_manager.gd"
 
 [display]
 

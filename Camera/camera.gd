@@ -30,14 +30,14 @@ func _process(_delta):
 
 func snap_to_room(room : Area2D, instant := false) -> void:
 	var size = room.get_node("CollisionShape2D").shape.size
-	var half = size / 2
+	#var half = size / 2
 	var pos = room.global_position
 
 	# Camera rect for this room
-	limit_left   = pos.x - half.x
-	limit_right  = pos.x + half.x
-	limit_top    = pos.y - half.y
-	limit_bottom = pos.y + half.y
+	#limit_left   = pos.x - half.x
+	#limit_right  = pos.x + half.x
+	#limit_top    = pos.y - half.y
+	#limit_bottom = pos.y + half.y
 
 	# Center the camera on the room
 	var room_center = pos
@@ -80,4 +80,4 @@ func _on_player_detector_area_entered(area):
 		return
 
 	current_room = area
-	snap_to_room(area)
+	snap_to_room(area, false)

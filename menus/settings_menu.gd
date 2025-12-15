@@ -7,5 +7,5 @@ func _on_back_button_pressed() -> void:
 	main_menu.back_from_settings_menu()
 
 
-func _on_ux_improvements_toggled(toggled_on: bool) -> void:
-	pass # Replace with function body.
+func _on_extra_spice_toggled(toggled_on: bool) -> void:
+	pass # Ändra status i game manager

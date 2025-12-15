@@ -60,5 +60,5 @@ offset_bottom = 17.0
 grow_vertical = 0
 text = "Back To Main Menu"
 
-[connection signal="toggled" from="VBoxContainer/ExtraSpice" to="." method="_on_ux_improvements_toggled"]
+[connection signal="toggled" from="VBoxContainer/ExtraSpice" to="." method="_on_extra_spice_toggled"]
 [connection signal="pressed" from="BackButtonS" to="." method="_on_back_button_pressed"]
