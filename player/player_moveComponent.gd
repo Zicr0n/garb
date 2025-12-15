@@ -127,7 +127,7 @@ func move_in_air(direction : float, dt, air_fric_multi = 1.0) -> void:
 		
 
 func fall(dt, _multiplier:=0):
-	var multi := FALL_MULTIPLIER if characterBody2D.velocity.y > 0.0 else 1.0
+	var multi := FALL_MULTIPLIER if characterBody2D.velocity.y > 0.0 else GRAVITY_MULTIPLIER
 
 	characterBody2D.velocity.y += GRAVITY * dt * multi
 	characterBody2D.velocity.y = clampf(characterBody2D.velocity.y, -99999, MAX_FALL_SPEED)

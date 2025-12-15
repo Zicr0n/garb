@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpkclqp5bgage"]
+
+[sub_resource type="Theme" id="Theme_7420o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_27okc"]
+font_size = 48
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_7420o")
+color = Color(0.20784314, 0.20784314, 0.20784314, 1)
+
+[node name="Header" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 88.0
+grow_horizontal = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_27okc")
+horizontal_alignment = 1
+vertical_alignment = 1

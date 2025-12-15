@@ -14,6 +14,7 @@ var previous_state : PlayerState = null
 @export var move_component : PlayerMoveComponent = null
 @export var health_component : HealthComponent = null
 @export var animation_player : AnimationPlayer = null
+@export var feet_positon : Marker2D = null
 
 @export var disabled := false
 
