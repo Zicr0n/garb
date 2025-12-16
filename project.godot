@@ -19,12 +19,14 @@ config/icon="res://icon.svg"
 
 CheckpointSystem="*res://CheckpointSystem/scripts/checkpoint_global.gd"
 GameManager="*res://GameManagement/game_manager.gd"
+SccoreManager="*res://Score/score_manager.gd"
 Level1Manager="*res://GameManagement/level_1_manager.gd"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/mode=3
 window/size/resizable=false
 window/size/window_width_override=1920
 window/size/window_height_override=1080
