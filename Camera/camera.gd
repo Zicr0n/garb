@@ -29,7 +29,7 @@ func _process(_delta):
 # ----------------------------
 
 func snap_to_room(room : Area2D, instant := false) -> void:
-	var size = room.get_node("CollisionShape2D").shape.size
+	#var size = room.get_node("CollisionShape2D").shape.size
 	#var half = size / 2
 	var pos = room.global_position
 

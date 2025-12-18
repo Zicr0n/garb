@@ -5,8 +5,11 @@ class_name HealthComponent
 
 signal on_die
 
+var last_hitter = null
+
 func _ready() -> void:
 	hurtbox.on_hitbox_entered.connect(on_hit)
 
-func on_hit(_hitbox : Hitbox):
+func on_hit(hitbox : Hitbox):
+	last_hitter = hitbox
 	on_die.emit()

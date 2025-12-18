@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=47 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
@@ -127,6 +127,54 @@ point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_knn7v"]
 curve = SubResource("Curve_g4c7l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s7qer"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 3
+emission_box_extents = Vector3(5, 1, 1)
+angle_min = -360.0
+angle_max = 360.00003
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+angular_velocity_min = -360.0
+angular_velocity_max = 359.99997
+gravity = Vector3(0, -3000, 0)
+linear_accel_min = -60.0
+linear_accel_max = 59.999996
+radial_accel_min = -30.000002
+radial_accel_max = 29.999996
+tangential_accel_min = -60.0
+tangential_accel_max = 59.999996
+damping_min = 1.5000001
+damping_max = 3.0000002
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_knn7v")
+scale_over_velocity_max = 100.0
+color_ramp = SubResource("GradientTexture1D_s7qer")
+
+[sub_resource type="Curve" id="Curve_bjvpn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6689189, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_s7qer"]
+curve = SubResource("Curve_bjvpn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g4c7l"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 7.0
+angle_min = -360.0
+angle_max = 360.00003
+spread = 180.0
+initial_velocity_max = 300.0
+angular_velocity_min = -360.0
+angular_velocity_max = 359.99997
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_s7qer")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bjvpn"]
 particle_flag_disable_z = true
@@ -269,8 +317,8 @@ scale = Vector2(0.11074219, 0.2109375)
 texture = ExtResource("1_oul6g")
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
-scale = Vector2(3.0625, 2.71875)
-energy = 0.4
+scale = Vector2(4.0625, 3.6065047)
+energy = 0.7
 range_item_cull_mask = 2
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_bjvpn")
@@ -284,7 +332,7 @@ texture = ExtResource("2_yllr7")
 
 [node name="Components" type="Node" parent="."]
 
-[node name="Statemachine" type="Node" parent="Components" node_paths=PackedStringArray("character", "start_state", "_death_state", "input_component", "move_component", "health_component", "animation_player", "feet_positon", "interactor", "stateLabel")]
+[node name="Statemachine" type="Node" parent="Components" node_paths=PackedStringArray("character", "start_state", "_death_state", "input_component", "move_component", "health_component", "animation_player", "feet_positon", "player_sprite", "interactor", "stateLabel")]
 script = ExtResource("3_g1dw6")
 character = NodePath("../..")
 call_input = true
@@ -295,6 +343,7 @@ move_component = NodePath("../MoveComponent")
 health_component = NodePath("../HealthComponent")
 animation_player = NodePath("../../AnimationPlayer")
 feet_positon = NodePath("../../FeetPosition")
+player_sprite = NodePath("../../Sprite2D")
 interactor = NodePath("../../Interactor")
 stateLabel = NodePath("../../currentstate")
 
@@ -318,17 +367,45 @@ _dialogue_state = NodePath("../Dialogue")
 running_particles = NodePath("../../../FeetPosition/LandDust")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="Jump" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_walljump_state", "_dash_state", "_yank_state")]
+[node name="Jump" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_fall_state", "_walljump_state", "_dash_state", "_yank_state", "jump_particles")]
 script = ExtResource("6_boad6")
 _fall_state = NodePath("../Fall")
 _walljump_state = NodePath("../Walljump")
 _dash_state = NodePath("../Dash")
 _yank_state = NodePath("../Yank")
+jump_particles = NodePath("JumpDust")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
-[node name="Death" type="Node" parent="Components/Statemachine"]
+[node name="JumpDust" type="GPUParticles2D" parent="Components/Statemachine/Jump"]
+z_index = 99
+position = Vector2(57, -20)
+emitting = false
+amount = 10
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_s7qer")
+
+[node name="Death" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("death_particles", "death_timer")]
 script = ExtResource("10_8t03j")
+death_particles = NodePath("GPUParticles2D")
+death_timer = NodePath("Timer")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Components/Statemachine/Death"]
+position = Vector2(44, -21)
+emitting = false
+amount = 25
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_g4c7l")
+
+[node name="Timer" type="Timer" parent="Components/Statemachine/Death"]
+wait_time = 0.2
+one_shot = true
 
 [node name="Fall" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_idle_state", "_run_state", "_jump_state", "_dash_state", "_walljump_state", "_yank_state")]
 script = ExtResource("8_hg6s5")
@@ -341,7 +418,7 @@ _yank_state = NodePath("../Yank")
 metadata/_custom_type_script = "uid://ddme3krabnfa5"
 
 [node name="coyote_timer" type="Timer" parent="Components/Statemachine/Fall"]
-wait_time = 0.15
+wait_time = 0.1
 one_shot = true
 
 [node name="buffer_timer" type="Timer" parent="Components/Statemachine/Fall"]

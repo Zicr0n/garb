@@ -3,6 +3,9 @@ extends Node
 class_name PlayerStateMachine
 
 @export var character : CharacterBody2D = null
+
+@export_category("Settings")
+@export var disabled := false
 @export var call_input : bool = false
 @export var start_state : PlayerState = null
 var current_state : PlayerState = null
@@ -10,15 +13,17 @@ var previous_state : PlayerState = null
 
 @export var _death_state : PlayerState = null
 
+@export_category("Components")
 @export var input_component : InputComponent = null
 @export var move_component : PlayerMoveComponent = null
 @export var health_component : HealthComponent = null
+@export_category("Nodes")
 @export var animation_player : AnimationPlayer = null
 @export var feet_positon : Marker2D = null
-
-@export var disabled := false
-
+@export var player_sprite : Sprite2D = null
 @export var interactor : Interactor = null;
+
+@export_category("Debug")
 @export var stateLabel : Label = null
 
 enum FALL_SOURCE {

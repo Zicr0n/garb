@@ -35,7 +35,7 @@ func process(_delta):
 	
 	return null
 
-func physics_process(delta):
+func physics_process(_delta):
 	if !state_machine.move_component.grounded():
 		return _fall_state
 	

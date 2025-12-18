@@ -13,9 +13,9 @@ var processing_death = false
 var current_level = null
 var current_deaths = 0
 var winscreen_instance : WinScreen = null
-
-signal level_started
-signal level_ended
+#
+#signal level_started
+#signal level_ended
 
 var gameTime = null
 
@@ -56,7 +56,6 @@ func player_died(_player : Player):
 	
 	# Reload scene
 	await reload_current_level()
-	
 	# Set player at correct checkpoint
 	var player : Player = get_tree().get_first_node_in_group("player")
 

@@ -1,12 +1,13 @@
-[gd_resource type="Environment" load_steps=0 format=3 uid="uid://cip8wnkfdeoft"]
+[gd_resource type="Environment" format=3 uid="uid://61071f7q0sp3"]
 
 [resource]
 background_mode = 3
+background_color = Color(1, 1, 1, 1)
+background_energy_multiplier = 0.0
 ssao_enabled = true
-ssil_enabled = true
 glow_enabled = true
 glow_hdr_threshold = 0.1
-fog_enabled = true
+fog_light_color = Color(0.16361213, 0.18151817, 0.20938048, 1)
 adjustment_enabled = true
 adjustment_brightness = 0.7
 adjustment_saturation = 1.6

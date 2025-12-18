@@ -12,6 +12,6 @@ func _init():
 	
 	area_entered.connect(on_hurtbox)
 
-func on_hurtbox(hurtbox : Hitbox):
+func on_hurtbox(hurtbox : Hurtbox):
 	print("eneterd hurtbox " + hurtbox.name)
 	on_hurtbox_entered.emit(hurtbox)

@@ -5,12 +5,18 @@ extends PlayerState
 @export var _dash_state: PlayerState = null
 @export var _yank_state: PlayerState = null
 
+@export var jump_particles : GPUParticles2D = null
+
 var dir_x = 0
 
 var has_released_jump = false
 
 func enter():
 	state_machine.move_component.jump()
+	
+	if jump_particles:
+		jump_particles.global_position = state_machine.feet_positon.global_position
+		jump_particles.emitting = true
 	
 	if Input.is_action_pressed("jump"):
 		has_released_jump = false
