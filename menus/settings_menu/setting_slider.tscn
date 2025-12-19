@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cl2wm71w8mjor"]
 
-[ext_resource type="Script" uid="uid://cal2iiq6cmrto" path="res://setting_slider.gd" id="1_7j5xg"]
+[ext_resource type="Script" uid="uid://cal2iiq6cmrto" path="res://menus/settings_menu/setting_slider.gd" id="1_7j5xg"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oerog"]
 

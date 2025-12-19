@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmm4ipby5u6f7"]
+
+[ext_resource type="Script" uid="uid://ce5734tuvno20" path="res://menus/settings_menu/setting_keybind.gd" id="1_0lqnl"]
+[ext_resource type="Script" uid="uid://bfxwilnp546xq" path="res://menus/settings_menu/keybind_holder.gd" id="2_0ehy8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ufg0w"]
+
+[node name="Setting_Keybind" type="PanelContainer" node_paths=PackedStringArray("key_1")]
+custom_minimum_size = Vector2(0, 40)
+size_flags_vertical = 3
+script = ExtResource("1_0lqnl")
+ACTION = "dash"
+key_1 = NodePath("VBoxContainer/Control/Key1")
+
+[node name="VBoxContainer" type="HSplitContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_ufg0w")
+
+[node name="Control" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Key1" type="Button" parent="VBoxContainer/Control"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "W"
+script = ExtResource("2_0ehy8")
+
+[connection signal="pressed" from="VBoxContainer/Control/Key1" to="." method="_on_button_pressed"]

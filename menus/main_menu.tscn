@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://ctvreo1y474rv"]
+[gd_scene load_steps=30 format=4 uid="uid://ctvreo1y474rv"]
 
 [ext_resource type="Script" uid="uid://covvuvdu1veku" path="res://menus/main_menu_buttons.gd" id="1_8gy84"]
 [ext_resource type="Texture2D" uid="uid://c27bbje0vpolq" path="res://Assets/AseFiles/ElevatorPulleyTop.png" id="1_oblsv"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://byr47gp8mwbva" path="res://menus/level_select_menu.tscn" id="2_ij7vn"]
 [ext_resource type="Texture2D" uid="uid://cp8v8dtwcqixa" path="res://Assets/AseFiles/elevator.png" id="3_a63lr"]
 [ext_resource type="PackedScene" uid="uid://bjxev4es20eod" path="res://menus/settings_menu.tscn" id="3_yjgyn"]
-[ext_resource type="PackedScene" uid="uid://d1bvv3jk0g1fe" path="res://settings_menu.tscn" id="6_pwbes"]
+[ext_resource type="Script" uid="uid://csgyiceukp6i5" path="res://menus/settings_menu.gd" id="6_hswy5"]
+[ext_resource type="PackedScene" uid="uid://d1bvv3jk0g1fe" path="res://menus/settings_menu/settings_menu.tscn" id="6_pwbes"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a63lr"]
 atlas = ExtResource("1_oblsv")
@@ -283,23 +284,36 @@ offset_right = 1020.0
 offset_bottom = 180.0
 main_menu = NodePath("../mainMenuButtons")
 
-[node name="SettingsMenu2" parent="." instance=ExtResource("6_pwbes")]
-offset_left = 5.0
-offset_top = 198.0
-offset_right = 5.0
-offset_bottom = 198.0
+[node name="SettingsMenu2" type="Control" parent="." node_paths=PackedStringArray("main_menu")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -320.0
+offset_top = 320.0
+offset_right = 320.0
+offset_bottom = 680.0
+script = ExtResource("6_hswy5")
+main_menu = NodePath("../mainMenuButtons")
+
+[node name="SettingsMenu2" parent="SettingsMenu2" instance=ExtResource("6_pwbes")]
+layout_mode = 1
+
+[node name="Button" type="Button" parent="SettingsMenu2"]
+layout_mode = 0
+offset_left = -31.0
+offset_top = 288.0
+offset_right = 129.0
+offset_bottom = 348.0
+text = "Return"
 
 [node name="SettingsMenu" parent="." node_paths=PackedStringArray("main_menu") instance=ExtResource("3_yjgyn")]
+visible = false
 offset_left = -320.0
 offset_top = 500.0
 offset_right = 320.0
 offset_bottom = 500.0
 main_menu = NodePath("../mainMenuButtons")
 
-[connection signal="body_entered" from="Tiles/BouncePad" to="Tiles/BouncePad" method="_on_body_entered"]
-[connection signal="body_exited" from="Tiles/BouncePad" to="Tiles/BouncePad" method="_on_body_exited"]
-[connection signal="body_entered" from="Tiles/@Area2D@130060" to="Tiles/@Area2D@130060" method="_on_body_entered"]
-[connection signal="body_exited" from="Tiles/@Area2D@130060" to="Tiles/@Area2D@130060" method="_on_body_exited"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/StartGame" to="mainMenuButtons" method="_on_start_game_pressed"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/Settings" to="mainMenuButtons" method="_on_settings_pressed"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/QuitGame" to="mainMenuButtons" method="_on_quit_game_pressed"]
+[connection signal="pressed" from="SettingsMenu2/Button" to="SettingsMenu2" method="_on_button_pressed"]
