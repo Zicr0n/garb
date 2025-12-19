@@ -1,14 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1bvv3jk0g1fe"]
+[gd_scene load_steps=10 format=3 uid="uid://d1bvv3jk0g1fe"]
 
-[ext_resource type="Script" uid="uid://cpfmjgrhcjyij" path="res://settings_manager.gd" id="1_fiqec"]
-[ext_resource type="Script" uid="uid://brb6ees2g5kk4" path="res://setting_toggle.gd" id="2_0cmel"]
-[ext_resource type="Script" path="res://setting_dropdown.gd" id="3_mlw3h"]
-[ext_resource type="PackedScene" uid="uid://cl2wm71w8mjor" path="res://setting_slider.tscn" id="4_2tlyv"]
-[ext_resource type="Script" path="res://setting_keybind.gd" id="4_d0eu6"]
+[ext_resource type="Script" uid="uid://cpfmjgrhcjyij" path="res://menus/settings_menu/settings_manager.gd" id="1_fiqec"]
+[ext_resource type="Script" uid="uid://brb6ees2g5kk4" path="res://menus/settings_menu/setting_toggle.gd" id="2_0cmel"]
+[ext_resource type="Script" uid="uid://bwyosr8gb6tgw" path="res://menus/settings_menu/setting_dropdown.gd" id="3_mlw3h"]
+[ext_resource type="PackedScene" uid="uid://cl2wm71w8mjor" path="res://menus/settings_menu/setting_slider.tscn" id="4_2tlyv"]
+[ext_resource type="PackedScene" uid="uid://cmm4ipby5u6f7" path="res://menus/settings_menu/setting_keybind.tscn" id="5_2tlyv"]
 [ext_resource type="Script" uid="uid://4oyo7ahakdv" path="res://test.gd" id="6_2tlyv"]
 [ext_resource type="AudioStream" uid="uid://cfvw0e2aa2l1b" path="res://wrong-letter.mp3" id="7_2d6lb"]
-
-[sub_resource type="Theme" id="Theme_7420o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_27okc"]
 font_size = 48
@@ -22,16 +20,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Background" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_7420o")
-color = Color(0.20784314, 0.20784314, 0.20784314, 1)
 
 [node name="Header" type="Label" parent="."]
 layout_mode = 1
@@ -50,7 +38,7 @@ offset_right = 82.0
 offset_bottom = 71.0
 script = ExtResource("6_2tlyv")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Button"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="Button"]
 stream = ExtResource("7_2d6lb")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
@@ -84,16 +72,62 @@ layout_mode = 2
 text = "Audio"
 
 [node name="Master_Slider" parent="ScrollContainer/Settings" instance=ExtResource("4_2tlyv")]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Master Volume"
 
 [node name="SFX_Slider" parent="ScrollContainer/Settings" instance=ExtResource("4_2tlyv")]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "SFX Volume"
 
 [node name="Music_Slider" parent="ScrollContainer/Settings" instance=ExtResource("4_2tlyv")]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Music Volume"
+
+[node name="Keybinds" type="Label" parent="ScrollContainer/Settings"]
+layout_mode = 2
+text = "Keybindings"
+
+[node name="Setting_Keybind" parent="ScrollContainer/Settings" instance=ExtResource("5_2tlyv")]
+layout_mode = 2
+ACTION = "move_left"
+action_name = "Left"
+
+[node name="Setting_Keybind2" parent="ScrollContainer/Settings" instance=ExtResource("5_2tlyv")]
+layout_mode = 2
+ACTION = "move_right"
+action_name = "Right"
+
+[node name="Setting_Keybind3" parent="ScrollContainer/Settings" instance=ExtResource("5_2tlyv")]
+layout_mode = 2
+ACTION = "move_up"
+action_name = "Up"
+
+[node name="Setting_Keybind4" parent="ScrollContainer/Settings" instance=ExtResource("5_2tlyv")]
+layout_mode = 2
+ACTION = "move_down"
+action_name = "Down"
+
+[node name="Setting_Keybind5" parent="ScrollContainer/Settings" instance=ExtResource("5_2tlyv")]
+layout_mode = 2
+ACTION = "jump"
+action_name = "Jump"
+
+[node name="Setting_Keybind6" parent="ScrollContainer/Settings" instance=ExtResource("5_2tlyv")]
+layout_mode = 2
+ACTION = "grapple"
+action_name = "Grapple"
+
+[node name="Setting_Keybind7" parent="ScrollContainer/Settings" instance=ExtResource("5_2tlyv")]
+layout_mode = 2
+action_name = "Dash"
+
+[node name="Setting_Keybind8" parent="ScrollContainer/Settings" instance=ExtResource("5_2tlyv")]
+layout_mode = 2
+ACTION = "interract"
+action_name = "Interact"
 
 [node name="Setting_Toggle" type="HBoxContainer" parent="ScrollContainer/Settings" node_paths=PackedStringArray("checkbox")]
 layout_mode = 2
@@ -176,24 +210,4 @@ popup/item_1/id = 1
 popup/item_2/text = "kark"
 popup/item_2/id = 2
 
-[node name="Setting_Keybind" type="Control" parent="ScrollContainer/Settings"]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("4_d0eu6")
-ACTION = "dash"
-
-[node name="Label" type="Label" parent="ScrollContainer/Settings/Setting_Keybind"]
-layout_mode = 0
-offset_right = 118.0
-offset_bottom = 23.0
-text = "Master Volume"
-label_settings = SubResource("LabelSettings_ufg0w")
-
-[node name="Button" type="Button" parent="ScrollContainer/Settings/Setting_Keybind"]
-layout_mode = 0
-offset_left = 122.0
-offset_right = 147.0
-offset_bottom = 23.0
-
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
-[connection signal="pressed" from="ScrollContainer/Settings/Setting_Keybind/Button" to="ScrollContainer/Settings/Setting_Keybind" method="_on_button_pressed"]
