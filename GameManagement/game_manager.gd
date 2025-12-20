@@ -93,7 +93,7 @@ func load_level(sceneName):
 func return_to_main_menu():
 	await dimmer.dim()
 	
-	winscreen_instance.queue_free()
+	if winscreen_instance : winscreen_instance.queue_free()
 	current_level = null
 	get_tree().change_scene_to_file("res://menus/main_menu.tscn")
 	
@@ -108,7 +108,6 @@ func reload_current_level():
 	await get_tree().process_frame  # Wait for scene to fully reload (fuck you chatgpt)
 
 func on_level_ended():
-	## TODO
 	# Get time
 	var timeToComplete = gameTime
 	
@@ -136,4 +135,13 @@ func on_level_ended():
 	add_child(winscreen_instance)
 	
 	dimmer.brighten()
-	
+
+###########
+## PAUSE ##
+###########
+
+func pause_game():
+	get_tree().paused = true
+
+func unpause_game():
+	get_tree().paused = false

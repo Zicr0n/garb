@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1bvv3jk0g1fe"]
+[gd_scene load_steps=11 format=3 uid="uid://d1bvv3jk0g1fe"]
 
 [ext_resource type="Script" uid="uid://cpfmjgrhcjyij" path="res://menus/settings_menu/settings_manager.gd" id="1_fiqec"]
 [ext_resource type="Script" uid="uid://brb6ees2g5kk4" path="res://menus/settings_menu/setting_toggle.gd" id="2_0cmel"]
@@ -10,6 +10,9 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_27okc"]
 font_size = 48
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ef3v"]
+content_margin_top = 54.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ufg0w"]
 
@@ -45,18 +48,21 @@ stream = ExtResource("7_2d6lb")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.23
-anchor_top = 0.286
+anchor_top = 0.21200001
 anchor_right = 0.77000004
 anchor_bottom = 1.0
 offset_left = -0.19999695
-offset_top = 0.039993286
+offset_top = 2.6799927
 offset_right = 0.19998169
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5ef3v")
+follow_focus = true
+draw_focus_border = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="Settings" type="VBoxContainer" parent="ScrollContainer" node_paths=PackedStringArray("master_volume_slider", "sfx_volume_slider", "music_volume_slider", "full_screen_toggle")]
+[node name="Settings" type="VBoxContainer" parent="ScrollContainer" node_paths=PackedStringArray("master_volume_slider", "sfx_volume_slider", "music_volume_slider", "full_screen_toggle", "start_control")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 4
@@ -66,8 +72,9 @@ master_volume_slider = NodePath("Master_Slider")
 sfx_volume_slider = NodePath("SFX_Slider")
 music_volume_slider = NodePath("Music_Slider")
 full_screen_toggle = NodePath("Setting_Toggle")
+start_control = NodePath("Master_Slider/Setting_Slider/HSlider")
 
-[node name="Audio" type="Label" parent="ScrollContainer/Settings"]
+[node name="Audio2" type="Label" parent="ScrollContainer/Settings"]
 layout_mode = 2
 text = "Audio"
 
@@ -211,3 +218,5 @@ popup/item_2/text = "kark"
 popup/item_2/id = 2
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+
+[editable path="ScrollContainer/Settings/Master_Slider"]

@@ -5,6 +5,7 @@ extends VBoxContainer
 @export var music_volume_slider : SettingSlider = null
 
 @export var full_screen_toggle : SettingToggle = null
+@export var start_control : Control = null
 
 func _ready() -> void:
 	master_volume_slider.value_changed.connect(set_master_volume)
@@ -12,6 +13,9 @@ func _ready() -> void:
 	music_volume_slider.value_changed.connect(set_music_volume)
 	
 	full_screen_toggle.value_changed.connect(toggle_fullscreen)
+	
+	if start_control:
+		start_control.grab_focus.call_deferred()
 
 func toggle_fullscreen(val):
 	if val == true:

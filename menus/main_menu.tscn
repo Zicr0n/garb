@@ -313,6 +313,14 @@ offset_right = 320.0
 offset_bottom = 500.0
 main_menu = NodePath("../mainMenuButtons")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="body_entered" from="Tiles/BouncePad" to="Tiles/BouncePad" method="_on_body_entered"]
+[connection signal="body_exited" from="Tiles/BouncePad" to="Tiles/BouncePad" method="_on_body_exited"]
+[connection signal="body_entered" from="Tiles/@Area2D@184111" to="Tiles/@Area2D@184111" method="_on_body_entered"]
+[connection signal="body_exited" from="Tiles/@Area2D@184111" to="Tiles/@Area2D@184111" method="_on_body_exited"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/StartGame" to="mainMenuButtons" method="_on_start_game_pressed"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/Settings" to="mainMenuButtons" method="_on_settings_pressed"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/QuitGame" to="mainMenuButtons" method="_on_quit_game_pressed"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://du5y4onajswiw"]
+
+[ext_resource type="Script" uid="uid://d18r5ejrbv0u" path="res://audio_system/audio_system.gd" id="1_vn1x8"]
+[ext_resource type="Script" uid="uid://bn3iwdpmck4go" path="res://audio_system/sound_class.gd" id="2_x8mhk"]
+[ext_resource type="AudioStream" uid="uid://cfvw0e2aa2l1b" path="res://wrong-letter.mp3" id="3_8qsmi"]
+
+[sub_resource type="Resource" id="Resource_8qsmi"]
+script = ExtResource("2_x8mhk")
+name = "wrong"
+stream = ExtResource("3_8qsmi")
+volume_db = 12.0
+pitch_variance = 0.1
+volume_variance = 2.0
+metadata/_custom_type_script = "uid://bn3iwdpmck4go"
+
+[node name="AudioSystem" type="Node"]
+script = ExtResource("1_vn1x8")
+sounds = Array[ExtResource("2_x8mhk")]([SubResource("Resource_8qsmi")])
