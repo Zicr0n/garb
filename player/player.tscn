@@ -352,7 +352,7 @@ _dash_duration = NodePath("dash_duration")
 _particle_emitter = NodePath("../../../dashParticles")
 
 [node name="dash_duration" type="Timer" parent="Components/Statemachine/Dash"]
-wait_time = 0.1
+wait_time = 0.12
 one_shot = true
 
 [node name="DashTrail" parent="Components/Statemachine/Dash" node_paths=PackedStringArray("player", "timer") instance=ExtResource("17_s7qer")]
@@ -403,7 +403,7 @@ MOVE_SPEED_AIR = 180.0
 ACCELERATION_AIR = 2000.0
 DECELERATION_AIR = 500.0
 YANK_POWER = 800.0
-DASH_VELOCITY = 550.0
+DASH_VELOCITY = 500.0
 
 [node name="InputComponent" type="Node" parent="Components"]
 script = ExtResource("5_qjkh3")
