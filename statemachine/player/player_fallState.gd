@@ -53,12 +53,14 @@ func physics_process(delta: float):
 		emit_particles()
 		
 		if buffer_timer.time_left > 0:
+			AudioSystem.play_sound("land")
 			return _jump_state
 		if state_machine.input_component.move_dir_x() != 0:
+			AudioSystem.play_sound("land")
 			return _run_state
 		else:
+			AudioSystem.play_sound("land")
 			return _idle_state
-		
 	
 	# Reduce air friction after yank to simulate "momentum" (not the best approach but what can i say)
 	var air_friction_multi = 1.0

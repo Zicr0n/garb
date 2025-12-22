@@ -24,3 +24,9 @@ func emits_signal(_va):
 
 func get_value():
 	return slider.value
+
+func set_value(val):
+	if val != null:
+		slider.value = val
+	else:
+		val = 1.0

@@ -45,19 +45,22 @@ func unpause():
 	GameManager.unpause_game()
 
 func open_options():
+	AudioSystem.play_sound("ui_click")
 	pause_menu.visible = false
 	options_menu.visible = true
 
 func close_options():
+	AudioSystem.play_sound("ui_click")
 	options_menu.visible = false
 	pause_menu.visible = true
 
 func return_to_main_menu():
+	AudioSystem.play_sound("ui_click")
 	unpause()
 	GameManager.return_to_main_menu()
 
 func restart_from_checkpoint():
+	AudioSystem.play_sound("ui_click")
 	unpause()
 	var player = get_tree().get_first_node_in_group("player")
-	print(player)
 	GameManager.player_died(player)

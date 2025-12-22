@@ -14,7 +14,9 @@ func _ready() -> void:
 		# Check if there is a stream
 		if sound.stream:
 			audio_player_instance.stream = sound.stream
-			audio_player_instance.stream.loop = sound.loop
+		## TODO Fix loop because something needs work
+			#if audio_player_instance.stream.loop:
+				#audio_player_instance.stream.loop = sound.loop
 		
 		# Check validity of audio bus
 		if AudioServer.get_bus_index(sound.audio_bus) != -1:
