@@ -1,86 +1,81 @@
-[gd_scene load_steps=27 format=3 uid="uid://cqbg372nxly4q"]
+[gd_scene load_steps=34 format=3 uid="uid://cqbg372nxly4q"]
 
 [ext_resource type="Script" uid="uid://cn24ol38ne40e" path="res://CollectibleSystem/collectible.gd" id="1_u1jan"]
-[ext_resource type="Texture2D" uid="uid://yalfcldikw87" path="res://Assets/AseFiles/spritesheet_diamond.png" id="1_ukqbc"]
+[ext_resource type="Shader" uid="uid://b7yn3nubx54e1" path="res://CollectibleSystem/collection_shader.gdshader" id="2_gahmt"]
 [ext_resource type="Texture2D" uid="uid://ci2u62oxeeci3" path="res://Assets/AseFiles/sparkle.png" id="2_qy1r2"]
 [ext_resource type="Texture2D" uid="uid://5mm3twnvx000" path="res://Assets/Textures/lightTexture.tres" id="3_88s62"]
+[ext_resource type="Texture2D" uid="uid://bh622ige8mhr1" path="res://Assets/AseFiles/diamondsheet_v2.png" id="3_gahmt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qy1r2"]
-radius = 8.0
+radius = 12.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_88s62"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vx44l"]
+shader = ExtResource("2_gahmt")
+shader_parameter/whiteness = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u1jan"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gahmt"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(16, 0, 16, 16)
+atlas = ExtResource("3_gahmt")
+region = Rect2(0, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vx44l"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(32, 0, 16, 16)
+atlas = ExtResource("3_gahmt")
+region = Rect2(0, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xadrm"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(48, 0, 16, 16)
+atlas = ExtResource("3_gahmt")
+region = Rect2(24, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1bbhe"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(64, 0, 16, 16)
+atlas = ExtResource("3_gahmt")
+region = Rect2(48, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tdxp2"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(80, 0, 16, 16)
+atlas = ExtResource("3_gahmt")
+region = Rect2(72, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3sgss"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(96, 0, 16, 16)
+atlas = ExtResource("3_gahmt")
+region = Rect2(96, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_up5ic"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(112, 0, 16, 16)
+atlas = ExtResource("3_gahmt")
+region = Rect2(120, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1k43p"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(128, 0, 16, 16)
+atlas = ExtResource("3_gahmt")
+region = Rect2(144, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cqbqt"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(144, 0, 16, 16)
+atlas = ExtResource("3_gahmt")
+region = Rect2(168, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k653f"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(160, 0, 16, 16)
+atlas = ExtResource("3_gahmt")
+region = Rect2(192, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cekes"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(176, 0, 16, 16)
+atlas = ExtResource("3_gahmt")
+region = Rect2(216, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ugcv7"]
-atlas = ExtResource("1_ukqbc")
-region = Rect2(192, 0, 16, 16)
+atlas = ExtResource("3_gahmt")
+region = Rect2(240, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obmxe"]
+atlas = ExtResource("3_gahmt")
+region = Rect2(264, 0, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_obmxe"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_88s62")
+"texture": SubResource("AtlasTexture_u1jan")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u1jan")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gahmt")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vx44l")
 }, {
@@ -113,6 +108,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ugcv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obmxe")
 }],
 "loop": false,
 "name": &"shine",
@@ -126,10 +124,17 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_u1jan"]
 gradient = SubResource("Gradient_88s62")
 
+[sub_resource type="Curve" id="Curve_u1jan"]
+_data = [Vector2(0.15151516, 0), 0.0, 0.0, 0, 0, Vector2(0.38888887, 0.24719107), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.6505984, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gahmt"]
+curve = SubResource("Curve_u1jan")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_88s62"]
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(10, 10, 1)
+emission_box_extents = Vector3(15, 20, 1)
 angle_min = 1.0728835e-05
 angle_max = 1.0728835e-05
 direction = Vector3(0, -1, 0)
@@ -138,6 +143,7 @@ gravity = Vector3(0, -30, 0)
 damping_min = 1.0
 damping_max = 2.0
 color_ramp = SubResource("GradientTexture1D_u1jan")
+emission_curve = SubResource("CurveTexture_gahmt")
 turbulence_enabled = true
 turbulence_noise_strength = 3.9
 turbulence_noise_scale = 3.9
@@ -145,24 +151,6 @@ turbulence_noise_speed = Vector3(0, -2, 0)
 turbulence_noise_speed_random = 1.0
 turbulence_initial_displacement_min = -3.8999987
 turbulence_initial_displacement_max = 3.9000015
-
-[sub_resource type="Animation" id="Animation_gahmt"]
-resource_name = "hover"
-length = 8.0
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 4, 8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 2), Vector2(0, -2), Vector2(0, 2)]
-}
 
 [sub_resource type="Animation" id="Animation_vx44l"]
 length = 0.001
@@ -176,16 +164,138 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 1)]
+"values": [Vector2(0, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/whiteness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explode:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u1jan"]
+resource_name = "collect"
+length = 1.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/whiteness")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explode:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gahmt"]
+resource_name = "hover"
+length = 4.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 2), Vector2(0, -2), Vector2(0, 2)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xadrm"]
 _data = {
 &"RESET": SubResource("Animation_vx44l"),
+&"collect": SubResource("Animation_u1jan"),
 &"hover": SubResource("Animation_gahmt")
 }
 
+[sub_resource type="Curve" id="Curve_gahmt"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7525252, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vx44l"]
+curve = SubResource("Curve_gahmt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gahmt"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.39
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+spread = 180.0
+initial_velocity_max = 150.0
+angular_velocity_min = -360.0
+angular_velocity_max = 359.99997
+gravity = Vector3(0, 25, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = 4.9999976
+damping_max = 5.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_vx44l")
+
 [node name="Collectible" type="Area2D" node_paths=PackedStringArray("animated_sprite")]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_u1jan")
 animated_sprite = NodePath("AnimatedSprite2D")
 
@@ -194,11 +304,13 @@ shape = SubResource("CircleShape2D_qy1r2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 light_mask = 4
-position = Vector2(0, 1)
+material = SubResource("ShaderMaterial_vx44l")
+position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_obmxe")
+animation = &"shine"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(0, 5)
+position = Vector2(0, 1)
 amount = 3
 amount_ratio = 0.5995
 texture = ExtResource("2_qy1r2")
@@ -206,10 +318,10 @@ lifetime = 4.0
 randomness = 0.5
 process_material = SubResource("ParticleProcessMaterial_88s62")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="ShineLight" type="PointLight2D" parent="."]
 scale = Vector2(2, 2)
-color = Color(1, 0, 0, 1)
-energy = 3.0
+color = Color(1, 0.39477575, 0.39477575, 1)
+energy = 0.0
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.7607843)
 texture = ExtResource("3_88s62")
@@ -218,3 +330,19 @@ texture = ExtResource("3_88s62")
 libraries = {
 &"": SubResource("AnimationLibrary_xadrm")
 }
+autoplay = "hover"
+
+[node name="Light" type="PointLight2D" parent="."]
+energy = 2.0
+texture = ExtResource("3_88s62")
+
+[node name="Explode" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 15
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_gahmt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

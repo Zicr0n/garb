@@ -112,8 +112,6 @@ func on_level_ended():
 	var timeToComplete = gameTime
 	
 	# Get deaths
-	print(current_deaths)
-	print("current deaths")
 	var totalDeaths = current_deaths
 	
 	# Unlock next level
@@ -128,8 +126,7 @@ func on_level_ended():
 	await dimmer.dim()
 	# Show that the level was unlocked
 	winscreen_instance = win_screen.instantiate()
-	print(totalDeaths)
-	print("total deaths")
+
 	winscreen_instance.set_deaths(totalDeaths)
 	winscreen_instance.set_time(str(timeToComplete))
 	add_child(winscreen_instance)
