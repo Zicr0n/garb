@@ -319,8 +319,8 @@ main_menu = NodePath("../mainMenuButtons")
 
 [connection signal="body_entered" from="Tiles/BouncePad" to="Tiles/BouncePad" method="_on_body_entered"]
 [connection signal="body_exited" from="Tiles/BouncePad" to="Tiles/BouncePad" method="_on_body_exited"]
-[connection signal="body_entered" from="Tiles/@Area2D@27550" to="Tiles/@Area2D@27550" method="_on_body_entered"]
-[connection signal="body_exited" from="Tiles/@Area2D@27550" to="Tiles/@Area2D@27550" method="_on_body_exited"]
+[connection signal="body_entered" from="Tiles/@Area2D@67693" to="Tiles/@Area2D@67693" method="_on_body_entered"]
+[connection signal="body_exited" from="Tiles/@Area2D@67693" to="Tiles/@Area2D@67693" method="_on_body_exited"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/StartGame" to="mainMenuButtons" method="_on_start_game_pressed"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/Settings" to="mainMenuButtons" method="_on_settings_pressed"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/QuitGame" to="mainMenuButtons" method="_on_quit_game_pressed"]

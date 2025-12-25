@@ -12,5 +12,3 @@ func _ready() -> void:
 
 func on_collectible_collected(index):
 	collectibles[index].collected = true
-	
-	

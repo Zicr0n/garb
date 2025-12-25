@@ -3,6 +3,11 @@ extends Control
 @export var main_menu : MainMenu = null
 @export var level_1 = null
 
+func _ready() -> void:
+	# TODO Get from save file which levels are unlocked
+	# TODO Check if player was already in a level, then load from last checkpoint
+	pass
+
 func _on_level_1_pressed() -> void:
 	GameManager.load_level("level1")
 

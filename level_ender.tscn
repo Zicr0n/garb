@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4owieirsltd6"]
+
+[ext_resource type="Script" uid="uid://lcoorfsndn8u" path="res://level_ender.gd" id="1_6umd6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwu2c"]
+size = Vector2(20, 62)
+
+[node name="LevelEnder" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_6umd6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bwu2c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

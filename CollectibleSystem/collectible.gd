@@ -2,8 +2,11 @@ extends Area2D
 class_name Collectible
 
 @export var animated_sprite: AnimatedSprite2D = null
+
 @onready var shine_light: PointLight2D = $ShineLight
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var unique_key: String = str(self.get_path())
 
 signal on_collected
 
@@ -14,6 +17,9 @@ var time = 0.0
 var move_speed = 5.0
 
 var player : Player = null
+
+func _ready() -> void:
+	print(unique_key)
 
 func _process(delta: float) -> void:
 	time += delta
@@ -48,7 +54,9 @@ func on_collection():
 	animation_player.play("collect")
 	await animation_player.animation_finished
 	on_collected.emit()
-	queue_free()
+	hide()
+	collision_shape_2d.disabled = true
+	
 
 func _on_body_entered(body: Node2D) -> void:
 	# Check if player

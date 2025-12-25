@@ -10,6 +10,7 @@ var processing_death = false
 	"level2" : "res://level_building_test.tscn"
 }
 
+## TODO : Load current_level from save file
 var current_level = null
 var current_deaths = 0
 var winscreen_instance : WinScreen = null
@@ -20,6 +21,7 @@ var winscreen_instance : WinScreen = null
 var gameTime = null
 
 func _process(delta: float) -> void:
+	## TODO fix this cuz currentlevel is used for saving now
 	if current_level:
 		if gameTime == null:
 			gameTime = 0
@@ -31,6 +33,11 @@ func _process(delta: float) -> void:
 func _ready() -> void:
 	add_child(dimmer)
 	add_child(level_system)
+	
+	SavingSystem.loaded_data.connect(
+		func():
+		current_level =  SavingSystem.get_data("current_level_name")
+		)
 
 func player_died(_player : Player):
 	if processing_death:
@@ -82,8 +89,12 @@ func load_level(sceneName):
 		level_system.set_current_level(sceneName)
 		await get_tree().process_frame
 		
-		current_level = scene
+		current_level = sceneName
+		SavingSystem.update_data("current_level_name", current_level)
+		SavingSystem.save()
 		current_deaths = 0
+		
+		# TODO : Check if there was a checkpoint in save, load player into that checkpoint
 		
 	else:
 		push_error("SCENE NOT FOUND!!!!!!!!!!! THE END IS NEAR!!!!!!!")
@@ -93,8 +104,9 @@ func load_level(sceneName):
 func return_to_main_menu():
 	await dimmer.dim()
 	
+	# TODO Save Checkpoint
+	
 	if winscreen_instance : winscreen_instance.queue_free()
-	current_level = null
 	get_tree().change_scene_to_file("res://menus/main_menu.tscn")
 	
 	await get_tree().process_frame
@@ -120,8 +132,10 @@ func on_level_ended():
 	# Return to level select screen
 	level_system.set_current_level("")
 	
-	# Reset
+	# Save
 	current_level = null
+	SavingSystem.update_data("current_level_name", current_level)
+	SavingSystem.save()
 	
 	await dimmer.dim()
 	# Show that the level was unlocked
