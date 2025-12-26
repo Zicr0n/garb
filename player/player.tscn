@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=43 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dtjh7ox1kyry8" path="res://player/yank_detector.tscn" id="15_wodsf"]
 [ext_resource type="Script" uid="uid://bb2gheck2km73" path="res://statemachine/player/player_dialogueState.gd" id="16_e7oew"]
 [ext_resource type="Script" uid="uid://bsebrpsa7rt6v" path="res://statemachine/player/walljump.gd" id="16_tqiix"]
+[ext_resource type="PackedScene" uid="uid://06743jtpeump" path="res://Levels/LevelTester/ghost_trail.tscn" id="17_s7qer"]
 [ext_resource type="Script" uid="uid://bn7f4lmksulal" path="res://menus/dialougue/Interract/interract_detector.gd" id="17_tqiix"]
 [ext_resource type="Script" uid="uid://bt1kk0nanswig" path="res://player/timerui.gd" id="21_x7c3f"]
 
@@ -105,6 +106,15 @@ radius = 22.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_bjvpn"]
 radius = 17.0
 
+[sub_resource type="Gradient" id="Gradient_34erp"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bjvpn"]
+gradient = SubResource("Gradient_34erp")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
 [sub_resource type="Gradient" id="Gradient_bjvpn"]
 offsets = PackedFloat32Array(0, 0.6122449, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
@@ -138,14 +148,6 @@ scale_max = 6.0
 scale_curve = SubResource("CurveTexture_knn7v")
 scale_over_velocity_max = 100.0
 color_ramp = SubResource("GradientTexture1D_s7qer")
-[sub_resource type="Gradient" id="Gradient_34erp"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_bjvpn"]
-gradient = SubResource("Gradient_34erp")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-metadata/_snap_enabled = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_65viv"]
 
@@ -350,8 +352,14 @@ _dash_duration = NodePath("dash_duration")
 _particle_emitter = NodePath("../../../dashParticles")
 
 [node name="dash_duration" type="Timer" parent="Components/Statemachine/Dash"]
-wait_time = 0.1
+wait_time = 0.12
 one_shot = true
+
+[node name="DashTrail" parent="Components/Statemachine/Dash" node_paths=PackedStringArray("player", "timer") instance=ExtResource("17_s7qer")]
+player = NodePath("../../../..")
+timer = NodePath("../dash_duration")
+interval = 0.01
+lifetime = 0.1
 
 [node name="Dialogue" type="Node" parent="Components/Statemachine" node_paths=PackedStringArray("_idle_state")]
 script = ExtResource("16_e7oew")
@@ -395,7 +403,7 @@ MOVE_SPEED_AIR = 180.0
 ACCELERATION_AIR = 2000.0
 DECELERATION_AIR = 500.0
 YANK_POWER = 800.0
-DASH_VELOCITY = 600.0
+DASH_VELOCITY = 500.0
 
 [node name="InputComponent" type="Node" parent="Components"]
 script = ExtResource("5_qjkh3")
@@ -506,8 +514,6 @@ scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_32hag")
 color = Color(0.6862745, 0.30980393, 0.8, 1)
 color_ramp = SubResource("Gradient_tqiix")
-
-[node name="LandDustHolder" type="Node" parent="."]
 
 [node name="FeetPosition" type="Marker2D" parent="."]
 position = Vector2(0, 13)
