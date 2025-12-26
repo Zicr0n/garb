@@ -7,10 +7,13 @@ extends PlayerState
 @export var _dash_state : PlayerState = null;
 @export var _dialogue_state : PlayerState = null;
 
+@export var running_particles : GPUParticles2D = null
+
 var x_dir = 0
 
 func enter():
-	pass
+	if running_particles:
+		running_particles.emitting = true
 
 func process(_delta):
 	x_dir = state_machine.input_component.move_dir_x()
@@ -43,4 +46,7 @@ func physics_process(delta):
 	return null
 
 func exit():
+	if running_particles:
+		running_particles.emitting = false
+	
 	state_machine.fall_source = state_machine.FALL_SOURCE.PLATFORM

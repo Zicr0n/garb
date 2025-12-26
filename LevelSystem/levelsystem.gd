@@ -29,8 +29,6 @@ func set_current_level(lvlName : String):
 		return
 	
 	for lvl in levels:
-		print(lvl.levelName)
-		print(lvlName)
 		if lvl.levelName == lvlName:
 			level = lvl
 			break
@@ -40,7 +38,6 @@ func set_current_level(lvlName : String):
 		return
 	
 	current_level = level
-	print("CURRENT LEVEL IS " + lvlName)
 
 func unlock_next_level():
 	if current_level == null:

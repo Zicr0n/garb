@@ -71,8 +71,6 @@ func idle(dt):
 func move_on_ground(direction : float, dt : float) -> void:
 	var target_speed = MOVE_SPEED_GROUND * direction
 	
-	var was_turning = is_turning
-	
 	if sign(target_speed) != sign(characterBody2D.velocity.x) and characterBody2D.velocity.x != 0 and direction != 0:
 		var absSpeed = abs(characterBody2D.velocity.x)
 		if absSpeed > TURNING_THRESHOLD_SPEED:
@@ -93,8 +91,6 @@ func move_on_ground(direction : float, dt : float) -> void:
 		characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, 0, DECELERATION_GROUND * dt)
 
 	last_target_speed = target_speed
-
-	was_turning = is_turning
 
 func grounded() -> bool:
 	return characterBody2D.is_on_floor()
@@ -196,3 +192,9 @@ func is_wall_left():
 
 func is_wall_right():
 	return WALL_RIGHT_RAY.is_colliding() || WALL_RIGHT_RAY_BOTTOM.is_colliding()
+
+#########
+## DIE ##
+#########
+func stop_moving():
+	characterBody2D.velocity = Vector2.ZERO

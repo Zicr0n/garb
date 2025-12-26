@@ -1,4 +1,5 @@
 extends HBoxContainer
+class_name SettingToggle
 
 @export var checkbox : CheckBox = null
 

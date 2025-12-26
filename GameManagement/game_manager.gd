@@ -10,16 +10,18 @@ var processing_death = false
 	"level2" : "res://level_building_test.tscn"
 }
 
+## TODO : Load current_level from save file
 var current_level = null
 var current_deaths = 0
 var winscreen_instance : WinScreen = null
-
-signal level_started
-signal level_ended
+#
+#signal level_started
+#signal level_ended
 
 var gameTime = null
 
 func _process(delta: float) -> void:
+	## TODO fix this cuz currentlevel is used for saving now
 	if current_level:
 		if gameTime == null:
 			gameTime = 0
@@ -31,6 +33,11 @@ func _process(delta: float) -> void:
 func _ready() -> void:
 	add_child(dimmer)
 	add_child(level_system)
+	
+	SavingSystem.loaded_data.connect(
+		func():
+		current_level =  SavingSystem.get_data("current_level_name")
+		)
 
 func player_died(_player : Player):
 	if processing_death:
@@ -56,7 +63,6 @@ func player_died(_player : Player):
 	
 	# Reload scene
 	await reload_current_level()
-	
 	# Set player at correct checkpoint
 	var player : Player = get_tree().get_first_node_in_group("player")
 
@@ -83,8 +89,12 @@ func load_level(sceneName):
 		level_system.set_current_level(sceneName)
 		await get_tree().process_frame
 		
-		current_level = scene
+		current_level = sceneName
+		SavingSystem.update_data("current_level_name", current_level)
+		SavingSystem.save()
 		current_deaths = 0
+		
+		# TODO : Check if there was a checkpoint in save, load player into that checkpoint
 		
 	else:
 		push_error("SCENE NOT FOUND!!!!!!!!!!! THE END IS NEAR!!!!!!!")
@@ -94,8 +104,9 @@ func load_level(sceneName):
 func return_to_main_menu():
 	await dimmer.dim()
 	
-	winscreen_instance.queue_free()
-	current_level = null
+	# TODO Save Checkpoint
+	
+	if winscreen_instance : winscreen_instance.queue_free()
 	get_tree().change_scene_to_file("res://menus/main_menu.tscn")
 	
 	await get_tree().process_frame
@@ -109,13 +120,10 @@ func reload_current_level():
 	await get_tree().process_frame  # Wait for scene to fully reload (fuck you chatgpt)
 
 func on_level_ended():
-	## TODO
 	# Get time
 	var timeToComplete = gameTime
 	
 	# Get deaths
-	print(current_deaths)
-	print("current deaths")
 	var totalDeaths = current_deaths
 	
 	# Unlock next level
@@ -124,17 +132,27 @@ func on_level_ended():
 	# Return to level select screen
 	level_system.set_current_level("")
 	
-	# Reset
+	# Save
 	current_level = null
+	SavingSystem.update_data("current_level_name", current_level)
+	SavingSystem.save()
 	
 	await dimmer.dim()
 	# Show that the level was unlocked
 	winscreen_instance = win_screen.instantiate()
-	print(totalDeaths)
-	print("total deaths")
+
 	winscreen_instance.set_deaths(totalDeaths)
 	winscreen_instance.set_time(str(timeToComplete))
 	add_child(winscreen_instance)
 	
 	dimmer.brighten()
-	
+
+###########
+## PAUSE ##
+###########
+
+func pause_game():
+	get_tree().paused = true
+
+func unpause_game():
+	get_tree().paused = false

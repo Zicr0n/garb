@@ -2,7 +2,7 @@ extends Control
 
 @onready var label: Label = $Label
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var time = GameManager.gameTime
 	if time != null:
 		label.text = seconds2hhmmss(time)
