@@ -169,7 +169,7 @@ func dash(dir : Vector2) -> bool:
 		return false
 
 func end_dash():
-	characterBody2D.velocity *= 0.5
+	characterBody2D.velocity *= 0.2
 
 ##############
 ## WALLJUMP ##

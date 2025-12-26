@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://06743jtpeump"]
+
+[ext_resource type="Script" uid="uid://lk5bdfclme4i" path="res://Levels/LevelTester/ghost_trail.gd" id="1_pfw3s"]
+
+[node name="LevelTester" type="Node" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_pfw3s")
+timer = NodePath("Interval")
+
+[node name="Interval" type="Timer" parent="."]
+autostart = true

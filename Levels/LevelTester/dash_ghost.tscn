@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://d068v4idjfcgf"]
+
+[ext_resource type="Script" uid="uid://b67hj0lkm18yq" path="res://Levels/LevelTester/dash_ghost.gd" id="1_rifgr"]
+
+[node name="DashGhost" type="Node2D" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_rifgr")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
