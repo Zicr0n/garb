@@ -3,15 +3,15 @@ class_name LevelSystem
 
 var levels : Array[Level]= []
 
-var current_level = null
+var current_level : Level = null
+
+var data_to_save = {"collectibles" : []}
 
 func _ready() -> void:
 	for i in range(get_children().size()):
 		var child = get_child(i)
 		if child is Level:
 			levels.append(child)
-	
-	print(levels)
 
 func is_level_locked(levelName) -> bool:
 	for lvl in levels:
@@ -22,7 +22,7 @@ func is_level_locked(levelName) -> bool:
 	return true 
 
 func set_current_level(lvlName : String):
-	var level = null
+	var level : Level = null
 	
 	if lvlName == "":
 		current_level = null
@@ -38,6 +38,15 @@ func set_current_level(lvlName : String):
 		return
 	
 	current_level = level
+	
+	var levels_data : Dictionary = SavingSystem.get_data("levels").duplicate()
+	
+	if levels_data.has(level.id):
+		print(levels_data[level.id])
+	else:
+		levels_data[level.id] = data_to_save
+	
+	SavingSystem.update_data("levels", levels_data)
 
 func unlock_next_level():
 	if current_level == null:
@@ -52,3 +61,21 @@ func unlock_next_level():
 	
 	var next_level = levels[next_index]
 	next_level.unlocked = true
+
+func on_collectible_collected(index):
+	if index != null && current_level != null:
+		var levels_data : Dictionary = SavingSystem.get_data("levels").duplicate()
+		var collectibles_array : Array = levels_data[current_level.id]["collectibles"]
+		
+		collectibles_array.append(index)
+		
+		SavingSystem.update_data("levels", levels_data)
+		SavingSystem.save()
+	
+	print(SavingSystem.save_data)
+
+func get_saved_collectibles() -> Array:
+	if current_level:
+		return SavingSystem.get_data("levels")[current_level.id]["collectibles"]
+	
+	return []
