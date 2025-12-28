@@ -23,6 +23,7 @@ SccoreManager="*res://Score/score_manager.gd"
 Level1Manager="*res://GameManagement/level_1_manager.gd"
 AudioSystem="*res://audio_system/audio_system.tscn"
 SavingSystem="*res://SaveSystem/saving_system.gd"
+Levels="*res://LevelSystem/levelsystem.tscn"
 
 [display]
 
@@ -54,6 +55,7 @@ moving_platform=""
 Rooms=""
 checkpoint_manager=""
 player="PLEASE NO OTHER NODE WITH THIS GROUP I BEG YOU!!!!!!!"
+collectibles_manager=""
 
 [input]
 

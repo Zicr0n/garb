@@ -4,14 +4,14 @@ const save_location = "user://leeks.json"
 
 var save_data : Dictionary = {
 	"current_level_name" : null, 
+	"last_checkpoint_index" : -1,
+	"levels" : {}
 }
 
 signal loaded_data
 
 func _ready() -> void:
 	_load_data()
-	
-	
 
 func update_data(key, value):
 	if save_data.has(key):
@@ -33,6 +33,7 @@ func _load_data():
 		file.close()
 		
 		for keys in save_data.keys():
-			save_data[keys] = data[keys]
+			if data.has(keys):
+				save_data[keys] = data[keys]
 		
 		loaded_data.emit()

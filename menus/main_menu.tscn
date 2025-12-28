@@ -333,8 +333,13 @@ main_menu = NodePath("../mainMenuButtons")
 
 [connection signal="body_entered" from="Tiles/BouncePad" to="Tiles/BouncePad" method="_on_body_entered"]
 [connection signal="body_exited" from="Tiles/BouncePad" to="Tiles/BouncePad" method="_on_body_exited"]
+<<<<<<< HEAD
+[connection signal="body_entered" from="Tiles/@Area2D@45042" to="Tiles/@Area2D@45042" method="_on_body_entered"]
+[connection signal="body_exited" from="Tiles/@Area2D@45042" to="Tiles/@Area2D@45042" method="_on_body_exited"]
+=======
 [connection signal="body_entered" from="Tiles/@Area2D@34461" to="Tiles/@Area2D@34461" method="_on_body_entered"]
 [connection signal="body_exited" from="Tiles/@Area2D@34461" to="Tiles/@Area2D@34461" method="_on_body_exited"]
+>>>>>>> db18e5adb2e63f1900921e56cb955b02fa2c9e9f
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/StartGame" to="mainMenuButtons" method="_on_start_game_pressed"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/Settings" to="mainMenuButtons" method="_on_settings_pressed"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/QuitGame" to="mainMenuButtons" method="_on_quit_game_pressed"]
