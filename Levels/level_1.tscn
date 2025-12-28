@@ -341,7 +341,7 @@ animations = [{
 layer = 2
 follow_viewport_enabled = true
 
-[node name="CollectiblesManager" type="Node" parent="Light" groups=["collectibles_manager"]]
+[node name="CollectiblesManager" type="Node" parent="Light"]
 script = ExtResource("1_1rr3k")
 
 [node name="Collectible" parent="Light/CollectiblesManager" instance=ExtResource("17_c7pbv")]
@@ -494,14 +494,9 @@ position_smoothing_speed = 10.0
 player = NodePath("../player")
 initial_room = NodePath("../Rooms/RoomBounds")
 
-[node name="BG" parent="Camera" instance=ExtResource("5_k2bse")]
-visible = false
-z_index = -9
-scale = Vector2(1.667, 1.667)
-
 [node name="Sprite2D" type="Sprite2D" parent="Camera"]
 modulate = Color(0.64, 0.64, 0.64, 1)
-z_index = -99
+z_index = -1
 texture = ExtResource("6_77l7m")
 
 [node name="ElevatorGroup" type="Node" parent="."]
