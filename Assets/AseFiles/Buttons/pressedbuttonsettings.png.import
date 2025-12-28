@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnwlcqgt3n4vu"
-path="res://.godot/imported/pillarright.png-9db986ead0475feff38667f8db668fb5.ctex"
+uid="uid://x2vm133mkfq"
+path="res://.godot/imported/pressedbuttonsettings.png-7e48fd1d9c524d0f48b315901d562256.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/LevelTester/pillarright.png"
-dest_files=["res://.godot/imported/pillarright.png-9db986ead0475feff38667f8db668fb5.ctex"]
+source_file="res://Assets/AseFiles/Buttons/pressedbuttonsettings.png"
+dest_files=["res://.godot/imported/pressedbuttonsettings.png-7e48fd1d9c524d0f48b315901d562256.ctex"]
 
 [params]
 

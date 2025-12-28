@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7572ad5gyb4b"
-path="res://.godot/imported/pillarleft.png-d0e132ae90f9dbd3c28f9a511f9be57a.ctex"
+uid="uid://dn7oq00gpfuxg"
+path="res://.godot/imported/Keyboard Letters and Symbols.png-38a1acf0f2a03cc6f0e748e3d3ed89d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/LevelTester/pillarleft.png"
-dest_files=["res://.godot/imported/pillarleft.png-d0e132ae90f9dbd3c28f9a511f9be57a.ctex"]
+source_file="res://Assets/FREE/Keyboard Letters and Symbols.png"
+dest_files=["res://.godot/imported/Keyboard Letters and Symbols.png-38a1acf0f2a03cc6f0e748e3d3ed89d8.ctex"]
 
 [params]
 
