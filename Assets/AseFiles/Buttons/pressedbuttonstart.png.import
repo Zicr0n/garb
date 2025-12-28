@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cke0k4atuiagx"
-path="res://.godot/imported/onewayplat.png-953cd563a4da38e211a24fcd92c4f3ce.ctex"
+uid="uid://oss5c7wo6m44"
+path="res://.godot/imported/pressedbuttonstart.png-5bf5a87bbdfe679219a6fe4167560472.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/LevelTester/onewayplat.png"
-dest_files=["res://.godot/imported/onewayplat.png-953cd563a4da38e211a24fcd92c4f3ce.ctex"]
+source_file="res://Assets/AseFiles/Buttons/pressedbuttonstart.png"
+dest_files=["res://.godot/imported/pressedbuttonstart.png-5bf5a87bbdfe679219a6fe4167560472.ctex"]
 
 [params]
 

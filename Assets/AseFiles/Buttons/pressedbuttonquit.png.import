@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd5vo6o0dg0xw"
-path="res://.godot/imported/SpringBounce.png-946138599f3da9406e79785aca66a93b.ctex"
+uid="uid://bib6yg574e4qu"
+path="res://.godot/imported/pressedbuttonquit.png-53ea021546a71cca50eca17e652c0b21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/LevelTester/SpringBounce.png"
-dest_files=["res://.godot/imported/SpringBounce.png-946138599f3da9406e79785aca66a93b.ctex"]
+source_file="res://Assets/AseFiles/Buttons/pressedbuttonquit.png"
+dest_files=["res://.godot/imported/pressedbuttonquit.png-53ea021546a71cca50eca17e652c0b21.ctex"]
 
 [params]
 
