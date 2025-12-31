@@ -7,7 +7,6 @@ func _ready() -> void:
 	body_entered.connect(on_enter)
 
 func on_enter(bd):
-	print("entered faggot")
 	if bd.is_in_group("player"):
 		var player : Player = bd
 		player.trigger_instruction(instruction)
