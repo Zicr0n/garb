@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn7oq00gpfuxg"
-path="res://.godot/imported/Keyboard Letters and Symbols.png-38a1acf0f2a03cc6f0e748e3d3ed89d8.ctex"
+uid="uid://d28c27jhl6au"
+path="res://.godot/imported/Keyboard Extras.png-95774b8d4b14e30727fbda7c82951b8b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/FREE/Keyboard Letters and Symbols.png"
-dest_files=["res://.godot/imported/Keyboard Letters and Symbols.png-38a1acf0f2a03cc6f0e748e3d3ed89d8.ctex"]
+source_file="res://Assets/FREE/KeyBinds/Keyboard Extras.png"
+dest_files=["res://.godot/imported/Keyboard Extras.png-95774b8d4b14e30727fbda7c82951b8b.ctex"]
 
 [params]
 

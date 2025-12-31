@@ -23,6 +23,7 @@ SccoreManager="*res://Score/score_manager.gd"
 Level1Manager="*res://GameManagement/level_1_manager.gd"
 AudioSystem="*res://audio_system/audio_system.tscn"
 SavingSystem="*res://SaveSystem/saving_system.gd"
+KeySpriteManagerGlob="*res://KeySpriteManager/key_sprite_manager_glob.gd"
 
 [display]
 
