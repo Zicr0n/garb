@@ -128,6 +128,11 @@ func reload_current_level():
 	# Sometiems the scene doesnt load instantly, so wait for the scene to run its first frame
 	await get_tree().process_frame  # Wait for scene to fully reload (fuck you chatgpt)
 
+func load_scene(path):
+	await dimmer.dim()
+	get_tree().change_scene_to_file(path)
+	dimmer.brighten()
+
 func on_level_ended():
 	# Get time
 	var timeToComplete = gameTime

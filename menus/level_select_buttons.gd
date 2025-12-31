@@ -9,7 +9,7 @@ func _ready() -> void:
 	pass
 
 func _on_level_1_pressed() -> void:
-	GameManager.load_level("level1")
+	GameManager.load_scene("res://CutsceneScenes/falling_cutscene.tscn")
 
 
 func _on_level_2_pressed() -> void:

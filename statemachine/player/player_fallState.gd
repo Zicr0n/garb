@@ -15,6 +15,7 @@ var dir_x = 0
 var fastfall = false
 
 func enter():
+	state_machine.animation_player.play("fall")
 	if state_machine.fall_source == state_machine.FALL_SOURCE.PLATFORM:
 		_coyote_timer.start()
 		return

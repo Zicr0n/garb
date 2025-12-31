@@ -12,6 +12,8 @@ var dir_x = 0
 var has_released_jump = false
 
 func enter():
+	state_machine.animation_player.play("jump")
+
 	state_machine.move_component.jump()
 	
 	if jump_particles:

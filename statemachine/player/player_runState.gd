@@ -12,6 +12,7 @@ extends PlayerState
 var x_dir = 0
 
 func enter():
+	state_machine.animation_player.play("run")
 	if running_particles:
 		running_particles.emitting = true
 
