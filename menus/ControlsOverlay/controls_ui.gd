@@ -2,7 +2,8 @@ extends CanvasLayer
 
 var visibleLabels : Array[String] = []
 
-@export var spritepos = Vector2(0, 100)
+@export var errorkey : String = "(unset)"
+@export var visibleActions : Dictionary
 
 var actions := {
 	"MoveLeftLabel": "move_left",
@@ -18,12 +19,6 @@ func _ready():
 	$VBoxContainer/JumpLabel.text = "Jump"
 	$VBoxContainer/DashLabel.text = "Dash"
 	$VBoxContainer/YankLabel.text = "Grapple"
-
-	$VBoxContainer/MoveLeftLabel/Sprite2D.offset = spritepos
-	$VBoxContainer/MoveRightLabel/Sprite2D.offset = spritepos
-	$VBoxContainer/JumpLabel/Sprite2D.offset = spritepos
-	$VBoxContainer/DashLabel/Sprite2D.offset = spritepos
-	$VBoxContainer/YankLabel/Sprite2D.offset = spritepos
 
 	update_label_sprites()
 
@@ -44,12 +39,15 @@ func update_label_sprites() -> void:
 	for label in $VBoxContainer.get_children():
 		set_key_sprite(label.get_child(0), get_action_keys(actions[label.name]))
 
-func set_key_sprite(sprite2D, key_name: String):
+func set_key_sprite(panel, key_name: String):
 	if key_name == "":
 		return
 	key_name = String(key_name).to_lower()
 	var atlas := AtlasTexture.new()
 	atlas.atlas = preload("res://Assets/FREE/KeyBinds/Keyboard Letters and Symbols.png")
-	print(key_name)
-	atlas.region = KeySpriteGlob.coordsblue[key_name]
-	sprite2D.texture = atlas
+	if KeySpriteGlob.coordsblue.has(key_name):
+		atlas.region = KeySpriteGlob.coordsblue[key_name]
+	else:
+		atlas.region = KeySpriteGlob.coordsblue[errorkey]
+	panel.texture = atlas
+	panel.update_texture()

@@ -5,6 +5,7 @@ const w := 16
 
 const coordswhite := {
 	"(unset)": Rect2(5 * w, 6 * w, w, w),
+	"a (physichal)": Rect2(5 * w, 6 * w, w, w),# TODO: ta bort kanske
 	"left": Rect2(2 * w, 0 * w, w, w),
 	"right": Rect2(3 * w, 0 * w, w, w),
 	"up": Rect2(0 * w, 0 * w, w, w),
