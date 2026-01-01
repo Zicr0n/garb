@@ -4,6 +4,7 @@ extends Node
 @export var timer : Timer = null
 @export var interval : float = 1.0
 @export var lifetime : float = 1.0
+@export var dash_sprite : Texture = null
 
 @onready var ghost_scene : PackedScene = preload("res://Levels/LevelTester/dash_ghost.tscn")
 var current_time : float = 0.0
@@ -31,7 +32,7 @@ func _on_interval_timeout() -> void:
 	var sprite_child := player.get_node_or_null("Sprite2D")
 
 	if sprite_child:
-		snapshot.texture = sprite_child.texture
+		snapshot.texture = dash_sprite
 		snapshot.flip_h = sprite_child.flip_h
 		snapshot.scale = sprite_child.scale
 		snapshot.modulate = Color(1, 1, 1, 0.2)# transparent so it looks ghostly
