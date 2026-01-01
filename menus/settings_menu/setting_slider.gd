@@ -19,7 +19,6 @@ func _ready() -> void:
 	slider.step = step
 
 func emits_signal(_va):
-	print("val change")
 	value_changed.emit(slider.value)
 
 func get_value():

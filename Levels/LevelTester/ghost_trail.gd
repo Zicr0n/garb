@@ -15,7 +15,6 @@ var playerPositions := []
 
 func _process(delta: float) -> void:
 	if timer.time_left > 0:
-		print("running")
 		if current_time >= interval:
 			current_time = 0
 			_on_interval_timeout()

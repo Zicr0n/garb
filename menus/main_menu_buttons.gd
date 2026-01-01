@@ -3,12 +3,6 @@ class_name MainMenu
 
 @onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
 
-const save_location = "user://leek.json"
-
-var contents : Dictionary = {
-	'current_level' : "level_1"
-}
-
 func _ready() -> void:
 	# TODO : Load save file
 	pass

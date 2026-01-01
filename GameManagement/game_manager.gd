@@ -1,7 +1,6 @@
 extends Node
 
 var dimmer : Dimmer = preload("res://GameManagement/dimmer.tscn").instantiate()
-var level_system : LevelSystem = preload("res://LevelSystem/levelsystem.tscn").instantiate()
 var win_screen = preload("res://GameManagement/win_screen.tscn")
 var processing_death = false
 
@@ -32,7 +31,6 @@ func _process(delta: float) -> void:
 
 func _ready() -> void:
 	add_child(dimmer)
-	add_child(level_system)
 	
 	SavingSystem.loaded_data.connect(
 		func():
@@ -76,9 +74,10 @@ func player_died(_player : Player):
 	processing_death = false
 
 func load_level(sceneName):
+	print(SavingSystem.save_data)
 	var scene = levels[sceneName]
 	
-	if level_system.is_level_locked(sceneName):
+	if Levels.is_level_locked(sceneName):
 		print("locked")
 		return
 	
@@ -86,15 +85,24 @@ func load_level(sceneName):
 
 	if scene:
 		get_tree().change_scene_to_file(scene)
-		level_system.set_current_level(sceneName)
+		Levels.set_current_level(sceneName)
 		await get_tree().process_frame
 		
 		current_level = sceneName
+		
 		SavingSystem.update_data("current_level_name", current_level)
-		SavingSystem.save()
+		
 		current_deaths = 0
 		
 		# TODO : Check if there was a checkpoint in save, load player into that checkpoint
+		var checkpoint_index = SavingSystem.get_data("last_checkpoint_index")
+		
+		if checkpoint_index != -1:
+			var last_checkpoint : Checkpoint = CheckpointSystem.get_checkpoint_from_index(checkpoint_index)
+			
+			if last_checkpoint:
+				var player : Player = get_tree().get_first_node_in_group("player")
+				player.global_position = last_checkpoint.global_position
 		
 	else:
 		push_error("SCENE NOT FOUND!!!!!!!!!!! THE END IS NEAR!!!!!!!")
@@ -105,6 +113,7 @@ func return_to_main_menu():
 	await dimmer.dim()
 	
 	# TODO Save Checkpoint
+	save_current_checkpoint()
 	
 	if winscreen_instance : winscreen_instance.queue_free()
 	get_tree().change_scene_to_file("res://menus/main_menu.tscn")
@@ -119,6 +128,11 @@ func reload_current_level():
 	# Sometiems the scene doesnt load instantly, so wait for the scene to run its first frame
 	await get_tree().process_frame  # Wait for scene to fully reload (fuck you chatgpt)
 
+func load_scene(path):
+	await dimmer.dim()
+	get_tree().change_scene_to_file(path)
+	dimmer.brighten()
+
 func on_level_ended():
 	# Get time
 	var timeToComplete = gameTime
@@ -127,14 +141,17 @@ func on_level_ended():
 	var totalDeaths = current_deaths
 	
 	# Unlock next level
-	level_system.unlock_next_level()
+	Levels.unlock_next_level()
 	
 	# Return to level select screen
-	level_system.set_current_level("")
+	Levels.set_current_level("")
 	
 	# Save
 	current_level = null
+	CheckpointSystem.latestCheckpointId = null
+	
 	SavingSystem.update_data("current_level_name", current_level)
+	SavingSystem.update_data("last_checkpoint_index", -1)
 	SavingSystem.save()
 	
 	await dimmer.dim()
@@ -146,6 +163,12 @@ func on_level_ended():
 	add_child(winscreen_instance)
 	
 	dimmer.brighten()
+
+func save_current_checkpoint():
+	var last_checkpoint : Checkpoint = CheckpointSystem.get_current_checkpoint()
+	if last_checkpoint:
+		SavingSystem.update_data("last_checkpoint_index", last_checkpoint.id)
+		SavingSystem.save()
 
 ###########
 ## PAUSE ##

@@ -23,7 +23,7 @@ func _ready() -> void:
 		start_control.grab_focus.call_deferred()
 	
 	# Saving system
-	config = ConfigFile.new()
+	config = SavingSystem.config_file
 	
 	# Load settings
 	var error = config.load(settings_directory)
@@ -80,4 +80,4 @@ func save_setting(section, setting : String, value):
 	if config:
 		config.set_value(section, setting, value)
 		
-		config.save(settings_directory)
+		SavingSystem.save_config()

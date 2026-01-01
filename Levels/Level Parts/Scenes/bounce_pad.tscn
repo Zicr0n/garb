@@ -28,6 +28,9 @@ animations = [{
 "texture": SubResource("AtlasTexture_rgmto")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_rgmto")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_mo11o")
 }, {
 "duration": 1.0,

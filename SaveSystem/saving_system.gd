@@ -4,14 +4,30 @@ const save_location = "user://leeks.json"
 
 var save_data : Dictionary = {
 	"current_level_name" : null, 
+	"last_checkpoint_index" : -1,
+	"levels" : {}
 }
+
+var settings_directory = "user://user_settings.miku"
+
+var config_file : ConfigFile = null
 
 signal loaded_data
 
+func _init():
+	config_file = ConfigFile.new()
+	
+	var error = config_file.load(settings_directory)
+	
+	if error != OK:
+		return
+
+func save_config():
+	if config_file:
+		config_file.save(settings_directory)
+
 func _ready() -> void:
 	_load_data()
-	
-	
 
 func update_data(key, value):
 	if save_data.has(key):
@@ -33,6 +49,7 @@ func _load_data():
 		file.close()
 		
 		for keys in save_data.keys():
-			save_data[keys] = data[keys]
+			if data.has(keys):
+				save_data[keys] = data[keys]
 		
 		loaded_data.emit()

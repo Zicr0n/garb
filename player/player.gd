@@ -8,6 +8,10 @@ var dashes := MAX_DASHES
 @onready var y: Label = $CanvasLayer/hud/velocities/Y
 
 @onready var statemachine : PlayerStateMachine =  $Components/Statemachine
+@onready var sprite : Sprite2D = $Sprite2D
+@onready var instructions : Node2D = $Instructions
+var cur_flip = false
+
 var was_on_floor = false
 
 func _input(event: InputEvent) -> void:
@@ -20,6 +24,22 @@ func _ready() -> void:
 func disable():
 	statemachine.disabled = true
 
+func trigger_instruction(instruction : String):
+	for child in instructions.get_children():
+		child.visible = false
+	
+	var node : Node2D= instructions.get_node(instruction)
+	
+	if node:
+		node.visible = true
+	
+	await wait(4)
+	
+	node.hide()
+
+func wait(seconds):
+	await get_tree().create_timer(seconds).timeout
+
 func enable():
 	statemachine.disabled = false
 
@@ -31,6 +51,13 @@ func _physics_process(_delta: float) -> void:
 
 	x.text = "VEL_X : " + "%0.2f" % velocity.x
 	y.text = "VEL_Y : " + "%0.2f" % velocity.y
+	
+	if velocity.x > 0:
+		cur_flip = false
+	elif velocity.x < 0:
+		cur_flip = true
+	
+	sprite.flip_h = cur_flip
 
 func custom_set_velocity(new_velocity):
 	statemachine.move_component.set_velocity(new_velocity)

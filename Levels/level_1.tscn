@@ -1,7 +1,8 @@
-[gd_scene load_steps=56 format=4 uid="uid://edo7nvmtqnrp"]
+[gd_scene load_steps=57 format=4 uid="uid://edo7nvmtqnrp"]
 
 [ext_resource type="Script" uid="uid://csu1xxqii6j0c" path="res://CollectibleSystem/collectibles_manager.gd" id="1_1rr3k"]
 [ext_resource type="TileSet" uid="uid://dhpa24av1r8g1" path="res://Levels/BackGround.tres" id="1_2hkqn"]
+[ext_resource type="Script" uid="uid://bbuksoc4cnyt1" path="res://Levels/instructor.gd" id="1_hsj5a"]
 [ext_resource type="TileSet" uid="uid://c8ijpwpmgvkts" path="res://tileset/cave.tres" id="2_f4pg2"]
 [ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://player/player.tscn" id="3_rf6l5"]
 [ext_resource type="PackedScene" uid="uid://d4hwe3dbyj3pg" path="res://Camera/camera.tscn" id="4_rf6l5"]
@@ -20,6 +21,9 @@
 [ext_resource type="Environment" uid="uid://61071f7q0sp3" path="res://Levels/cave.tres" id="15_34erp"]
 [ext_resource type="PackedScene" uid="uid://cqbg372nxly4q" path="res://CollectibleSystem/collectible.tscn" id="17_c7pbv"]
 [ext_resource type="PackedScene" uid="uid://b4owieirsltd6" path="res://level_ender.tscn" id="20_hsj5a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hsj5a"]
+size = Vector2(20, 203)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f4pg2"]
 size = Vector2(32, 160)
@@ -338,6 +342,40 @@ animations = [{
 
 [node name="Level 1" type="Node2D"]
 
+[node name="Intructors" type="Node" parent="."]
+
+[node name="InstructorJump" type="Area2D" parent="Intructors"]
+position = Vector2(-3743, -410)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_hsj5a")
+instruction = "jump"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Intructors/InstructorJump"]
+position = Vector2(0, -91.5)
+shape = SubResource("RectangleShape2D_hsj5a")
+
+[node name="InstructorSide" type="Area2D" parent="Intructors"]
+position = Vector2(-4193, -411)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_hsj5a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Intructors/InstructorSide"]
+position = Vector2(0, -91.5)
+shape = SubResource("RectangleShape2D_hsj5a")
+
+[node name="InstructorDash" type="Area2D" parent="Intructors"]
+position = Vector2(-2407, -106)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_hsj5a")
+instruction = "dash"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Intructors/InstructorDash"]
+position = Vector2(0, -91.5)
+shape = SubResource("RectangleShape2D_hsj5a")
+
 [node name="Light" type="CanvasLayer" parent="."]
 layer = 2
 follow_viewport_enabled = true
@@ -358,18 +396,15 @@ position = Vector2(432, -1040)
 script = ExtResource("9_f4pg2")
 metadata/_custom_type_script = "uid://d2bs7i87t7h2s"
 
-[node name="Checkpoint" type="Area2D" parent="CheckpointManager"]
-position = Vector2(-48, -1088)
+[node name="Initial" type="Area2D" parent="CheckpointManager"]
+position = Vector2(-4193, -405)
 script = ExtResource("9_xoyoh")
 can_be_recaptured = false
 metadata/_custom_type_script = "uid://dkbglh8kwo400"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointManager/Checkpoint"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointManager/Initial"]
 position = Vector2(0, -64)
 shape = SubResource("RectangleShape2D_f4pg2")
-
-[node name="FlagAnim" parent="CheckpointManager/Checkpoint" instance=ExtResource("9_rs4xw")]
-position = Vector2(0, -16)
 
 [node name="Checkpoint2" type="Area2D" parent="CheckpointManager"]
 position = Vector2(-1296, -1040)
@@ -482,7 +517,7 @@ tile_map_data = PackedByteArray("AADs/uT/AQAAAAAABQDt/uP/AQAAAAAABQDt/uL/AQAAAAA
 tile_set = ExtResource("2_f4pg2")
 
 [node name="player" parent="." instance=ExtResource("3_rf6l5")]
-position = Vector2(-1280, -80)
+position = Vector2(-4192, -417)
 
 [node name="PointLight2D" type="PointLight2D" parent="player"]
 scale = Vector2(3.0625, 2.71875)
@@ -650,25 +685,25 @@ position = Vector2(2592, -544)
 
 [connection signal="body_entered" from="MiddleGround/BouncePad" to="MiddleGround/BouncePad" method="_on_body_entered"]
 [connection signal="body_exited" from="MiddleGround/BouncePad" to="MiddleGround/BouncePad" method="_on_body_exited"]
-[connection signal="body_entered" from="MiddleGround/@Area2D@21549" to="MiddleGround/@Area2D@21549" method="_on_body_entered"]
-[connection signal="body_exited" from="MiddleGround/@Area2D@21549" to="MiddleGround/@Area2D@21549" method="_on_body_exited"]
-[connection signal="body_entered" from="MiddleGround/@Area2D@21574" to="MiddleGround/@Area2D@21574" method="_on_body_entered"]
-[connection signal="body_exited" from="MiddleGround/@Area2D@21574" to="MiddleGround/@Area2D@21574" method="_on_body_exited"]
-[connection signal="body_entered" from="MiddleGround/@Area2D@21609" to="MiddleGround/@Area2D@21609" method="_on_body_entered"]
-[connection signal="body_exited" from="MiddleGround/@Area2D@21609" to="MiddleGround/@Area2D@21609" method="_on_body_exited"]
-[connection signal="body_entered" from="MiddleGround/@Area2D@21610" to="MiddleGround/@Area2D@21610" method="_on_body_entered"]
-[connection signal="body_exited" from="MiddleGround/@Area2D@21610" to="MiddleGround/@Area2D@21610" method="_on_body_exited"]
-[connection signal="body_entered" from="MiddleGround/@Area2D@21611" to="MiddleGround/@Area2D@21611" method="_on_body_entered"]
-[connection signal="body_exited" from="MiddleGround/@Area2D@21611" to="MiddleGround/@Area2D@21611" method="_on_body_exited"]
-[connection signal="body_entered" from="MiddleGround/@Area2D@21670" to="MiddleGround/@Area2D@21670" method="_on_body_entered"]
-[connection signal="body_exited" from="MiddleGround/@Area2D@21670" to="MiddleGround/@Area2D@21670" method="_on_body_exited"]
-[connection signal="body_entered" from="MiddleGround/@Area2D@21671" to="MiddleGround/@Area2D@21671" method="_on_body_entered"]
-[connection signal="body_exited" from="MiddleGround/@Area2D@21671" to="MiddleGround/@Area2D@21671" method="_on_body_exited"]
-[connection signal="body_entered" from="MiddleGround/@Area2D@21672" to="MiddleGround/@Area2D@21672" method="_on_body_entered"]
-[connection signal="body_exited" from="MiddleGround/@Area2D@21672" to="MiddleGround/@Area2D@21672" method="_on_body_exited"]
+[connection signal="body_entered" from="MiddleGround/@Area2D@247833" to="MiddleGround/@Area2D@247833" method="_on_body_entered"]
+[connection signal="body_exited" from="MiddleGround/@Area2D@247833" to="MiddleGround/@Area2D@247833" method="_on_body_exited"]
+[connection signal="body_entered" from="MiddleGround/@Area2D@247858" to="MiddleGround/@Area2D@247858" method="_on_body_entered"]
+[connection signal="body_exited" from="MiddleGround/@Area2D@247858" to="MiddleGround/@Area2D@247858" method="_on_body_exited"]
+[connection signal="body_entered" from="MiddleGround/@Area2D@247893" to="MiddleGround/@Area2D@247893" method="_on_body_entered"]
+[connection signal="body_exited" from="MiddleGround/@Area2D@247893" to="MiddleGround/@Area2D@247893" method="_on_body_exited"]
+[connection signal="body_entered" from="MiddleGround/@Area2D@247894" to="MiddleGround/@Area2D@247894" method="_on_body_entered"]
+[connection signal="body_exited" from="MiddleGround/@Area2D@247894" to="MiddleGround/@Area2D@247894" method="_on_body_exited"]
+[connection signal="body_entered" from="MiddleGround/@Area2D@247895" to="MiddleGround/@Area2D@247895" method="_on_body_entered"]
+[connection signal="body_exited" from="MiddleGround/@Area2D@247895" to="MiddleGround/@Area2D@247895" method="_on_body_exited"]
+[connection signal="body_entered" from="MiddleGround/@Area2D@247954" to="MiddleGround/@Area2D@247954" method="_on_body_entered"]
+[connection signal="body_exited" from="MiddleGround/@Area2D@247954" to="MiddleGround/@Area2D@247954" method="_on_body_exited"]
+[connection signal="body_entered" from="MiddleGround/@Area2D@247955" to="MiddleGround/@Area2D@247955" method="_on_body_entered"]
+[connection signal="body_exited" from="MiddleGround/@Area2D@247955" to="MiddleGround/@Area2D@247955" method="_on_body_exited"]
+[connection signal="body_entered" from="MiddleGround/@Area2D@247956" to="MiddleGround/@Area2D@247956" method="_on_body_entered"]
+[connection signal="body_exited" from="MiddleGround/@Area2D@247956" to="MiddleGround/@Area2D@247956" method="_on_body_exited"]
 [connection signal="body_entered" from="MiddleGround/YankPoint" to="MiddleGround/YankPoint" method="_on_body_entered"]
 [connection signal="body_exited" from="MiddleGround/YankPoint" to="MiddleGround/YankPoint" method="_on_body_exited"]
-[connection signal="body_entered" from="MiddleGround/@Area2D@21786" to="MiddleGround/@Area2D@21786" method="_on_body_entered"]
-[connection signal="body_exited" from="MiddleGround/@Area2D@21786" to="MiddleGround/@Area2D@21786" method="_on_body_exited"]
+[connection signal="body_entered" from="MiddleGround/@Area2D@248070" to="MiddleGround/@Area2D@248070" method="_on_body_entered"]
+[connection signal="body_exited" from="MiddleGround/@Area2D@248070" to="MiddleGround/@Area2D@248070" method="_on_body_exited"]
 [connection signal="body_entered" from="ElevatorGroup/Elevator/PlayerDetect" to="ElevatorGroup/Elevator" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="ElevatorGroup/Elevator/PlayerDetect" to="ElevatorGroup/Elevator" method="_on_player_detect_body_exited"]

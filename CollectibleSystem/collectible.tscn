@@ -1,7 +1,6 @@
 [gd_scene load_steps=34 format=3 uid="uid://cqbg372nxly4q"]
 
 [ext_resource type="Script" uid="uid://cn24ol38ne40e" path="res://CollectibleSystem/collectible.gd" id="1_u1jan"]
-[ext_resource type="Shader" uid="uid://b7yn3nubx54e1" path="res://CollectibleSystem/collection_shader.gdshader" id="2_gahmt"]
 [ext_resource type="Texture2D" uid="uid://ci2u62oxeeci3" path="res://Assets/AseFiles/sparkle.png" id="2_qy1r2"]
 [ext_resource type="Texture2D" uid="uid://5mm3twnvx000" path="res://Assets/Textures/lightTexture.tres" id="3_88s62"]
 [ext_resource type="Texture2D" uid="uid://bh622ige8mhr1" path="res://Assets/AseFiles/diamondsheet_v2.png" id="3_gahmt"]
@@ -9,8 +8,22 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_qy1r2"]
 radius = 12.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vx44l"]
-shader = ExtResource("2_gahmt")
+[sub_resource type="Shader" id="Shader_u1jan"]
+code = "shader_type canvas_item;
+
+uniform float whiteness = 0.0;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	color.xyz = mix(color.xyz, vec3(1.0),whiteness);
+	
+	COLOR = color;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gahmt"]
+resource_local_to_scene = true
+shader = SubResource("Shader_u1jan")
 shader_parameter/whiteness = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u1jan"]
@@ -304,7 +317,7 @@ shape = SubResource("CircleShape2D_qy1r2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 light_mask = 4
-material = SubResource("ShaderMaterial_vx44l")
+material = SubResource("ShaderMaterial_gahmt")
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_obmxe")
 animation = &"shine"

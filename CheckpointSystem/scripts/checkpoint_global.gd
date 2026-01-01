@@ -17,6 +17,12 @@ func get_current_checkpoint() -> Checkpoint:
 	
 	return null
 
+func get_checkpoint_from_index(index) -> Checkpoint:
+	if current_checkpoint_manager:
+		return current_checkpoint_manager.get_checkpoint_from_id(index)
+	
+	return null
+
 func add_captured_checkpoint(id : int):
 	not_recapturable.append(id)
 
