@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://d2bs7i87t7h2s" path="res://CheckpointSystem/scripts/checkpoint_manager.gd" id="9_f4pg2"]
 [ext_resource type="PackedScene" uid="uid://babejy0btl0nu" path="res://CheckpointSystem/scenes/FlagAnim.tscn" id="9_rs4xw"]
 [ext_resource type="Script" uid="uid://dkbglh8kwo400" path="res://CheckpointSystem/scripts/checkpoint.gd" id="9_xoyoh"]
+[ext_resource type="PackedScene" uid="uid://cyy71o1kbo5dv" path="res://menus/ControlsOverlay/controls_ui.tscn" id="11_hsj5a"]
 [ext_resource type="Environment" uid="uid://61071f7q0sp3" path="res://Levels/cave.tres" id="15_34erp"]
 [ext_resource type="PackedScene" uid="uid://cqbg372nxly4q" path="res://CollectibleSystem/collectible.tscn" id="17_c7pbv"]
 [ext_resource type="PackedScene" uid="uid://b4owieirsltd6" path="res://level_ender.tscn" id="20_hsj5a"]
@@ -533,6 +534,8 @@ initial_room = NodePath("../Rooms/RoomBounds")
 modulate = Color(0.64, 0.64, 0.64, 1)
 z_index = -1
 texture = ExtResource("6_77l7m")
+
+[node name="ControlsUI" parent="Camera" instance=ExtResource("11_hsj5a")]
 
 [node name="ElevatorGroup" type="Node" parent="."]
 

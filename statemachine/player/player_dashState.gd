@@ -2,7 +2,6 @@ extends PlayerState
 
 @export var _fall_state : PlayerState = null
 @export var _dash_duration : Timer = null
-@export var _particle_emitter : CPUParticles2D = null
 
 func enter():
 	if state_machine.character.dashes <= 0:
@@ -14,7 +13,6 @@ func enter():
 		return _fall_state
 
 	_dash_duration.start()
-	_particle_emitter.emitting = true
 
 func process(_delta):
 	if _dash_duration.time_left <= 0:
@@ -27,4 +25,3 @@ func process(_delta):
 
 func exit():
 	state_machine.move_component.end_dash()
-	_particle_emitter.emitting = false

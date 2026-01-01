@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://byr47gp8mwbva"]
+[gd_scene load_steps=9 format=3 uid="uid://byr47gp8mwbva"]
 
+[ext_resource type="Texture2D" uid="uid://bbywii7t1j52o" path="res://Assets/AseFiles/LevelsMenuTitle.png" id="2_qm42x"]
 [ext_resource type="Script" uid="uid://eqix3edryhvy" path="res://menus/level_select_buttons.gd" id="2_ty7iu"]
+[ext_resource type="Texture2D" uid="uid://dh5lkpr1vaxox" path="res://Assets/AseFiles/Buttons/Levels/defaultbuttonlevel1.png" id="3_ys5pv"]
+[ext_resource type="Texture2D" uid="uid://lsji0qw53jjb" path="res://Assets/AseFiles/Buttons/Levels/pressedbuttonlevel1.png" id="4_gtv7w"]
+[ext_resource type="Texture2D" uid="uid://c3vbcn6cn01at" path="res://Assets/AseFiles/Buttons/Levels/defaultbuttonlevel2.png" id="5_hncbd"]
+[ext_resource type="Texture2D" uid="uid://bclsq0sah4elc" path="res://Assets/AseFiles/Buttons/Levels/pressedbuttonlevel2.png" id="6_u8oxk"]
+[ext_resource type="Texture2D" uid="uid://coq6lfj80ll5k" path="res://Assets/AseFiles/Buttons/Levels/defaultbuttonlevel3.png" id="7_a4lm0"]
+[ext_resource type="Texture2D" uid="uid://cju6064fq7wew" path="res://Assets/AseFiles/Buttons/Levels/pressedbuttonlevel3.png" id="8_rdncl"]
 
 [node name="levelSelectMenu" type="Control"]
 layout_mode = 3
@@ -24,17 +31,24 @@ offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Level1" type="Button" parent="VBoxContainer"]
+[node name="Title" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
-text = "Level 1"
+texture = ExtResource("2_qm42x")
 
-[node name="Level2" type="Button" parent="VBoxContainer"]
+[node name="Level1" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
-text = "Level 2"
+texture_normal = ExtResource("3_ys5pv")
+texture_pressed = ExtResource("4_gtv7w")
 
-[node name="Level3" type="Button" parent="VBoxContainer"]
+[node name="Level2" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
-text = "Level 3"
+texture_normal = ExtResource("5_hncbd")
+texture_pressed = ExtResource("6_u8oxk")
+
+[node name="Level3" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("7_a4lm0")
+texture_pressed = ExtResource("8_rdncl")
 
 [node name="BackButtonLS" type="Button" parent="."]
 layout_mode = 1

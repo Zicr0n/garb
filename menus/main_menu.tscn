@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://ctvreo1y474rv"]
+[gd_scene load_steps=38 format=4 uid="uid://ctvreo1y474rv"]
 
 [ext_resource type="Script" uid="uid://covvuvdu1veku" path="res://menus/main_menu_buttons.gd" id="1_8gy84"]
 [ext_resource type="Texture2D" uid="uid://c27bbje0vpolq" path="res://Assets/AseFiles/ElevatorPulleyTop.png" id="1_oblsv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cp8v8dtwcqixa" path="res://Assets/AseFiles/elevator.png" id="3_a63lr"]
 [ext_resource type="PackedScene" uid="uid://bjxev4es20eod" path="res://menus/settings_menu.tscn" id="3_yjgyn"]
 [ext_resource type="Texture2D" uid="uid://lpdu8d6gprn8" path="res://Assets/AseFiles/Buttons/defaultbuttonstart.png" id="5_rx1ud"]
+[ext_resource type="Texture2D" uid="uid://vojqmg7y4cl5" path="res://Assets/AseFiles/MainMenuTitle.png" id="5_ygrj5"]
 [ext_resource type="Script" uid="uid://csgyiceukp6i5" path="res://menus/settings_menu.gd" id="6_hswy5"]
 [ext_resource type="PackedScene" uid="uid://d1bvv3jk0g1fe" path="res://menus/settings_menu/settings_menu.tscn" id="6_pwbes"]
 [ext_resource type="Texture2D" uid="uid://oss5c7wo6m44" path="res://Assets/AseFiles/Buttons/pressedbuttonstart.png" id="6_wcdpt"]
@@ -262,6 +263,10 @@ offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Title" type="TextureRect" parent="mainMenuButtons/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_ygrj5")
+
 [node name="StartGame" type="TextureButton" parent="mainMenuButtons/VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("5_rx1ud")
@@ -333,8 +338,10 @@ main_menu = NodePath("../mainMenuButtons")
 
 [connection signal="body_entered" from="Tiles/BouncePad" to="Tiles/BouncePad" method="_on_body_entered"]
 [connection signal="body_exited" from="Tiles/BouncePad" to="Tiles/BouncePad" method="_on_body_exited"]
-[connection signal="body_entered" from="Tiles/@Area2D@81353" to="Tiles/@Area2D@81353" method="_on_body_entered"]
-[connection signal="body_exited" from="Tiles/@Area2D@81353" to="Tiles/@Area2D@81353" method="_on_body_exited"]
+[connection signal="body_entered" from="Tiles/@Area2D@32466" to="Tiles/@Area2D@32466" method="_on_body_entered"]
+[connection signal="body_exited" from="Tiles/@Area2D@32466" to="Tiles/@Area2D@32466" method="_on_body_exited"]
+[connection signal="body_entered" from="Tiles/@Area2D@75905" to="Tiles/@Area2D@75905" method="_on_body_entered"]
+[connection signal="body_exited" from="Tiles/@Area2D@75905" to="Tiles/@Area2D@75905" method="_on_body_exited"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/StartGame" to="mainMenuButtons" method="_on_start_game_pressed"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/Settings" to="mainMenuButtons" method="_on_settings_pressed"]
 [connection signal="pressed" from="mainMenuButtons/VBoxContainer/QuitGame" to="mainMenuButtons" method="_on_quit_game_pressed"]
