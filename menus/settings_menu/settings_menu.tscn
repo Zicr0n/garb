@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1bvv3jk0g1fe"]
+[gd_scene load_steps=10 format=3 uid="uid://d1bvv3jk0g1fe"]
 
 [ext_resource type="Script" uid="uid://cpfmjgrhcjyij" path="res://menus/settings_menu/settings_manager.gd" id="1_fiqec"]
 [ext_resource type="Theme" uid="uid://b0d2uqrdtxl58" path="res://menus/settings_menu/settings_menu.tres" id="1_p4eom"]
@@ -6,8 +6,6 @@
 [ext_resource type="Script" uid="uid://bwyosr8gb6tgw" path="res://menus/settings_menu/setting_dropdown.gd" id="3_mlw3h"]
 [ext_resource type="PackedScene" uid="uid://cl2wm71w8mjor" path="res://menus/settings_menu/setting_slider.tscn" id="4_2tlyv"]
 [ext_resource type="PackedScene" uid="uid://cmm4ipby5u6f7" path="res://menus/settings_menu/setting_keybind.tscn" id="5_2tlyv"]
-[ext_resource type="Script" uid="uid://4oyo7ahakdv" path="res://test.gd" id="6_2tlyv"]
-[ext_resource type="AudioStream" uid="uid://cfvw0e2aa2l1b" path="res://wrong-letter.mp3" id="7_2d6lb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_27okc"]
 font_size = 32
@@ -38,15 +36,6 @@ label_settings = SubResource("LabelSettings_27okc")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
-
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_right = 82.0
-offset_bottom = 71.0
-script = ExtResource("6_2tlyv")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="Button"]
-stream = ExtResource("7_2d6lb")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
@@ -222,7 +211,5 @@ popup/item_1/text = "Trumpet"
 popup/item_1/id = 1
 popup/item_2/text = "kark"
 popup/item_2/id = 2
-
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
 
 [editable path="ScrollContainer/Settings/Master_Slider"]

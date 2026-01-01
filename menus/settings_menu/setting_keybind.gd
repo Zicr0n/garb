@@ -4,12 +4,10 @@ var waiting_for_input = false
 
 @export var ACTION : String = ""
 @export var action_name : String = ""
-var current_key = null
-@onready var label: Label = $VBoxContainer/Label
-
 @export var key_1 : KeybindHolder = null
 
-var settings_directory = "user://user_settings.miku"
+var current_key = null
+@onready var label: Label = $VBoxContainer/Label
 
 var config : ConfigFile = null
 var keybinds_section = "keybinds"
@@ -17,11 +15,9 @@ var keybinds_section = "keybinds"
 func _ready() -> void:
 	label.text = action_name
 	
-	config = ConfigFile.new()
+	config = SavingSystem.config_file
 	
-	var error = config.load(settings_directory)
-	
-	if error != OK:
+	if config == null:
 		return
 	
 	var default = InputMap.action_get_events(ACTION)[0].physical_keycode
@@ -60,4 +56,4 @@ func set_keybind(keycode):
 	
 	config.set_value(keybinds_section, ACTION, keycode)
 	
-	config.save(settings_directory)
+	SavingSystem.save_config()

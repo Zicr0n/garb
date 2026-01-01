@@ -197,9 +197,9 @@ texture = ExtResource("3_1wk85")
 [node name="PlayerLieDown" type="Sprite2D" parent="."]
 position = Vector2(1316, 156)
 texture = ExtResource("2_kxjum")
-hframes = 11
-vframes = 6
-frame = 44
+hframes = 16
+vframes = 2
+frame = 19
 
 [node name="PointLight2D" type="PointLight2D" parent="PlayerLieDown"]
 position = Vector2(0, 17)
@@ -209,9 +209,9 @@ texture = ExtResource("5_b0cx5")
 position = Vector2(0, -200)
 rotation = -1.5707964
 texture = ExtResource("2_kxjum")
-hframes = 11
-vframes = 6
-frame = 22
+hframes = 16
+vframes = 2
+frame = 12
 
 [node name="PointLight2D" type="PointLight2D" parent="PlayerFalling"]
 texture = ExtResource("5_b0cx5")
