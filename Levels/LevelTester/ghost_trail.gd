@@ -28,20 +28,21 @@ func _on_interval_timeout() -> void:
 	if playerPositions.size() > 0 and player.global_position == playerPositions.back():
 		return
 	playerPositions.append(player.global_position)
-	var snapshot := Sprite2D.new()
+	#var snapshot := Sprite2D.new()
 	var sprite_child := player.get_node_or_null("Sprite2D")
-
-	if sprite_child:
-		snapshot.texture = dash_sprite
-		snapshot.flip_h = sprite_child.flip_h
-		snapshot.scale = sprite_child.scale
-		snapshot.modulate = Color(1, 1, 1, 0.2)# transparent so it looks ghostly
+#
+	#if sprite_child:
+		#snapshot.texture = dash_sprite
+		#snapshot.flip_h = sprite_child.flip_h
+		#snapshot.scale = sprite_child.scale
+		#snapshot.modulate = Color(1, 1, 1, 0.2)# transparent so it looks ghostly
 
 	var ghost_instance = ghost_scene.instantiate()
-	ghost_instance.add_child(snapshot)
+	ghost_instance.scale.x = 1 if sprite_child.flip_h == false else -1
+	#ghost_instance.add_child(snapshot)
 	ghost_instance.global_position = player.global_position
 
 	ghost_instance.lifetime = lifetime
 
 	get_tree().root.add_child(ghost_instance)
-	playerPositions.append(snapshot.global_position)
+	playerPositions.append(ghost_instance.global_position)

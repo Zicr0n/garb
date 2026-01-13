@@ -1,10 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://d068v4idjfcgf"]
+[gd_scene load_steps=5 format=3 uid="uid://d068v4idjfcgf"]
 
 [ext_resource type="Script" uid="uid://b67hj0lkm18yq" path="res://Levels/LevelTester/dash_ghost.gd" id="1_rifgr"]
+[ext_resource type="Texture2D" uid="uid://2uo1w5hhdik7" path="res://Assets/AseFiles/player-Sheet.png" id="2_l7uwu"]
+
+[sub_resource type="Shader" id="Shader_l7uwu"]
+code = "shader_type canvas_item;
+
+uniform float whiteness = 0.0;
+uniform vec4 col : source_color = vec4(1.0);
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	color.xyz = mix(color.xyz, col.xyz,whiteness);
+	color.a *= col.a;
+	
+	COLOR = color;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycq2q"]
+shader = SubResource("Shader_l7uwu")
+shader_parameter/whiteness = 1.0
+shader_parameter/col = Color(1, 0.40000004, 0, 0.36862746)
 
 [node name="DashGhost" type="Node2D" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_rifgr")
 timer = NodePath("Timer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ycq2q")
+texture = ExtResource("2_l7uwu")
+hframes = 16
+vframes = 2
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
