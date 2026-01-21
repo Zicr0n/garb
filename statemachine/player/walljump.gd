@@ -2,6 +2,7 @@ extends PlayerState
 
 @export var _fall_state : PlayerState = null
 @onready var walljump_timer: Timer = $WalljumpDuration
+@export var _dash_state: PlayerState = null;
 
 var dir_x = 0
 
@@ -29,6 +30,9 @@ func enter():
 
 func process(_delta):
 	dir_x = state_machine.input_component.move_dir_x()
+
+	if state_machine.input_component.is_dash_just_pressed() and state_machine.character.dashes > 0:
+		return _dash_state
 
 	return null
 

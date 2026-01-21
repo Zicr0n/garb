@@ -33,6 +33,9 @@ func process(_delta):
 	if state_machine.input_component.is_yank_just_pressed():
 		return _yank_state
 
+	if state_machine.input_component.is_dash_just_pressed() and state_machine.character.dashes > 0:
+		return _dash_state
+
 	return null
 
 func input(event : InputEvent):

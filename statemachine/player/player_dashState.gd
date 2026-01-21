@@ -4,9 +4,6 @@ extends PlayerState
 @export var _dash_duration : Timer = null
 
 func enter():
-	if state_machine.character.dashes <= 0:
-		return _fall_state
-
 	var dashing = state_machine.move_component.dash(state_machine.input_component.aim_dash())
 
 	if !dashing:
