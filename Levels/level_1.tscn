@@ -1,8 +1,9 @@
-[gd_scene load_steps=58 format=4 uid="uid://edo7nvmtqnrp"]
+[gd_scene load_steps=59 format=4 uid="uid://edo7nvmtqnrp"]
 
 [ext_resource type="Script" uid="uid://csu1xxqii6j0c" path="res://CollectibleSystem/collectibles_manager.gd" id="1_1rr3k"]
 [ext_resource type="TileSet" uid="uid://dhpa24av1r8g1" path="res://Levels/BackGround.tres" id="1_2hkqn"]
 [ext_resource type="Script" uid="uid://bbuksoc4cnyt1" path="res://Levels/instructor.gd" id="1_hsj5a"]
+[ext_resource type="Script" uid="uid://dt34vsqb4ie0u" path="res://Levels/fps.gd" id="1_uclwg"]
 [ext_resource type="TileSet" uid="uid://c8ijpwpmgvkts" path="res://tileset/cave.tres" id="2_f4pg2"]
 [ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://player/player.tscn" id="3_rf6l5"]
 [ext_resource type="PackedScene" uid="uid://d4hwe3dbyj3pg" path="res://Camera/camera.tscn" id="4_rf6l5"]
@@ -12,10 +13,10 @@
 [ext_resource type="Script" uid="uid://cm16s2jky6g2j" path="res://Levels/elevator.gd" id="6_rfktq"]
 [ext_resource type="Texture2D" uid="uid://beiibv3dmao1v" path="res://Assets/AseFiles/Rubble.png" id="6_rs4xw"]
 [ext_resource type="Texture2D" uid="uid://c27bbje0vpolq" path="res://Assets/AseFiles/ElevatorPulleyTop.png" id="7_lk57d"]
-[ext_resource type="PackedScene" uid="uid://bhle1s1ioja0u" path="res://Levels/Level Parts/Scenes/btn_door.tscn" id="8_77x7w"]
-[ext_resource type="PackedScene" uid="uid://l8b8bf2iqn2e" path="res://Levels/Level Parts/Scenes/button.tscn" id="9_62b6n"]
+[ext_resource type="PackedScene" uid="uid://dips7kivqxr0y" path="res://Levels/Level Parts/Scenes/btn_door.tscn" id="8_77x7w"]
+[ext_resource type="PackedScene" path="res://Levels/Level Parts/Scenes/button.tscn" id="9_62b6n"]
 [ext_resource type="Script" uid="uid://d2bs7i87t7h2s" path="res://CheckpointSystem/scripts/checkpoint_manager.gd" id="9_f4pg2"]
-[ext_resource type="PackedScene" uid="uid://babejy0btl0nu" path="res://CheckpointSystem/scenes/FlagAnim.tscn" id="9_rs4xw"]
+[ext_resource type="PackedScene" path="res://CheckpointSystem/scenes/FlagAnim.tscn" id="9_rs4xw"]
 [ext_resource type="Script" uid="uid://dkbglh8kwo400" path="res://CheckpointSystem/scripts/checkpoint.gd" id="9_xoyoh"]
 [ext_resource type="PackedScene" uid="uid://cyy71o1kbo5dv" path="res://menus/ControlsOverlay/controls_ui.tscn" id="11_hsj5a"]
 [ext_resource type="Environment" uid="uid://61071f7q0sp3" path="res://Levels/cave.tres" id="15_34erp"]
@@ -341,6 +342,7 @@ animations = [{
 }]
 
 [node name="Level 1" type="Node2D"]
+script = ExtResource("1_uclwg")
 
 [node name="Intructors" type="Node" parent="."]
 
@@ -536,6 +538,7 @@ z_index = -1
 texture = ExtResource("6_77l7m")
 
 [node name="ControlsUI" parent="Camera" instance=ExtResource("11_hsj5a")]
+visible = false
 
 [node name="ElevatorGroup" type="Node" parent="."]
 
