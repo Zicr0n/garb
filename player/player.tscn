@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://b8kifcuaee8n3"]
+[gd_scene load_steps=76 format=3 uid="uid://b8kifcuaee8n3"]
 
 [ext_resource type="Script" uid="uid://cniufabxudqvo" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Script" uid="uid://c2ec4273d274r" path="res://player/room_detect.gd" id="2_65viv"]
@@ -27,6 +27,12 @@
 [ext_resource type="Script" uid="uid://edkqhjlxx51y" path="res://menus/pause_menu/pause_menu.gd" id="22_s7qer"]
 [ext_resource type="PackedScene" uid="uid://d1bvv3jk0g1fe" path="res://menus/settings_menu/settings_menu.tscn" id="24_g4c7l"]
 [ext_resource type="Texture2D" uid="uid://dn7oq00gpfuxg" path="res://Assets/FREE/KeyBinds/Keyboard Letters and Symbols.png" id="26_7pqkx"]
+[ext_resource type="Texture2D" uid="uid://lpdu8d6gprn8" path="res://Assets/AseFiles/Buttons/defaultbuttonstart.png" id="27_5ejfk"]
+[ext_resource type="Texture2D" uid="uid://oss5c7wo6m44" path="res://Assets/AseFiles/Buttons/pressedbuttonstart.png" id="28_jd2rm"]
+[ext_resource type="Texture2D" uid="uid://bjl0bfkaayupi" path="res://Assets/AseFiles/Buttons/defaultbuttonsettings.png" id="29_q28gw"]
+[ext_resource type="Texture2D" uid="uid://x2vm133mkfq" path="res://Assets/AseFiles/Buttons/pressedbuttonsettings.png" id="30_ge24q"]
+[ext_resource type="Texture2D" uid="uid://cctpwgb5dica4" path="res://Assets/AseFiles/Buttons/defaultbuttonquit.png" id="31_pnw6m"]
+[ext_resource type="Texture2D" uid="uid://bib6yg574e4qu" path="res://Assets/AseFiles/Buttons/pressedbuttonquit.png" id="32_1so5t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
 radius = 7.0
@@ -789,9 +795,8 @@ text = "
 "
 label_settings = SubResource("LabelSettings_65viv")
 
-[node name="PauseMenu" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("start_nav_element", "continue_button", "options_button", "main_menu_button", "restart_button", "options_menu", "pause_menu")]
+[node name="PauseMenu" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("start_nav_element", "continue_button", "restart_button", "options_button", "main_menu_button", "options_menu", "pause_menu")]
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -802,9 +807,9 @@ mouse_filter = 2
 script = ExtResource("22_s7qer")
 start_nav_element = NodePath("Pause/VBoxContainer2/Continue")
 continue_button = NodePath("Pause/VBoxContainer2/Continue")
+restart_button = NodePath("Pause/VBoxContainer2/Restart")
 options_button = NodePath("Pause/VBoxContainer2/Options")
 main_menu_button = NodePath("Pause/VBoxContainer2/MainMenu")
-restart_button = NodePath("Pause/VBoxContainer2/Restart")
 options_menu = NodePath("SettingsMenu")
 pause_menu = NodePath("Pause")
 
@@ -847,21 +852,25 @@ size_flags_horizontal = 4
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Continue" type="Button" parent="CanvasLayer/PauseMenu/Pause/VBoxContainer2"]
+[node name="Continue" type="TextureButton" parent="CanvasLayer/PauseMenu/Pause/VBoxContainer2"]
 layout_mode = 2
-text = "Continue"
+texture_normal = ExtResource("27_5ejfk")
+texture_pressed = ExtResource("28_jd2rm")
 
-[node name="Restart" type="Button" parent="CanvasLayer/PauseMenu/Pause/VBoxContainer2"]
+[node name="Restart" type="TextureButton" parent="CanvasLayer/PauseMenu/Pause/VBoxContainer2"]
 layout_mode = 2
-text = "Restart"
+texture_normal = ExtResource("27_5ejfk")
+texture_pressed = ExtResource("28_jd2rm")
 
-[node name="Options" type="Button" parent="CanvasLayer/PauseMenu/Pause/VBoxContainer2"]
+[node name="Options" type="TextureButton" parent="CanvasLayer/PauseMenu/Pause/VBoxContainer2"]
 layout_mode = 2
-text = "Options"
+texture_normal = ExtResource("29_q28gw")
+texture_pressed = ExtResource("30_ge24q")
 
-[node name="MainMenu" type="Button" parent="CanvasLayer/PauseMenu/Pause/VBoxContainer2"]
+[node name="MainMenu" type="TextureButton" parent="CanvasLayer/PauseMenu/Pause/VBoxContainer2"]
 layout_mode = 2
-text = "Main Menu"
+texture_normal = ExtResource("31_pnw6m")
+texture_pressed = ExtResource("32_1so5t")
 
 [node name="Header" type="Label" parent="CanvasLayer/PauseMenu/Pause"]
 layout_mode = 0
