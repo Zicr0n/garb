@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://xudb0h0qn0bm"]
+
+[ext_resource type="Script" uid="uid://c72hcb3aba176" path="res://Testing/fps_meter.gd" id="1_45o6r"]
+
+[node name="FPSmeter" type="CanvasLayer" node_paths=PackedStringArray("label")]
+script = ExtResource("1_45o6r")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "placeholder FPS"

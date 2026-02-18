@@ -1,6 +1,6 @@
 extends Node2D
+class_name BenchMark
 
-@export var intensity_multiplier : float = 1.0
 @export var scene_to_instantiate : PackedScene = null
 @export var preload_amount : int = 10
 @export var parent = self

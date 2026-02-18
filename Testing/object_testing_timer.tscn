@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://mqfy82k00va"]
+
+[ext_resource type="Script" uid="uid://cle7bqj2gpt7s" path="res://Testing/object_testing_timer.gd" id="1_sot5y"]
+
+[node name="ObjectTestingSpawner" type="Node"]
+script = ExtResource("1_sot5y")
