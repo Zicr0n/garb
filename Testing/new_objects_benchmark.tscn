@@ -1,6 +1,37 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=2 format=3 uid="uid://d3e5pihgdfvx"]
 
 [ext_resource type="Script" uid="uid://86hftrj04t4v" path="res://Testing/new_objects_benchmark.gd" id="1_tfh5i"]
 
 [node name="NewObjectsBenchmark" type="Node2D"]
 script = ExtResource("1_tfh5i")
+=======
+[gd_scene load_steps=6 format=3 uid="uid://d3e5pihgdfvx"]
+
+[ext_resource type="Script" uid="uid://dsgt2pxudxorg" path="res://Testing/new_objects_benchmark.gd" id="1_tfh5i"]
+[ext_resource type="Script" uid="uid://biigmw32gy7r5" path="res://Testing/other_testing_timer.gd" id="2_0tb2y"]
+[ext_resource type="PackedScene" uid="uid://70qgduff08wn" path="res://Testing/testing_bullet.tscn" id="2_gxl2r"]
+[ext_resource type="PackedScene" uid="uid://xudb0h0qn0bm" path="res://Testing/fps_meter.tscn" id="4_gd4cr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tb2y"]
+size = Vector2(16, 368)
+
+[node name="NewObjectsBenchmark" type="Node2D" node_paths=PackedStringArray("parent")]
+script = ExtResource("1_tfh5i")
+scene_to_instantiate = ExtResource("2_gxl2r")
+parent = NodePath(".")
+
+[node name="FPSmeter" parent="." instance=ExtResource("4_gd4cr")]
+
+[node name="OtherTestingTimer" type="Timer" parent="." node_paths=PackedStringArray("benchmark")]
+script = ExtResource("2_0tb2y")
+benchmark = NodePath("..")
+speed = Vector2(10, 0)
+
+[node name="Wall" type="CharacterBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(616, 184)
+shape = SubResource("RectangleShape2D_0tb2y")
+>>>>>>> Stashed changes
