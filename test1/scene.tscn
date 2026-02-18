@@ -1,8 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bg1t4e83mc5xc"]
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_5eo3a"]
-[ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://player/player.tscn" id="3_finam"]
+[ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://Levels/Level Parts/player/player.tscn" id="3_finam"]
 [ext_resource type="PackedScene" uid="uid://di4cl6i0wcrea" path="res://Levels/Level Parts/Scenes/wind_tunnel.tscn" id="3_g7snt"]
+
 
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h82q0"]

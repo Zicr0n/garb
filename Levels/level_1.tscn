@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bbuksoc4cnyt1" path="res://Levels/instructor.gd" id="1_hsj5a"]
 [ext_resource type="Script" uid="uid://dt34vsqb4ie0u" path="res://Levels/fps.gd" id="1_uclwg"]
 [ext_resource type="TileSet" uid="uid://c8ijpwpmgvkts" path="res://tileset/cave.tres" id="2_f4pg2"]
-[ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://player/player.tscn" id="3_rf6l5"]
+[ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://Levels/Level Parts/player/player.tscn" id="3_rf6l5"]
 [ext_resource type="PackedScene" uid="uid://d4hwe3dbyj3pg" path="res://Camera/camera.tscn" id="4_rf6l5"]
 [ext_resource type="PackedScene" uid="uid://c6jqpfm5h82k4" path="res://Levels/Level Parts/Scenes/room_bounds.tscn" id="4_syshm"]
 [ext_resource type="Texture2D" uid="uid://cp8v8dtwcqixa" path="res://Assets/AseFiles/elevator.png" id="5_f4pg2"]
@@ -22,6 +22,7 @@
 [ext_resource type="Environment" uid="uid://61071f7q0sp3" path="res://Levels/cave.tres" id="15_34erp"]
 [ext_resource type="PackedScene" uid="uid://cqbg372nxly4q" path="res://CollectibleSystem/collectible.tscn" id="17_c7pbv"]
 [ext_resource type="PackedScene" uid="uid://b4owieirsltd6" path="res://level_ender.tscn" id="20_hsj5a"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hsj5a"]
 size = Vector2(20, 203)

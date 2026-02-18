@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d34etog4kb360"
-path="res://.godot/imported/blowmegng.webp-afd513953c8fbd665333f325dd70a3a3.ctex"
+path="res://.godot/imported/blowmegng.webp-7ba0f7c81a305a69992a8e56d57435d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/blowmegng.webp"
-dest_files=["res://.godot/imported/blowmegng.webp-afd513953c8fbd665333f325dd70a3a3.ctex"]
+source_file="res://Levels/Level Parts/player/blowmegng.webp"
+dest_files=["res://.godot/imported/blowmegng.webp-7ba0f7c81a305a69992a8e56d57435d3.ctex"]
 
 [params]
 

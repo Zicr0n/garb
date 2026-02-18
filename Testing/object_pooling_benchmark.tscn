@@ -1,34 +1,10 @@
-<<<<<<< Updated upstream
-[gd_scene format=3 uid="uid://ckbdcxxdgt1a0"]
+[gd_scene load_steps=3 format=3 uid="uid://ckbdcxxdgt1a0"]
 
-[node name="ObjectPoolingBenchmark" type="Node2D"]
-=======
-[gd_scene load_steps=6 format=3 uid="uid://ckbdcxxdgt1a0"]
-
-[ext_resource type="Script" uid="uid://86hftrj04t4v" path="res://Testing/object_pooling_benchmark.gd" id="1_svf32"]
-[ext_resource type="PackedScene" uid="uid://70qgduff08wn" path="res://Testing/testing_bullet.tscn" id="2_svf32"]
-[ext_resource type="PackedScene" uid="uid://mqfy82k00va" path="res://Testing/object_testing_timer.tscn" id="3_clttw"]
-[ext_resource type="PackedScene" uid="uid://xudb0h0qn0bm" path="res://Testing/fps_meter.tscn" id="3_gn5sp"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_svf32"]
-size = Vector2(16, 368)
+[ext_resource type="Script" uid="uid://86hftrj04t4v" path="res://Testing/new_objects_benchmark.gd" id="1_5txp8"]
+[ext_resource type="PackedScene" uid="uid://cqbg372nxly4q" path="res://CollectibleSystem/collectible.tscn" id="2_svf32"]
 
 [node name="ObjectPoolingBenchmark" type="Node2D" node_paths=PackedStringArray("parent")]
-script = ExtResource("1_svf32")
+script = ExtResource("1_5txp8")
 scene_to_instantiate = ExtResource("2_svf32")
+preload_amount = 100
 parent = NodePath(".")
-
-[node name="FPSmeter" parent="." instance=ExtResource("3_gn5sp")]
-
-[node name="ObjectTestingTimer" parent="." node_paths=PackedStringArray("object_pooling_benchmark") instance=ExtResource("3_clttw")]
-object_pooling_benchmark = NodePath("..")
-speed = Vector2(10, 0)
-cooldown = 0.0005499999999999999
-
-[node name="Wall" type="CharacterBody2D" parent="."]
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
-position = Vector2(616, 184)
-shape = SubResource("RectangleShape2D_svf32")
->>>>>>> Stashed changes
