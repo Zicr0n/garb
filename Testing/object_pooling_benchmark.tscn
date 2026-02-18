@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://ckbdcxxdgt1a0"]
+[gd_scene load_steps=3 format=3 uid="uid://ckbdcxxdgt1a0"]
 
-[node name="ObjectPoolingBenchmark" type="Node2D"]
+[ext_resource type="Script" uid="uid://86hftrj04t4v" path="res://Testing/new_objects_benchmark.gd" id="1_5txp8"]
+[ext_resource type="PackedScene" uid="uid://cqbg372nxly4q" path="res://CollectibleSystem/collectible.tscn" id="2_svf32"]
+
+[node name="ObjectPoolingBenchmark" type="Node2D" node_paths=PackedStringArray("parent")]
+script = ExtResource("1_5txp8")
+scene_to_instantiate = ExtResource("2_svf32")
+preload_amount = 100
+parent = NodePath(".")

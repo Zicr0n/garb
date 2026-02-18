@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=4 uid="uid://bu7tg0xwu83m2"]
 
-[ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://player/player.tscn" id="2_oomf2"]
+[ext_resource type="PackedScene" uid="uid://b8kifcuaee8n3" path="res://Levels/Level Parts/player/player.tscn" id="2_oomf2"]
 [ext_resource type="PackedScene" uid="uid://d4hwe3dbyj3pg" path="res://Camera/camera.tscn" id="3_5dgbu"]
 [ext_resource type="TileSet" uid="uid://c8ijpwpmgvkts" path="res://tileset/cave.tres" id="3_meme6"]
 [ext_resource type="PackedScene" uid="uid://bsoq3wpilqxjt" path="res://Levels/Level Parts/Scenes/guide_char.tscn" id="5_s7otp"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://d2bs7i87t7h2s" path="res://CheckpointSystem/scripts/checkpoint_manager.gd" id="11_6sfkf"]
 [ext_resource type="Script" uid="uid://c6bnlbgeosmhn" path="res://Levels/Level Parts/Scripts/yank_point.gd" id="13_strcr"]
 [ext_resource type="Texture2D" uid="uid://sypl2u85cu64" path="res://YankTest/wanker.jpg" id="14_1mivt"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6sfkf"]
 size = Vector2(20, 66)

@@ -2,15 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://dfedybx3etkpr" path="res://icon.svg" id="1_364m4"]
 [ext_resource type="Script" uid="uid://haxl2ftc6qc1" path="res://YankTest/yanker.gd" id="1_sk6g7"]
-[ext_resource type="Script" uid="uid://c3qb0f2v1g87h" path="res://player/player_moveComponent.gd" id="2_sk6g7"]
+[ext_resource type="Script" uid="uid://c3qb0f2v1g87h" path="res://Levels/Level Parts/player/player_moveComponent.gd" id="2_sk6g7"]
 [ext_resource type="Script" uid="uid://ojfalqk7a0sv" path="res://hit_system/hurtbox.gd" id="3_50pxr"]
-[ext_resource type="Script" uid="uid://qlk0erq25k8y" path="res://player/input_component.gd" id="3_crleu"]
+[ext_resource type="Script" uid="uid://qlk0erq25k8y" path="res://Levels/Level Parts/player/input_component.gd" id="3_crleu"]
 [ext_resource type="Script" uid="uid://c1240vqmt4squ" path="res://statemachine/player/player_statemachine.gd" id="4_50pxr"]
 [ext_resource type="Script" uid="uid://b5psxt4dsqn1t" path="res://statemachine/player/player_idleState.gd" id="5_4bq8a"]
 [ext_resource type="Script" uid="uid://cyrk46itcj7hg" path="res://statemachine/player/player_runState.gd" id="6_1g5u3"]
 [ext_resource type="Script" uid="uid://ciuanf5meh5yq" path="res://statemachine/player/player_jumpState.gd" id="7_uqd35"]
 [ext_resource type="Script" uid="uid://bt7jmrbfpepbj" path="res://statemachine/player/player_fallState.gd" id="8_bgold"]
-[ext_resource type="Script" uid="uid://d0og7kbpdb86e" path="res://player/player_healthComponent.gd" id="10_crleu"]
+[ext_resource type="Script" uid="uid://d0og7kbpdb86e" path="res://Levels/Level Parts/player/player_healthComponent.gd" id="10_crleu"]
+
 
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u4cas"]
