@@ -1,9 +1,6 @@
 extends Node2D
 class_name BenchMark
-
-<<<<<<< Updated upstream
-@export var intensity_multiplier : float = 0
-=======
+		  
 @export var scene_to_instantiate : PackedScene = null
 @export var preload_amount : int = 10
 @export var parent = self
@@ -17,4 +14,3 @@ func create_object() -> Node2D:
 
 func kill(area2d : Area2D):
 	area2d.queue_free()
->>>>>>> Stashed changes

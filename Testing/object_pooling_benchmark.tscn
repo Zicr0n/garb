@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-[gd_scene format=3 uid="uid://ckbdcxxdgt1a0"]
 
-[node name="ObjectPoolingBenchmark" type="Node2D"]
-=======
 [gd_scene load_steps=6 format=3 uid="uid://ckbdcxxdgt1a0"]
 
 [ext_resource type="Script" uid="uid://86hftrj04t4v" path="res://Testing/object_pooling_benchmark.gd" id="1_svf32"]
@@ -31,4 +27,3 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
 position = Vector2(616, 184)
 shape = SubResource("RectangleShape2D_svf32")
->>>>>>> Stashed changes

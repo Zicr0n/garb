@@ -1,11 +1,4 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=2 format=3 uid="uid://d3e5pihgdfvx"]
 
-[ext_resource type="Script" uid="uid://86hftrj04t4v" path="res://Testing/new_objects_benchmark.gd" id="1_tfh5i"]
-
-[node name="NewObjectsBenchmark" type="Node2D"]
-script = ExtResource("1_tfh5i")
-=======
 [gd_scene load_steps=6 format=3 uid="uid://d3e5pihgdfvx"]
 
 [ext_resource type="Script" uid="uid://dsgt2pxudxorg" path="res://Testing/new_objects_benchmark.gd" id="1_tfh5i"]
@@ -34,4 +27,3 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
 position = Vector2(616, 184)
 shape = SubResource("RectangleShape2D_0tb2y")
->>>>>>> Stashed changes
