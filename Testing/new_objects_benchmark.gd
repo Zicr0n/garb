@@ -7,7 +7,7 @@ class_name BenchMark
 var active_scenes : Array = []
 
 func _ready() -> void:
-	pass
+	print("hello world")
 
 func create_object() -> Node2D:
 	return scene_to_instantiate.instantiate()
