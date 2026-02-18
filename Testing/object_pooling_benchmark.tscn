@@ -10,7 +10,7 @@
 size = Vector2(16, 368)
 
 [node name="ObjectPoolingBenchmark" type="Node2D" node_paths=PackedStringArray("parent")]
-script = ExtResource("1_svf32")
+script = ExtResource("1_5txp8")
 scene_to_instantiate = ExtResource("2_svf32")
 parent = NodePath(".")
 
