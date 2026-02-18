@@ -86,6 +86,7 @@ func move_on_ground(direction : float, dt : float) -> void:
 	var accel = TURNING_ACCELERATION_GROUND if is_turning else ACCELERATION_GROUND
 	
 	if direction != 0:
+		last_move_dir = direction
 		characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, target_speed, accel * dt)
 	else:
 		characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, 0, DECELERATION_GROUND * dt)
@@ -114,13 +115,15 @@ func move_in_air(direction : float, dt, air_fric_multi = 1.0) -> void:
 	var target_speed := MOVE_SPEED_AIR * direction
 	
 	if direction != 0:
+		last_move_dir = direction
 		characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, target_speed, ACCELERATION_AIR * dt * air_fric_multi)
 	else:
 		if characterBody2D.get_platform_velocity().x != 0.0:
 			characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, characterBody2D.get_platform_velocity().x, DECELERATION_AIR * dt * air_fric_multi)
 		else:
 			characterBody2D.velocity.x = move_toward(characterBody2D.velocity.x, 0.0, dt * DECELERATION_AIR)
-		
+	
+
 
 func fall(dt, _multiplier:=0):
 	var multi := FALL_MULTIPLIER if characterBody2D.velocity.y > 0.0 else GRAVITY_MULTIPLIER
@@ -164,6 +167,10 @@ func dash(dir : Vector2) -> bool:
 	if dir != Vector2.ZERO:
 		characterBody2D.dashes -= 1
 		characterBody2D.velocity = dir * DASH_VELOCITY
+		return true
+	elif grounded():
+		characterBody2D.dashes -= 1
+		characterBody2D.velocity = Vector2(last_move_dir, 0) * DASH_VELOCITY
 		return true
 	else:
 		return false

@@ -22,7 +22,8 @@ func is_dash_just_pressed() -> bool:
 	return Input.is_action_just_pressed("dash")
 
 func aim_dash() -> Vector2:
-	return Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
+	var dir = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
+	return dir
 
 func is_interact_just_pressed() -> bool:
 	return Input.is_action_just_pressed("interract")
