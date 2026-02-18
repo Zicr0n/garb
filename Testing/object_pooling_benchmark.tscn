@@ -1,4 +1,3 @@
-
 [gd_scene load_steps=6 format=3 uid="uid://ckbdcxxdgt1a0"]
 
 [ext_resource type="Script" uid="uid://86hftrj04t4v" path="res://Testing/object_pooling_benchmark.gd" id="1_svf32"]
@@ -10,7 +9,7 @@
 size = Vector2(16, 368)
 
 [node name="ObjectPoolingBenchmark" type="Node2D" node_paths=PackedStringArray("parent")]
-script = ExtResource("1_5txp8")
+script = ExtResource("1_svf32")
 scene_to_instantiate = ExtResource("2_svf32")
 parent = NodePath(".")
 
