@@ -7,13 +7,17 @@ extends Node
 var timer : float = 0.0
 
 var shot_rate: float = 1/3000. #3000 shots a second
+var idle_time = 10
+var cur_time = 0
 
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("jump"):
+	if cur_time > idle_time:
 		timer -= delta
 		while timer < 0:
 			timer += shot_rate
 			new_object()
+	else:
+		cur_time += delta
 
 func new_object() -> void:
 	var object = object_pooling_benchmark.pull_from_pool()

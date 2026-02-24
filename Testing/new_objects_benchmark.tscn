@@ -17,8 +17,8 @@ parent = NodePath(".")
 
 [node name="OtherTestingTimer" type="Timer" parent="." node_paths=PackedStringArray("benchmark")]
 script = ExtResource("2_0tb2y")
-speed = Vector2(10, 0)
 benchmark = NodePath("..")
+speed = Vector2(10, 0)
 
 [node name="Wall" type="CharacterBody2D" parent="."]
 collision_mask = 0

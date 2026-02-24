@@ -18,7 +18,7 @@ parent = NodePath(".")
 [node name="ObjectTestingTimer" parent="." node_paths=PackedStringArray("object_pooling_benchmark") instance=ExtResource("3_clttw")]
 object_pooling_benchmark = NodePath("..")
 speed = Vector2(10, 0)
-cooldown = 0.0005499999999999999
+cooldown = 0.00054999999999999
 
 [node name="Wall" type="CharacterBody2D" parent="."]
 collision_mask = 0

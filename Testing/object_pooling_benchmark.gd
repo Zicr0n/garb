@@ -7,6 +7,7 @@ class_name ObjectPool
 var object_pool : Array = []
 var active_scenes : Array = []
 
+
 func _ready() -> void:
 	for i in range(preload_amount):
 		var instantiated = scene_to_instantiate.instantiate()
