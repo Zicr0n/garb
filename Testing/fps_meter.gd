@@ -5,7 +5,7 @@ var timeArray = []
 var framerateArray = []
 var cur_time = 0
 var counted_time = 0
-var total_test_time = 30
+var total_test_time = 60
 
 var config : ConfigFile = null
 
